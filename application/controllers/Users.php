@@ -6,7 +6,7 @@ class Users extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('include/header.php');
+	$this->load->view('include/header.php');
         $this->load->view('include/nav.php');
         $this->load->view('users/register.php');
         $this->load->view('include/footer.php');
