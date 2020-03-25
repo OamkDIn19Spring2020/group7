@@ -82,9 +82,7 @@
                     <div class="input-group">
                         <input class="form-control <?php echo (!empty(form_error('password'))) ? "is-invalid" : ""; ?>" 
                                 type="password" id="pwd" placeholder="Password" 
-                                name="password" value="" data-toggle="popover" 
-                                data-placement="left" data-trigger="focus" 
-                                data-content="Must be at least 6 characters."> 
+                                name="password" value=""> 
                         <div class="input-group-append">
                             <div class="input-group-text bg-white text-danger">*</div>
                         </div>
