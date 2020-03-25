@@ -136,7 +136,7 @@
 
                 <!-- Have an account? -->
                 <div class="col-12 text-center">
-                    <span>Have an account? </span><a class="text-decoration-none" href="#">Login</a>
+                    <span>Have an account? </span><a class="text-decoration-none" href="<?php echo base_url('users/login'); ?>">Login</a>
                 </div>
 
             </form><!-- Form End -->
