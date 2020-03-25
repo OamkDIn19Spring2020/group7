@@ -1,7 +1,7 @@
 <div class="container"><!-- Container Start -->
     <div class="row mt-3 justify-content-center">
         <div class="card card-body col-md-8 bg-light shadow-lg  mt-5"><!-- Card Start -->
-            <form class="form-row" action="" method=""><!-- Form Start -->
+            <form class="form-row" action="Users/register" method="POST"><!-- Form Start -->
 
                 <h2 class="form-text col-12 text-center mb-5">Create an account</h2>
                 <p class="form-text col-12 text-danger font-italic">
@@ -10,6 +10,7 @@
                     </small>
                 </p>
 
+                <!-- First Name -->
                 <div class="form-group col-lg-6">
                     <label class="form-control-label sr-only" for="fname">First name</label>
                     <div class="input-group">
@@ -21,6 +22,7 @@
                     </div><!-- Input Group -->
                 </div><!-- Form Group -->
 
+                <!--Last Name -->
                 <div class="form-group col-lg-6">
                     <label class="form-control-label sr-only" for="lname">Last name</label>
                     <div class="input-group">
@@ -32,6 +34,7 @@
                     </div><!-- Input Group -->
                 </div><!-- Form Group -->
 
+                <!-- Email -->
                 <div class="form-group col-lg-6">
                     <label class="form-control-label sr-only" for="email">Email</label>
                     <div class="input-group">
@@ -43,6 +46,7 @@
                     </div><!-- Input Group -->
                 </div><!-- Form Group -->
 
+                <!-- Confirm Email -->
                 <div class="form-group col-lg-6">
                     <label class="form-control-label sr-only" for="cnfm_email">Confirm email</label>
                     <div class="input-group">
@@ -54,6 +58,7 @@
                     </div><!-- Input Group -->
                 </div><!-- Form Group -->
 
+                <!-- Password -->
                 <div class="form-group col-lg-6">
                     <label class="form-control-label sr-only" for="pwd">Password</label>
                     <div class="input-group">
@@ -65,6 +70,7 @@
                     </div><!-- Input Group -->
                 </div><!-- Form Group -->
 
+                <!-- Confirm Password -->
                 <div class="form-group col-lg-6">
                     <label class="form-control-label sr-only" for="cnfm_pwd">Confirm password</label>
                     <div class="input-group">
@@ -76,28 +82,34 @@
                     </div><!-- Input Group -->
                 </div><!-- Form Group -->
 
+                <!-- Birthday -->
                 <div class="form-group col-lg-6">
                     <label class="form-control-label sr-only" for="bday">Birthday</label>
                     <input class="form-control" type="text" id="bday" placeholder="Birthday"
                             name="birthday" onfocus="(this.type='date')" onblur="(this.type='text')">
                 </div><!-- Form Group -->
 
+                <!-- Phone Number -->
                 <div class="form-group col-lg-6">
                     <label class="form-control-label sr-only" for="phone">Phone number</label>
                     <input class="form-control" type="text" id="phone" placeholder="Phone number"
                             name="phone">
                 </div><!-- Form Group -->
 
+
+                <!-- Address -->
                 <div class="form-group col-12 mb-5">
                     <label class="form-control-label sr-only" for="address">Address</label>
                     <input class="form-control" type="text" id="address" placeholder="Address"
                             name="address">
                 </div><!-- Form Group -->
 
+                <!-- Submit -->
                 <div class="col-12 mb-3">
                     <input class="btn btn-primary btn-block text-center" type="submit" value="Register">
                 </div><!-- Submit -->
 
+                <!-- Have an account? -->
                 <div class="col-12 text-center">
                     <span>Have an account? </span><a class="text-decoration-none" href="#">Login</a>
                 </div>

@@ -1,0 +1,1 @@
+<?php echo "Registered successfully";
