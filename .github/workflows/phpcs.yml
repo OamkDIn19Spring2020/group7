@@ -9,7 +9,4 @@ jobs:
       steps:
         - uses: actions/checkout@v2
         - name: PHPCS check
-          uses: chekalsky/phpcs-action@v1
-           with:
-              enable_warnings: true
-              
+          uses: chekalsky/phpcs-action@v1            
