@@ -4,23 +4,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users extends CI_Controller {
 
-	public function index()
-	{
-		$this->load->view('include/header.php');
-        $this->load->view('include/nav.php');
-        $this->load->view('users/register.php');
-        $this->load->view('include/footer.php');
-	}
-
+    // Start Register Function
     public function register()
     {
+        // Load user model
         $this->load->model('User');
-        $this->User->register();
 
+        // Load CI form validation library
+        $this->load->library('form_validation');
 
-        $this->load->view('include/header.php');
-        $this->load->view('include/nav.php');
-        $this->load->view('users/login.php');
-        $this->load->view('include/footer.php');
+        // Calling the rules in form_validation.php
+        if ($this->form_validation->run() === FALSE)
+        {
+            // Reload registration form if is invalid
+            $this->load->view('users/register');
+        }
+        else
+        {
+            // Call Model register method if is valid and load login page
+            $this->User->register();
+            redirect('users/login');
+        }
+    }
+
+    // Start Login Function
+    public function login()
+    {
+        $this->load->view('users/login');
+        // TODO
+
     }
 }
