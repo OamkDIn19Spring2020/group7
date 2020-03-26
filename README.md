@@ -6,6 +6,6 @@ School project, Web Application using PHP & Mysql
 
 CodeIgniter Framework, Bootstrap Library.
 
-# Tools used
+# Languages used
 
 Php & Mysql, Javascript, HTML & CSS
