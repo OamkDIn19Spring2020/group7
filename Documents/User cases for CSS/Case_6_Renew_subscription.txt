@@ -1,0 +1,19 @@
+Case 6 Renew subscription
+Use case: 				User wants to extend a subscription
+Primary actor:			User
+Trigger:	 			User Need	
+Preconditions:			User has active subscription. user has credits
+Postconditions:			User has extended subscription
+
+1. User looks at the active subscription.
+2. Pick the one user want to renew.
+3. Sees the start date and current end date.
+4. System gives option for extension 1-7 days, 1 month or 3 months.
+5. User pick the extension duration.
+6. System check user credits and send confirmation. 6a
+7. User confirms.
+8. System show the renewed time and accepted confirmation.
+
+Expectional cases:
+
+6a user does not have enough credits. Ask user if they want to charge-> direct or cancel
