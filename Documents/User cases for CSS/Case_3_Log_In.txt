@@ -1,0 +1,18 @@
+Case 3 Log In
+Use case: 		User logs in 			
+Primary actor:	User
+Trigger:	 	User request a log in	
+Preconditions:	User has an account to log in
+Postconditions:	User has succeed logging in to the system.
+
+1.User presses log in button.
+2.System directs to log in page.
+3.Ask for User log in information.
+4.User types them in. 4a
+5.System confirms the log information. 5a
+6.System direct user to profile page 
+
+
+Expectional cases:
+4a. User does not rember user name or/and password.
+5a. Password or user name is incorrect ask user to re type them.

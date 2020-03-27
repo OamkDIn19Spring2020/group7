@@ -1,0 +1,20 @@
+Case 5 Charging credit
+Use case: 	Credit  charging			
+Primary actor:		User
+Trigger:	 		User has want to charge credits
+Preconditions:		User is logged in
+Postconditions:		User has succeed in charging the card.
+
+1. User presses add credits button.
+2. System directs to add credits page.
+3. User picks credit amount and the card wants to charge. Auto fill users card number.
+4. System check the card balance not over 1000. 4a
+5. User picks payment method.
+6. System ask for confirmation.
+7. User confirms. 7a
+8. system check payment and adds the credits.
+9. User is show confirmation and current balance.
+
+Expectional cases:
+4a. Gives user msg card cannot have more then 1000 credits.
+7a. User cancels.
