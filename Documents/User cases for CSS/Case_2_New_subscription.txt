@@ -1,0 +1,22 @@
+Case 2 New subscription
+
+Use case: 			User wants new gym subscription
+Primary actor:		User
+Trigger:	 		User need for new subscription
+Preconditions:		User has account
+Postconditions:		User has a new subscription
+
+1.User logs in with account or Card Id. 1a
+2.User goes to the subscription page.
+3.User chooses one of the avaible options. 3a
+4.User is given choice between 1 month and 3 month subscription. 4a
+5.System ask for confirmation and payment method.
+6.User confirms order. 6a
+7.Subscription is registered and user is show an confirmation page. 7a
+
+Expectional cases:
+1a. if user does not have account is directed to create one or Order a card.
+3a. User does not pick any.
+4a. User does not want 1 or 3 month period.
+6a. User cancel or wants to change?
+7a. failure during the confirmation phase.
