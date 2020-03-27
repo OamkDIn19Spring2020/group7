@@ -6,8 +6,11 @@
         <!-- Card Start -->
         <div class="card card-body col-md-7 bg-light shadow-lg  mt-5">
 
+        <?php echo $this->session->flashdata('success'); ?>
+        <?php echo $this->session->flashdata('fail'); ?>
+
             <!-- CI form helper -->
-            <?php echo form_open('Users/login', 'class="form-row"'); ?>
+            <?php echo form_open('Users/authenticate', 'class="form-row"'); ?>
             <!-- Form Start -->
 
             <h2 class="form-text col-12 text-center mb-5">Log in</h2>
@@ -15,17 +18,13 @@
             <!-- Email -->
             <div class="form-group col-xl-12">
                 <label class="form-control-label sr-only" for="email">Email</label>
-                <input class="form-control <?php echo (!empty(form_error('email'))) ? "is-invalid" : ""; ?>" type="email" id="email" placeholder="Email" name="email" value="<?php echo set_value('email'); ?>">
-                <!-- CI Form Validation -->
-                <?php echo form_error('email', '<span class="invalid-feedback">', '</span>'); ?>
+                <input class="form-control" type="email" id="email" placeholder="Email" name="email" value="<?php echo set_value('email'); ?>" required>
             </div><!-- Form Group -->
 
             <!-- Password -->
             <div class="form-group col-xl-12">
                 <label class="form-control-label sr-only" for="pwd">Password</label>
-                <input class="form-control <?php echo (!empty(form_error('password'))) ? "is-invalid" : ""; ?>" type="password" id="pwd" placeholder="Password" name="password" value="">
-                <!-- CI Form Validation -->
-                <?php echo form_error('password', '<span class="invalid-feedback">', '</span>'); ?>
+                <input class="form-control" type="password" id="pwd" placeholder="Password" name="password" value="" required>
             </div><!-- Form Group -->
 
             <!-- Submit -->
