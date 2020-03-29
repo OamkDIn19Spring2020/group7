@@ -7,6 +7,7 @@
             // Load CI database library
             $this->load->database();
         }
+
         public function randomcardNumber();
         {   
             // construct random 12 digit number
@@ -21,8 +22,7 @@
         }
 
         //make a card
-        public function makeCard()
-
+         public function makeCard()
         {
 
         $newcardNumber = randomcardNumber();
@@ -39,12 +39,19 @@
             $data = [
                 'cardnumber' => $newcardNumber,
                 'credits' => '0',
-    ];
+            ];
 
         //create new card
         return $this->db->insert('cards', $data);
+
          }
 
-        }   
 
-    }
+       
+ } 
+
+}
+
+?>
+
+  
