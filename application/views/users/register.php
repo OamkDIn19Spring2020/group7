@@ -121,7 +121,7 @@
 
             <!-- Have an account? -->
             <div class="col-12 text-center">
-                <span>Have an account? </span><a class="text-decoration-none" href="<?php echo site_url('users/login'); ?>">Login</a>
+                <span>Have an account? </span><a class="text-decoration-none" href="<?php echo site_url('users/login'); ?>">Sign in</a>
             </div>
 
             </form><!-- Form End -->
