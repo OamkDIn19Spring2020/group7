@@ -7,7 +7,6 @@
             // Load CI database library
             $this->load->database();
         }
-
         public function randomcardNumber();
         {   
             // construct random 12 digit number
