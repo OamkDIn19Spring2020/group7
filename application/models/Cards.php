@@ -29,13 +29,13 @@
         
             
 
-        //check if card exists
+        //check user has cards
 
             $userid = $this->session->has_userdata('customer_id');
             $userquery = $this->db->get_where('card',array('customer_id' => $userid));
 
         
-        //if it doesnt
+        //if user doesnt have cards.
 
     
         if ($userquery->num_rows() == 0)
@@ -44,10 +44,13 @@
         //create new card
 
          {
-            $newcardNumber = $this->Cards->randomNum();
 
+            //random card number
+            $newcardNumber = $this->Cards->randomNum();
+            //check if it exists.
             $query = $this->db->get_where('card', array('cardnumber' => $newcardNumber));
-        
+        //while cardnum already exists, make another cardnumber
+
             while ($query->num_rows() > 0  )
             {
                  $newcardNumber = randomNum();
@@ -55,7 +58,7 @@
             }
             
             
-
+            //the data for the row
                   $data = [
                 'cardnumber' => $newcardNumber,
                 'credit' => 100,
