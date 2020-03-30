@@ -10,28 +10,23 @@
         }
 
 
-        public function randomcardNumber()
-        {   
-            // construct random 8 digit number
-
-            $bar0 = 55;
-            $bar1 =  mt_rand (10,99);
-            $bar2 =  mt_rand (10,99);
-            $bar3 =  mt_rand (10,99);
-
-            $newNumber = $bar0.$bar1.$bar2.$bar3; 
-            return $newNumber;
-        }
-
+    
         //make a card
 
            
          public function makeCard()
-        {
+        { 
+            
+            $bar0 = 5555;
+            $bar1 =  mt_rand (1000,9999);
+
+            
+            
+            $newcardNumber = $bar0.$bar1;
            //check if card exists
             $userid = $this->session->has_userdata('customer_id');
-            $query = $this->db->get_where('cards', array('cardnumber' => $newcardNumber));
-            $userquery = $this->db->get_where('cards',array('customer' => $userid));
+            $query = $this->db->get_where('card', array('cardnumber' => $newcardNumber));
+            $userquery = $this->db->get_where('card',array('customer_id' => $userid));
 
         
         //if it doesnt
@@ -40,26 +35,21 @@
         if ($query->num_rows() == 0 && $userquery->num_rows() == 0)
           //create new card
          {
-            $newcardNumber = randomcardNumber();
+          
         
 
             $data = [
                 'cardnumber' => $newcardNumber,
-                'credits' => '0',
+                'credit' => 100,
                 'customer_id'=> $userid
             ];
 
       
-        return $this->db->insert('cards', $data);
+        return $this->db->insert('card', $data);
+          }
+     } 
 
-        }
-
-
-       
- 
-        } 
-
-    }
+ }
 
 
 
