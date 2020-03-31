@@ -10,6 +10,9 @@ class Users extends CI_Controller {
 
         // Load user model
         $this->load->model('User');
+
+        // Load card model
+        $this->load->model('Cards');
     }
 
     // Start Register Function
@@ -31,7 +34,7 @@ class Users extends CI_Controller {
         {
             // Call Model register method if form is valid and load login page
             if ($this->User->register())
-            {
+            {    
                 // Setting flash message that will be displayed in login view
                 $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Registered successfully</div>');
 
@@ -48,7 +51,7 @@ class Users extends CI_Controller {
 
     // Start Login Function
     public function login()
-    {
+    {     
             // If logged in redirect to home page
             if ($this->session->has_userdata('customer_id'))
             {
@@ -59,6 +62,7 @@ class Users extends CI_Controller {
                 // Load login view
                 $this->load->view('users/login');
             }
+           
 
     }
 
@@ -68,9 +72,13 @@ class Users extends CI_Controller {
         // If user authenticated continue to set session
         if ($user = $this->User->authenticate())
         {
+            
             // Set user session
             $this->session->set_userdata($user);
-                redirect('users/profile');
+           
+           // Make a card
+            $this->Cards->makeCard();
+            redirect('users/profile');
         }
         else
         {
