@@ -6,6 +6,7 @@
         <!-- Card Start -->
         <div class="card card-body col-md-7 bg-light shadow-lg  mt-5">
 
+        <!-- Flashdata for feedback -->
         <?php echo $this->session->flashdata('success'); ?>
         <?php echo $this->session->flashdata('fail'); ?>
 
