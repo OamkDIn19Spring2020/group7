@@ -15,10 +15,7 @@ class Users extends CI_Controller {
     // Start Register Function
     public function register()
     {
-        // Load CI form validation library
-        $this->load->library('form_validation');
-
-        // Calling the rules in form_validation.php
+        // Calling the rules from form_validation.php
         if ($this->form_validation->run() === false)
         {
             // If logged in redirect to home page
@@ -73,7 +70,7 @@ class Users extends CI_Controller {
         {
             // Set user session
             $this->session->set_userdata($user);
-            redirect('users/profile');
+                redirect('users/profile');
         }
         else
         {
@@ -96,36 +93,97 @@ class Users extends CI_Controller {
         redirect('users/login');
     }
 
-    // Start profile function
+    // Start Profile Function
     public function profile()
     {
-        
-        // Load CI form validation library
-        $this->load->library('form_validation');
-
-        // Calling the rules in form_validation.php
+        // Calling the rules from form_validation.php
         if ($this->form_validation->run() === false)
         {
-            // Reload registration form if is invalid
+            // Reload profile view
             $this->load->view('users/profile');
         }
         else
         {
             // Update user infromation in database
-            $this->User->update();
+            $this->User->update_profile();
 
             // Get user data by id
             $user = $this->User->get($this->session->userdata('customer_id'))->row_array();
-            
+
             // Clean last registered session
             $this->session->unset_userdata($this->session->userdata());
 
             // Create new session with new user information
             $this->session->set_userdata($user);
+            
+            // Send a feedback
+            $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Profile updated successfully.</div>');
 
             // Load profile view
             $this->load->view('users/profile');
         }
+    }
+
+
+    // Start Account Function
+    public function update_email()
+    {
+ 
+        // Calling the rules from form_validation.php
+        if ($this->form_validation->run() === false)
+        {
+            // Reload profile view
+            $this->load->view('users/profile');
+        }
+        else
+        {
+            // Update user infromation in database
+            $this->User->update_email();
+
+            // Get user data by id
+            $user = $this->User->get($this->session->userdata('customer_id'))->row_array();
+
+            // Clean last registered session
+            $this->session->unset_userdata($this->session->userdata());
+
+            // Create new session with new user information
+            $this->session->set_userdata($user);
+            
+            // Send a success update feedback
+            $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Email updated successfully.</div>');
+
+            // Load profile view
+            redirect('users/profile');
+        }
+    }
+
+    // Start Update Password Function
+    public function update_password()
+    {
+        // Calling the rules from form_validation.php
+        if ($this->form_validation->run() === false)
+        {
+            // Reload profile view
+            $this->load->view('users/profile');
+        }
+        else
+        {
+            // Update user infromation in database
+            if ($this->User->update_password())
+            {
+                // Send a success update feedback
+                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Password updated successfully.</div>');
+                redirect('users/profile');
+            }
+            else
+            {
+                // If user entered wrong old password display failed login message and load profile view
+                $this->session->set_flashdata('fail', '<div class="alert alert-danger text-center" id="flash-msg">Password is invalid. Please try again.</div>');
+                redirect('users/profile');
+            }
+        }
+            
+
     }
 
 }
