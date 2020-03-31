@@ -26,16 +26,17 @@ class Users extends CI_Controller {
             {
                 redirect('pages');
             }
-            // Reload registration form if is invalid
+
+            // Reload registration form if form is invalid
             $this->load->view('users/register');
         }
         else
         {
-            // Call Model register method if is valid and load login page
+            // Call Model register method if form is valid and load login page
             if ($this->User->register())
             {
                 // Setting flash message that will be displayed in login view
-                $this->session->set_flashdata('success', '<div class="alert alert-success" id="flash-msg">Registered successfully. You can log in now.</div>');
+                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Registered successfully</div>');
 
                 redirect('users/login');
             }
@@ -54,7 +55,7 @@ class Users extends CI_Controller {
             // If logged in redirect to home page
             if ($this->session->has_userdata('customer_id'))
             {
-                redirect('pages');
+                redirect('users/profile');
             }
             else
             {
@@ -72,12 +73,12 @@ class Users extends CI_Controller {
         {
             // Set user session
             $this->session->set_userdata($user);
-            redirect('pages');
+            redirect('users/profile');
         }
         else
         {
             // If user unauthenticated display failed login message and redirect to login again
-            $this->session->set_flashdata('fail', '<div class="alert alert-danger" id="flash-msg">Email or Password is invalid. Please try again.</div>');
+            $this->session->set_flashdata('fail', '<div class="alert alert-danger text-center" id="flash-msg">Email or Password is invalid. Please try again.</div>');
             $this->login();
         }
     }
@@ -94,4 +95,37 @@ class Users extends CI_Controller {
 
         redirect('users/login');
     }
+
+    // Start profile function
+    public function profile()
+    {
+        
+        // Load CI form validation library
+        $this->load->library('form_validation');
+
+        // Calling the rules in form_validation.php
+        if ($this->form_validation->run() === false)
+        {
+            // Reload registration form if is invalid
+            $this->load->view('users/profile');
+        }
+        else
+        {
+            // Update user infromation in database
+            $this->User->update();
+
+            // Get user data by id
+            $user = $this->User->get($this->session->userdata('customer_id'))->row_array();
+            
+            // Clean last registered session
+            $this->session->unset_userdata($this->session->userdata());
+
+            // Create new session with new user information
+            $this->session->set_userdata($user);
+
+            // Load profile view
+            $this->load->view('users/profile');
+        }
+    }
+
 }
