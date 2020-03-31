@@ -8,7 +8,7 @@
             $this->load->database();
         }
 
-        // Start get function
+        // Start Get Function
         public function get($id = false, $email = false)
         {
             // If no $id passed return all records in customer table
@@ -20,7 +20,7 @@
             else if($email === false)
             {
                 // Return record that match $id
-                $query = $this->db->get_where('customer', array('id' => $id));
+                $query = $this->db->get_where('customer', array('customer_id' => $id));
                 return $query;
             }
             else
@@ -31,11 +31,14 @@
             }
         }
 
-        // Start register function
+        // Start Register Function
         public function register()
         {
+            // Clean password
+            $password = $this->security->xss_clean($this->input->post('password'));
+
             // Hash Password
-            $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+            $password = password_hash($password, PASSWORD_DEFAULT);
 
             // Retrieve user inputs from POST and store it in $data array
             $data = [
@@ -52,7 +55,7 @@
             return $this->db->insert('customer', $data);
         }
 
-        // Start login function
+        // Start Authenticate Function
         public function authenticate()
         {
             // Check if the email entered by the user exists
@@ -86,4 +89,79 @@
                  return false;
             }
         }
-    }
+
+        // Start Profile Update Function
+        public function update_profile()
+        {
+            // Retrieve data from AJAX POST
+            $data = [
+                        'firstname' => $this->input->post('firstname'),
+                        'lastname' => $this->input->post('lastname'),
+                        'birthday' => $this->input->post('birthday'),
+                        'phone' => $this->input->post('phone'),
+                        'address' => $this->input->post('address')
+            ];
+
+            // Retrieve id from AJAX POST
+            $id = $this->input->post('id');
+
+            // Update customer where id = $id
+            $this->db->where('customer_id', $id);
+            $this->db->update('customer', $data);
+        }
+
+        // Start Email Update Function
+        public function update_email()
+        {
+            // Retrieve data from AJAX POST
+            $data = [
+                        'email' => $this->input->post('email'),
+            ];
+
+            // Retrieve id from AJAX POST
+            $id = $this->input->post('id');
+
+            // Update customer where id = $id
+            $this->db->where('customer_id', $id);
+            $this->db->update('customer', $data);
+        }
+
+       // Start Password Update Function 
+        public function update_password()
+        {
+
+            // Retrieve data from AJAX POST
+            $oldpassword = $this->security->xss_clean($this->input->post('oldpassword'));
+            $newpassword = $this->security->xss_clean($this->input->post('newpassword'));
+
+
+            // Retrive id from AJAX POST
+            $id = $this->input->post('id');
+
+            // Get user hashed password by id
+            $hashed_password = $this->get($id)->row_object()->password;
+
+            // If old password matches hashed password in database
+            if (password_verify($oldpassword, $hashed_password))
+            {
+                // Hash user new password
+                $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+                
+                // Update user password with the new password
+                $this->db->where('customer_id', $id);
+                $this->db->update('customer', array('password' => $newpassword));
+
+                return true;
+            }
+
+            // User entered wrong old password
+            else
+            {
+                if (strlen($oldpassword) > 6)
+                {
+                    return false;
+                }
+            }
+
+        }
+}
