@@ -6,6 +6,7 @@
         <!-- Card Start -->
         <div class="card card-body col-md-7 bg-light shadow-lg  mt-5">
 
+        <!-- Flashdata for feedback -->
         <?php echo $this->session->flashdata('success'); ?>
         <?php echo $this->session->flashdata('fail'); ?>
 
@@ -13,7 +14,7 @@
             <?php echo form_open('Users/authenticate', 'class="form-row"'); ?>
             <!-- Form Start -->
 
-            <h2 class="form-text col-12 text-center mb-5">Log in</h2>
+            <h2 class="form-text col-12 text-center mb-5">Please sign in</h2>
 
             <!-- Email -->
             <div class="form-group col-xl-12">
@@ -29,7 +30,7 @@
 
             <!-- Submit -->
             <div class="col-12 mb-3">
-                <input class="btn btn-primary btn-block text-center" type="submit" value="Login">
+                <input class="btn btn-primary btn-block text-center" type="submit" value="Sign in">
             </div><!-- Submit -->
 
             <!-- Have an account? -->

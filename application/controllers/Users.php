@@ -10,17 +10,15 @@ class Users extends CI_Controller {
 
         // Load user model
         $this->load->model('User');
-        //load card model
+
+        // Load card model
         $this->load->model('Cards');
     }
 
     // Start Register Function
     public function register()
     {
-        // Load CI form validation library
-        $this->load->library('form_validation');
-
-        // Calling the rules in form_validation.php
+        // Calling the rules from form_validation.php
         if ($this->form_validation->run() === false)
         {
             // If logged in redirect to home page
@@ -28,16 +26,17 @@ class Users extends CI_Controller {
             {
                 redirect('pages');
             }
-            // Reload registration form if is invalid
+
+            // Reload registration form if form is invalid
             $this->load->view('users/register');
         }
         else
         {
-            // Call Model register method if is valid and load login page
+            // Call Model register method if form is valid and load login page
             if ($this->User->register())
             {    
                 // Setting flash message that will be displayed in login view
-                $this->session->set_flashdata('success', '<div class="alert alert-success" id="flash-msg">Registered successfully. You can log in now.</div>');
+                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Registered successfully</div>');
 
                 redirect('users/login');
             }
@@ -56,8 +55,7 @@ class Users extends CI_Controller {
             // If logged in redirect to home page
             if ($this->session->has_userdata('customer_id'))
             {
-                
-                redirect('pages');
+                redirect('users/profile');
             }
             else
             {
@@ -77,13 +75,15 @@ class Users extends CI_Controller {
             
             // Set user session
             $this->session->set_userdata($user);
+           
+           // Make a card
             $this->Cards->makeCard();
-            redirect('pages');
+            redirect('users/profile');
         }
         else
         {
             // If user unauthenticated display failed login message and redirect to login again
-            $this->session->set_flashdata('fail', '<div class="alert alert-danger" id="flash-msg">Email or Password is invalid. Please try again.</div>');
+            $this->session->set_flashdata('fail', '<div class="alert alert-danger text-center" id="flash-msg">Email or Password is invalid. Please try again.</div>');
             $this->login();
         }
     }
@@ -100,4 +100,98 @@ class Users extends CI_Controller {
 
         redirect('users/login');
     }
+
+    // Start Profile Function
+    public function profile()
+    {
+        // Calling the rules from form_validation.php
+        if ($this->form_validation->run() === false)
+        {
+            // Reload profile view
+            $this->load->view('users/profile');
+        }
+        else
+        {
+            // Update user infromation in database
+            $this->User->update_profile();
+
+            // Get user data by id
+            $user = $this->User->get($this->session->userdata('customer_id'))->row_array();
+
+            // Clean last registered session
+            $this->session->unset_userdata($this->session->userdata());
+
+            // Create new session with new user information
+            $this->session->set_userdata($user);
+            
+            // Send a feedback
+            $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Profile updated successfully.</div>');
+
+            // Load profile view
+            $this->load->view('users/profile');
+        }
+    }
+
+
+    // Start Account Function
+    public function update_email()
+    {
+ 
+        // Calling the rules from form_validation.php
+        if ($this->form_validation->run() === false)
+        {
+            // Reload profile view
+            $this->load->view('users/profile');
+        }
+        else
+        {
+            // Update user infromation in database
+            $this->User->update_email();
+
+            // Get user data by id
+            $user = $this->User->get($this->session->userdata('customer_id'))->row_array();
+
+            // Clean last registered session
+            $this->session->unset_userdata($this->session->userdata());
+
+            // Create new session with new user information
+            $this->session->set_userdata($user);
+            
+            // Send a success update feedback
+            $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Email updated successfully.</div>');
+
+            // Load profile view
+            redirect('users/profile');
+        }
+    }
+
+    // Start Update Password Function
+    public function update_password()
+    {
+        // Calling the rules from form_validation.php
+        if ($this->form_validation->run() === false)
+        {
+            // Reload profile view
+            $this->load->view('users/profile');
+        }
+        else
+        {
+            // Update user infromation in database
+            if ($this->User->update_password())
+            {
+                // Send a success update feedback
+                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Password updated successfully.</div>');
+                redirect('users/profile');
+            }
+            else
+            {
+                // If user entered wrong old password display failed login message and load profile view
+                $this->session->set_flashdata('fail', '<div class="alert alert-danger text-center" id="flash-msg">Password is invalid. Please try again.</div>');
+                redirect('users/profile');
+            }
+        }
+            
+
+    }
+
 }
