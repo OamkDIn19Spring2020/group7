@@ -21,7 +21,7 @@
             <div class="form-group col-lg-6">
                 <label class="form-control-label sr-only" for="fname">First name</label>
                 <div class="input-group">
-                    <input class="form-control <?php echo (!empty(form_error('firstname'))) ? "is-invalid" : ""; ?>" type="text" id="fname" placeholder="First name" name="firstname" value="<?php echo set_value('firstname'); ?>">
+                    <input class="form-control <?php echo (form_error('firstname')) ? "is-invalid" : ""; ?>" type="text" id="fname" placeholder="First name" name="firstname" value="<?php echo set_value('firstname'); ?>">
                     <div class="input-group-append">
                         <div class="input-group-text bg-white text-danger">*</div>
                     </div>
@@ -34,7 +34,7 @@
             <div class="form-group col-lg-6">
                 <label class="form-control-label sr-only" for="lname">Last name</label>
                 <div class="input-group">
-                    <input class="form-control <?php echo (!empty(form_error('lastname'))) ? "is-invalid" : ""; ?>" type="text" id="lname" placeholder="Last name" name="lastname" value="<?php echo set_value('lastname'); ?>">
+                    <input class="form-control <?php echo (form_error('lastname')) ? "is-invalid" : ""; ?>" type="text" id="lname" placeholder="Last name" name="lastname" value="<?php echo set_value('lastname'); ?>">
                     <div class="input-group-append">
                         <div class="input-group-text bg-white text-danger">*</div>
                     </div>
@@ -47,7 +47,7 @@
             <div class="form-group col-lg-6">
                 <label class="form-control-label sr-only" for="email">Email</label>
                 <div class="input-group">
-                    <input class="form-control <?php echo (!empty(form_error('email'))) ? "is-invalid" : ""; ?>" type="email" id="email" placeholder="Email" name="email" value="<?php echo set_value('email'); ?>">
+                    <input class="form-control <?php echo (form_error('email')) ? "is-invalid" : ""; ?>" type="email" id="email" placeholder="Email" name="email" value="<?php echo set_value('email'); ?>">
                     <div class="input-group-append">
                         <div class="input-group-text bg-white text-danger">*</div>
                     </div>
@@ -60,7 +60,7 @@
             <div class="form-group col-lg-6">
                 <label class="form-control-label sr-only" for="cnfm_email">Confirm email</label>
                 <div class="input-group">
-                    <input class="form-control <?php echo (!empty(form_error('cnfm_email'))) ? "is-invalid" : ""; ?>" type="email" id="cnfm_email" placeholder="Confirm email" name="cnfm_email" value="<?php echo set_value('cnfm_email'); ?>">
+                    <input class="form-control <?php echo (form_error('cnfm_email')) ? "is-invalid" : ""; ?>" type="email" id="cnfm_email" placeholder="Confirm email" name="cnfm_email" value="<?php echo set_value('cnfm_email'); ?>">
                     <div class="input-group-append">
                         <div class="input-group-text bg-white text-danger">*</div>
                     </div>
@@ -73,7 +73,7 @@
             <div class="form-group col-lg-6">
                 <label class="form-control-label sr-only" for="pwd">Password</label>
                 <div class="input-group">
-                    <input class="form-control <?php echo (!empty(form_error('password'))) ? "is-invalid" : ""; ?>" type="password" id="pwd" placeholder="Password" name="password" value="">
+                    <input class="form-control <?php echo (form_error('password')) ? "is-invalid" : ""; ?>" type="password" id="pwd" placeholder="Password" name="password" value="">
                     <div class="input-group-append">
                         <div class="input-group-text bg-white text-danger">*</div>
                     </div>
@@ -86,7 +86,7 @@
             <div class="form-group col-lg-6">
                 <label class="form-control-label sr-only" for="cnfm_pwd">Confirm password</label>
                 <div class="input-group">
-                    <input class="form-control <?php echo (!empty(form_error('cnfm_password'))) ? "is-invalid" : ""; ?>" type="password" id="cnfm_pwd" placeholder="Confirm password" name="cnfm_password" value="">
+                    <input class="form-control <?php echo (form_error('cnfm_password')) ? "is-invalid" : ""; ?>" type="password" id="cnfm_pwd" placeholder="Confirm password" name="cnfm_password" value="">
                     <div class="input-group-append">
                         <div class="input-group-text bg-white text-danger">*</div>
                     </div>
@@ -121,7 +121,7 @@
 
             <!-- Have an account? -->
             <div class="col-12 text-center">
-                <span>Have an account? </span><a class="text-decoration-none" href="<?php echo site_url('users/login'); ?>">Login</a>
+                <span>Have an account? </span><a class="text-decoration-none" href="<?php echo site_url('users/login'); ?>">Sign in</a>
             </div>
 
             </form><!-- Form End -->
