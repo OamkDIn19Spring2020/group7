@@ -6,9 +6,6 @@
         {
             //Codeigniter : Write Less Do More
             parent::__construct();
-
-            // Load CodeIgniter Libary for databases
-            $this->load->database();
         }
         public function getSubtypeData()
         {

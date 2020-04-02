@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <?php include(APPPATH . '/views/include/header.php'); ?>
 <?php include(APPPATH . '/views/include/nav.php'); ?>
 
@@ -41,10 +40,6 @@
 
 
 </div>
-
-<!-- For bootstrap links -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- Script what could be used to get the button Id put in session variable or flastdata -->
 <script>
 
