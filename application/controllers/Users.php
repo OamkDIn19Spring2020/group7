@@ -104,6 +104,12 @@ class Users extends CI_Controller {
     // Start Profile Function
     public function profile()
     {
+        // Restrict non logged users from accessing profile page
+        if (!$this->session->has_userdata('customer_id'))
+        {
+            redirect('pages');
+        }
+
         // Calling the rules from form_validation.php
         if ($this->form_validation->run() === false)
         {
