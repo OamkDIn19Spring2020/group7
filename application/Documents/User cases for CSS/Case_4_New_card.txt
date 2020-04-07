@@ -1,0 +1,16 @@
+Case 4 New card
+Use case: 		User want to order a new card		
+Primary actor:	User	
+Trigger:	 	User need for new card
+Preconditions:	System is online
+Postconditions:	User has orded a card.
+
+1.User presses Order new card button.
+2.System ask payment option card credit on the old card or some payment system.
+3.User picks payment option. 3a
+3.System ask for confirmation.
+4.System generates new card.
+5.Card number is given to the user.
+
+Expectional cases:
+3a. User cancels order

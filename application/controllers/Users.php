@@ -76,8 +76,7 @@ class Users extends CI_Controller {
             // Set user session
             $this->session->set_userdata($user);
            
-           // Make a card
-            $this->Cards->makeCard();
+         
             redirect('users/profile');
         }
         else
@@ -103,7 +102,9 @@ class Users extends CI_Controller {
 
     // Start Profile Function
     public function profile()
-    {
+    {  
+        // Make a card if card doesnt exist, or read cards. 
+        $this->Cards->makeCard($this->session->userdata('customer_id'));
         // Restrict non logged users from accessing profile page
         if (!$this->session->has_userdata('customer_id'))
         {
