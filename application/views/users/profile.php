@@ -33,14 +33,7 @@
                             <!-- CI Form Validation -->
                             <?php echo form_error('firstname', '<span class="invalid-feedback">', '</span>'); ?>
                         </div><!-- Form Group -->
-                           <!-- First Name -->
-                           <div class="form-group row col-lg-12">
-                            <label class="form-control-label col-lg-3" for="fname">id</label>
-                            <input class="form-control col-lg-9 <?php echo (form_error('customer_id')) ? "is-invalid" : ""; ?>" type="text" id="fname" name="firstname" value="<?php echo (form_error('firstname')) ? set_value('firstname') : $this->session->userdata('cardnumber'); ?>">
-                            <!-- CI Form Validation -->
-                            <?php echo form_error('firstname', '<span class="invalid-feedback">', '</span>'); ?>
-                        </div><!-- Form Group -->
-
+                          
                         <!--Last Name -->
                         <div class="form-group row col-lg-12">
                             <label class="form-control-label col-lg-3" for="lname">Last name</label>
@@ -79,7 +72,7 @@
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 
                     <!-- Form Start -->
-                    <?php echo form_open('Users/cards', 'class="form-row" id="profile-form" onsubmit="update_cards(this); return false;"'); ?>
+                    <?php echo form_open('Users/cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
 
                         <!-- Card number-->
                         <div class="form-group row col-lg-12">
@@ -97,10 +90,12 @@
                             <?php echo form_error('credits', '<span class="invalid-feedback">', '</span>'); ?>
                         </div><!-- Form Group -->
 
-                        <!-- Submit -->
+                         <!-- There are no functions yet used by this tab -->
+                         <!-- Submit -->
                         <div class="d-flex justify-content-end col-lg-12">
                             <input class="btn btn-primary text-center" type="submit" value="Update cards">
-                        </div><!-- Submit -->
+                        </div>
+                        <!-- Submit -->
                    </form>
                 </div>
 
