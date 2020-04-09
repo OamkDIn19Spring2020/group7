@@ -24,20 +24,18 @@
         //make a card
 
            
-         public function makeCard()
+         public function makeCard($userID)
         { 
         
             
 
-        //check user has cards
+        //check wether user has cards
 
-            $userid = $this->session->has_userdata('customer_id');
+            $userid = $userID;
             $userquery = $this->db->get_where('card',array('customer_id' => $userid));
 
         
         //if user doesnt have any cards.
-
-    
         if ($userquery->num_rows() == 0)
            
             
@@ -49,7 +47,7 @@
 
             $newcardNumber = $this->Cards->randomNum();
 
-            //check if it exists.
+            //check wether the number is taken
 
         $query = $this->db->get_where('card', array('cardnumber' => $newcardNumber));
 
@@ -69,9 +67,19 @@
                 'customer_id'=> $userid
             ];
 
-        //push data into db
+        //push data into db and set the userdata for the card
+        $this->session->set_userdata($data);
         return $this->db->insert('card', $data);
           }
+        
+        // if card already exists just read the row from table
+          else
+          {
+            $query =  $this->db->get_where('card', array('customer_id' => $userid));
+            $data =  $query->row_array();
+            $this->session->set_userdata($data);
+          }
+
      } 
 
  }

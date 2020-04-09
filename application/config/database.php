@@ -74,15 +74,15 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'   => '',
+	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'test',
-	'password' => 'test',
-	'database' => 'db',
+	'username' => 'karim',
+	'password' => '1234',
+	'database' => 'card',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
-	'pconnect' => TRUE,
-	'db_debug' => FALSE,
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
@@ -91,28 +91,6 @@ $db['default'] = array(
 	'encrypt' => FALSE,
 	'compress' => FALSE,
 	'stricton' => FALSE,
-	'failover' => array()
+	'failover' => array(),
+	'save_queries' => TRUE
 );
-
-
-// $db['default'] = array(
-// 	'dsn'	=> '',
-// 	'hostname' => 'mysli.oamk.fi',
-// 	'username' => 't9abka00',
-// 	'password' => 'z42qt2EdED7yJEjy',
-// 	'database' => 'opisk_t9abka00',
-// 	'dbdriver' => 'mysqli',
-// 	'dbprefix' => '',
-// 	'pconnect' => FALSE,
-// 	'db_debug' => (ENVIRONMENT !== 'production'),
-// 	'cache_on' => FALSE,
-// 	'cachedir' => '',
-// 	'char_set' => 'utf8',
-// 	'dbcollat' => 'utf8_general_ci',
-// 	'swap_pre' => '',
-// 	'encrypt' => FALSE,
-// 	'compress' => FALSE,
-// 	'stricton' => FALSE,
-// 	'failover' => array(),
-// 	'save_queries' => TRUE
-// );

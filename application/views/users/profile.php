@@ -17,6 +17,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="account-tab" data-toggle="pill" href="#account" role="tab" aria-controls="account" aria-selected="false">Account</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="cards-tab" data-toggle="pill" href="#cards" role="tab" aria-controls="cards" aria-selected="false">cards</a>
+                    </li>
                 </ul>
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
@@ -30,7 +33,7 @@
                             <!-- CI Form Validation -->
                             <?php echo form_error('firstname', '<span class="invalid-feedback">', '</span>'); ?>
                         </div><!-- Form Group -->
-
+                          
                         <!--Last Name -->
                         <div class="form-group row col-lg-12">
                             <label class="form-control-label col-lg-3" for="lname">Last name</label>
@@ -63,6 +66,39 @@
                         </div><!-- Submit -->
                    </form>
                 </div>
+
+                <!-- cards tab -->
+
+                <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
+
+                    <!-- Form Start -->
+                    <?php echo form_open('Users/cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
+
+                        <!-- Card number-->
+                        <div class="form-group row col-lg-12">
+                            <label class="form-control-label col-lg-3" for="cardnumber">Cardnumber:</label>
+                            <input class="form-control col-lg-9 <?php echo (form_error('cardnumber')) ? "is-invalid" : ""; ?>" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
+                            <!-- CI Form Validation -->
+                            <?php echo form_error('cardnumber', '<span class="invalid-feedback">', '</span>'); ?>
+                        </div><!-- Form Group -->
+
+                          <!-- Credits -->
+                          <div class="form-group row col-lg-12">
+                            <label class="form-control-label col-lg-3" for="credits">Credits:</label>
+                            <input class="form-control col-lg-9 <?php echo (form_error('cardnumber')) ? "is-invalid" : ""; ?>" readonly type="text" id="credits" name="credits" value="<?php echo $this->session->userdata('credit'); ?>">
+                            <!-- CI Form Validation -->
+                            <?php echo form_error('credits', '<span class="invalid-feedback">', '</span>'); ?>
+                        </div><!-- Form Group -->
+
+                         <!-- There are no functions yet used by this tab -->
+                         <!-- Submit -->
+                        <div class="d-flex justify-content-end col-lg-12">
+                            <input class="btn btn-primary text-center" type="submit" value="Update cards">
+                        </div>
+                        <!-- Submit -->
+                   </form>
+                </div>
+
                 <div class="col-lg-9 tab-pane fade mt-4 p-3" id="account" role="tabpanel" aria-labelledby="account-tab">
 
                     <!-- Form Start -->
