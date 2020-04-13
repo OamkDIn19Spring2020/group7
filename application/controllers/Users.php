@@ -179,8 +179,15 @@ class Users extends CI_Controller {
         // Start Cards Function
         public function update_cards()
         {
-            //dropdown list doesn't need validation neccessarily
-
+     
+            // Calling the rules from form_validation.php
+            // if ($this->form_validation->run() === false)
+            // {
+            //     // Reload profile view
+            //     $this->load->view('users/profile');
+            // }
+            // else
+           // {
                 // Update user infromation in database
                 $this->User->update_cards();
     
@@ -194,16 +201,9 @@ class Users extends CI_Controller {
                 $this->session->set_userdata($user);
                 
                 // Send a success update feedback
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                 $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
-=======
-                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Email updated successfully.</div>');
->>>>>>> Working on credits + card readout
-=======
-                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
->>>>>>> Added dropdown menu to credit buy
-    
+
                 // Load profile view
                 redirect('users/profile');
            // }
