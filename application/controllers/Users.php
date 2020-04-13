@@ -197,7 +197,11 @@ class Users extends CI_Controller {
                 $this->session->set_userdata($user);
                 
                 // Send a success update feedback
+<<<<<<< HEAD
                 $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
+=======
+                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Email updated successfully.</div>');
+>>>>>>> Working on credits + card readout
     
                 // Load profile view
                 redirect('users/profile');
