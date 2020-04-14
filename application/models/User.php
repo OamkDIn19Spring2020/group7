@@ -129,15 +129,17 @@
         //start update cards function
         public function update_cards()
         {
-
-            // Retrieve id from AJAX POST
-            $id = $this->input->post('id');
-
+        
             // Retrieve data from AJAX POST
             $data = [
-                        'credit' => $this->input->post('credit'),
+                        'credit' => $this->input->post('Amount') + $this->input->post('credit'),
             ];
 
+            
+            
+            // Retrieve id from AJAX POST
+            $id = $this->input->post('id');
+            
             // Update customer where id = $id
             $this->db->where('customer_id', $id);
             $this->db->update('card', $data);
