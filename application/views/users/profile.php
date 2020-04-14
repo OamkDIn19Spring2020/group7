@@ -85,11 +85,20 @@
                           <!-- Credits -->
                           <div class="form-group row col-lg-12">
                             <label class="form-control-label col-lg-3" for="credit">Credits:</label>
-                            <input class="form-control col-lg-9 <?php echo (form_error('credit')) ? "is-invalid" : ""; ?>"  type="text" id="credit" name="credit" value="<?php echo $this->session->userdata('credit'); ?>">
+                            <input class="form-control col-lg-9 <?php echo (form_error('credit')) ? "is-invalid" : ""; ?>" readonly type="text" id="credit" name="credit" value="<?php echo $this->session->userdata('credit'); ?>">
                             <!-- CI Form Validation -->
                             <?php echo form_error('credit', '<span class="invalid-feedback">', '</span>'); ?>
                         </div><!-- Form Group -->
+                        <div class="form-group row col-lg-12">
+                        <p> Select an amount of credits to buy: </p>
+                        <label class="form-control-label col-lg-3" for="CreditsAmount">Amount:</label>
 
+                        <select Class="form-control col-lg-3  <?php echo (form_error('Amount')) ? "is-invalid" : ""; ?>" id="Amount" name="Amount">
+                            <option value="50">50</option>
+                            <option value="100">100 Credits</option>
+                        </select>
+
+                        </div>
                          <!-- There are no functions yet used by this tab -->
                          <!-- Submit -->
                         <div class="d-flex justify-content-end col-lg-12">
