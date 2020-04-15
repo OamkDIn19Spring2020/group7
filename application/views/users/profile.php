@@ -5,7 +5,7 @@
     <div class="row mt-3 justify-content-center">
         <div class="card text-center col-md-12 bg-light shadow-lg mt-5">
             <div class="card-header bg-light">
-                <h5 class="card-title">Personal Settings</h5>
+                <h4 class="card-title">Personal Settings</h4>
                     <?php echo $this->session->flashdata('success'); ?>
                     <?php echo $this->session->flashdata('fail'); ?>
             </div>
@@ -21,7 +21,9 @@
                         <a class="nav-link" id="cards-tab" data-toggle="pill" href="#cards" role="tab" aria-controls="cards" aria-selected="false">cards</a>
                     </li>
                 </ul>
-                <div class="col-lg-9 mt-4 p-3 tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                <!-- Profile tab -->
+                <div class="col-lg-9 p-3 tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
                     <!-- Form Start -->
                     <?php echo form_open('Users/profile', 'class="form-row" id="profile-form" onsubmit="update_profile(this); return false;"'); ?>
@@ -61,14 +63,13 @@
                         </div><!-- Form Group -->
 
                         <!-- Submit -->
-                        <div class="d-flex justify-content-end col-lg-12">
+                        <div class="form-group row justify-content-end col-lg-12">
                             <input class="btn btn-primary text-center" type="submit" value="Update profile">
                         </div><!-- Submit -->
                    </form>
                 </div>
 
                 <!-- cards tab -->
-
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 
                     <!-- Form Start -->
@@ -99,7 +100,8 @@
                    </form>
                 </div>
 
-                <div class="col-lg-9 tab-pane fade mt-4 p-3" id="account" role="tabpanel" aria-labelledby="account-tab">
+                <!-- Account tab -->
+                <div class="col-lg-9 tab-pane fade p-3" id="account" role="tabpanel" aria-labelledby="account-tab">
 
                     <!-- Form Start -->
                     <?php echo form_open('Users/update_email', 'class="form-row" id="email-form" onsubmit="update_email(this); return false;"'); ?>
@@ -118,7 +120,7 @@
                         </div><!-- Form Group -->
                     </form>
 
-                <hr class="mb-4">
+                    <hr class="mb-4">
 
                     <!-- Form Start -->
                     <?php echo form_open('Users/update_password', 'class="form-row" id="password-form" onsubmit="update_password(this); return false;"'); ?>
@@ -139,10 +141,52 @@
                              <?php echo form_error('newpassword', '<span class="invalid-feedback">', '</span>'); ?>
                         </div><!-- Form Group -->
                         <!-- Submit -->
-                        <div class="d-flex justify-content-end col-12">
+                        <div class="form-group row justify-content-end col-12">
                             <input class="btn btn-primary text-center" type="submit" value="Change password">
                         </div><!-- Submit -->
                     </form>
+
+                    <hr class="mb-4">
+
+                    <!-- Delete account -->
+                    <div class="row">
+                        <div class="row col-lg-12 text-danger pl-4">
+                            <h5 > Delete Account</h5>
+                        </div>
+                        <div class="row col-lg-12 pl-4">
+                            <p>Once you delete your account, there is no going back. Please be certain.</p>
+                        </div>
+                        <!-- Button trigger modal -->
+                        <div class="form-group row justify-content-end col-lg-12">
+                            <button class="btn btn-danger text-center" type="button" data-toggle="modal" data-target="#cnf_del">Delete account</button>
+                        </div>
+                        <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="cnf_del" >
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="row col-lg-12 justify-content-center">
+                                            <h5 class="modal-title text-danger" id="cnf_del_label">Delete Account</h5>
+                                        </div>
+                                    </div><!-- Modal Header -->
+                                    <div class="modal-body">
+                                        <p class="modal-title">Are you sure you want to delete your account?</p>
+                                    </div><!-- Modal Body -->
+                                    <div class="modal-footer">
+                                        <div class="row col-lg-12 justify-content-around">
+                                            <div class="">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                            </div><!-- Close Modal-->
+                                            <!-- Form Start -->
+                                            <?php echo form_open('Users/delete_account', 'class="form-row" id="delete-form"'); ?>
+                                                <?php echo form_hidden('customer_id', $this->session->userdata('customer_id')); ?>
+                                                <input class="btn btn-danger text-center" type="submit" value="Yes, i am sure"><!-- Submit -->
+                                            </form><!-- Form End -->
+                                        </div>
+                                    </div><!-- Modal Footer-->
+                                </div><!-- Modal Content -->
+                            </div><!-- Modal Dialog -->
+                        </div><!-- Modal -->
+                    </div>
                 </div>
             </div>
         </div>
