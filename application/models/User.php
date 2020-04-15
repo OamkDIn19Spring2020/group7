@@ -164,4 +164,15 @@
             }
 
         }
+
+        // Start Delete Account Funtion
+        public function delete_account()
+        {
+            // Retrieve id from AJAX POST
+            $id = $this->input->post('id');
+
+            // Update customer where id = $id
+            $this->db->where('customer_id', $id);
+            $this->db->delete('customer');
+        }
 }
