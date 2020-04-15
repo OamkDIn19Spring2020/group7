@@ -201,4 +201,20 @@ class Users extends CI_Controller {
 
     }
 
+    // Start Delete Account Function
+    public function delete_account()
+    {
+        // Call delete_account from User model
+        $this->User->delete_account();
+
+        // Unset user session
+        $this->session->unset_userdata($this->session->userdata());
+
+        // Destroy user session
+        $this->session->sess_destroy();
+
+        // Redirect to home page
+        redirect('pages/index');
+    }
+
 }
