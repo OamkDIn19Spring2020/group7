@@ -28,9 +28,9 @@
         echo '</div>';
         // here we can put to link to buy page
         echo '<br>';
-        // form action link needs to fixed
+        // form action link needs to fixed redirects to byutest file ->404
         // does the value work? leaks ">
-        echo'<form action="./buytest" method="post">';
+        echo'<form action="./buytest.php" method="post">';
         echo'<input type="hidden" name="Id_Button" value="<?php echo .$row[\"subtype_id\"];\?\>">';
         echo'<input type="submit">';     
         echo '</form>';
