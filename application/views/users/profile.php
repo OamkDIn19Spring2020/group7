@@ -73,6 +73,8 @@
                 </div>
 
                 <!-- cards tab -->
+                <!-- cards tab -->
+
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 
                     <!-- Form Start -->
@@ -85,7 +87,16 @@
                             <!-- CI Form Validation -->
                             <?php echo form_error('cardnumber', '<span class="invalid-feedback">', '</span>'); ?>
                         </div><!-- Form Group -->
-
+                        <div class="form-control-label col-lg-3">
+                        <a class="nav-link" id="cardinfo-tab" data-toggle="pill" href="#cardinfo" role="tab" aria-controls="cardinfo" aria-selected="false">cardinfo   </a>
+                        </div>
+                        <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cardinfo" role="tabpanel" aria-labelledby="cardinfo-tab">
+                        <div class="form-group row col-lg-12">
+                        <label class="form-control-label col-lg-3" for="credit">Credits:</label>
+                            <input class="form-control col-lg-9 <?php echo (form_error('credit')) ? "is-invalid" : ""; ?>" readonly type="text" id="credit" name="credit" value="<?php echo $this->session->userdata('credit'); ?>">
+                        </div>
+                        </div>  
+                     
                           <!-- Credits -->
                           <div class="form-group row col-lg-12">
                             <label class="form-control-label col-lg-3" for="credit">Credits:</label>

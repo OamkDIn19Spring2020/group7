@@ -12,7 +12,7 @@ class Users extends CI_Controller {
         $this->load->model('User');
 
         // Load card model
-        $this->load->model('Cards');
+        $this->load->model('Card');
     }
 
     // Start Register Function
@@ -104,7 +104,7 @@ class Users extends CI_Controller {
     public function profile()
     {  
         // Make a card if card doesnt exist, or read cards. 
-        $this->Cards->makeCard($this->session->userdata('customer_id'));
+        $this->Card->makeCard($this->session->userdata('customer_id'));
         // Restrict non logged users from accessing profile page
         if (!$this->session->has_userdata('customer_id'))
         {
