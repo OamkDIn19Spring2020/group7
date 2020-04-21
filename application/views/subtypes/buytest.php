@@ -5,8 +5,8 @@
 
 echo 'Here Be the money making page';
 
-$var_value = $subtypePicked;
-echo $var_value;
+
+echo $ID;
 
 ?>
 

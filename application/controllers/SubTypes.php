@@ -24,10 +24,14 @@ class SubTypes extends CI_Controller
 
         public function subtypesRedirect()
         {
-            $subtypePicked = $this->input->post('Id_Button');
+            //$subtypePicked = 1; //$this->input->post('Id_Button');
 
             // if ($this->session->has_userdata('customer_id'))
             {
+                $subtypePicked =array(
+                    'ID' => $this->input->post('Id_Button')
+                    
+                ); 
                 $this->load->view('subtypes/buytest',$subtypePicked);
             }
             // else
