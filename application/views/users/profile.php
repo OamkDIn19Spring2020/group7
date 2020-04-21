@@ -73,7 +73,7 @@
                 </div>
 
                 <!-- cards tab -->
-                <!-- cards tab -->
+            
 
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 
@@ -86,17 +86,72 @@
                             <input class="form-control col-lg-9 <?php echo (form_error('cardnumber')) ? "is-invalid" : ""; ?>" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
                             <!-- CI Form Validation -->
                             <?php echo form_error('cardnumber', '<span class="invalid-feedback">', '</span>'); ?>
-                        </div><!-- Form Group -->
-                        <div class="form-control-label col-lg-3">
-                        <a class="nav-link" id="cardinfo-tab" data-toggle="pill" href="#cardinfo" role="tab" aria-controls="cardinfo" aria-selected="false">cardinfo   </a>
                         </div>
-                        <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cardinfo" role="tabpanel" aria-labelledby="cardinfo-tab">
-                        <div class="form-group row col-lg-12">
-                        <label class="form-control-label col-lg-3" for="credit">Credits:</label>
-                            <input class="form-control col-lg-9 <?php echo (form_error('credit')) ? "is-invalid" : ""; ?>" readonly type="text" id="credit" name="credit" value="<?php echo $this->session->userdata('credit'); ?>">
+
+                        <!-- Form Group -->
+
+                        <!-- Button trigger modal -->
+                        <div class="row justify-content-end col-lg-12">
+                        <?php echo form_open('Users/card_info', 'class="form-row" id="cardinfo_form"'); ?>
+
+                            <button class="btn btn-primary text-center" type="button" data-toggle="modal" data-target="#card_infos">Card information</button>
                         </div>
-                        </div>  
-                     
+                        <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="card_infos" >
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="row col-lg-12 justify-content-center">
+                                        <!-- Modal header -->
+                                            <h5 class="modal-title" id="cnf_del_label">Card info</h5>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Modal body -->
+
+                                    <div class="modal-body">
+                                        <p class="modal-title">Card info of card: <?php echo print_r($this->session->userdata('cardnumber'));  ?></p>
+
+                                        <table class = table>
+                                        <tr>
+                                        <th>ID</th>
+                                        <th>START DATE</th>
+                                        <th>EXPIRATION DATE</th>
+                                        <th>SUBSCRIPTION NAME</th>
+                                        <th>DESCRIPTION</th>
+                                        <th>Subscription id</th>
+                                        </tr>
+
+                                        <?php
+                                        
+                                       // $cardinfos = $this->session->userdata('card_info');
+
+                                        foreach ($this->session->userdata('card_info') as $info) { ?>
+                                        <tr>
+                                        <td><?php echo $info['sub_id']; ?></td>
+                                        <td><?php echo $info['startdate'] ?></td>
+                                        <td><?php echo $info['expirydate']?></td>
+                                        <td><?php echo $info['name'] ?></td>
+                                        <td><?php echo $info['description'] ?></td>
+                                        <td><?php echo $info['subtype_id']?></td>
+                                        <?php } ?>
+                                        </tr>
+                                        </table>
+                                        
+                                    </div>
+                                    <!-- Modal footer/buttons -->
+                                    <div class="modal-footer">
+                                        <div class="row col-lg-12 justify-content-around">
+                                            <div class="">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+                                            </div><!-- Close Modal-->
+
+                                            
+                                        </div>
+                                    </div><!-- Modal Footer-->
+                                </div><!-- Modal Content -->
+                            </div><!-- Modal Dialog -->
+                        </div><!-- Modal -->
+                                        
                           <!-- Credits -->
                           <div class="form-group row col-lg-12">
                             <label class="form-control-label col-lg-3" for="credit">Credits:</label>
@@ -120,9 +175,10 @@
                             <input class="btn btn-primary text-center" type="submit" value="Update cards">
                         </div>
                         <!-- Submit -->
-                   </form>
+                   </form><!-- 1st Form End -->
+                   </form><!-- 2nd Form End -->
                 </div>
-
+                                        
                 <!-- Account tab -->
                 <div class="col-lg-9 tab-pane fade p-3 mt-3" id="account" role="tabpanel" aria-labelledby="account-tab">
 

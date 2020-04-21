@@ -37,11 +37,11 @@
         
         //if user doesnt have any cards.
         if ($userquery->num_rows() == 0)
-           
+        { 
             
         //create new card for this user
 
-         {
+       
 
             //random card number
 
@@ -73,14 +73,25 @@
           }
         
         // if card already exists just read the row from table
-          else
-          {
+          
             $query =  $this->db->get_where('card', array('customer_id' => $userid));
             $data =  $query->row_array();
             $this->session->set_userdata($data);
-          }
+          
 
-     } 
+     }
+    
+     public function cards_info($userid)
+     {
+         // Retrieve id from AJAX POST
+             $cardid = $this->db->query("SELECT card.card_id FROM card WHERE card.customer_id = $userid");
+         
+    
+         $query = $this->db->query("SELECT sub.sub_id,sub.startdate,sub.expirydate,subtype.name,subtype.description,subtype.subtype_id FROM sub INNER JOIN subtype ON subtype.subtype_id = sub.subtype_id WHERE sub.card_id=33");
+
+        return $query->result_array();
+       
+     }
 
  }
 
