@@ -15,24 +15,19 @@ class SubTypes extends CI_Controller
             $data['subtype']=$this->Sub_type->getSubtypeData();
             $this->load->view('subtypes/mainsubtype',$data);
         }
-        // public function SubTypeChosen()
-        // {
-        //     $subtypePicked = array(
-        //         'SubTypeChosen'=>$this->input->post('Id_Button')
-        //     );
-        // }
 
         public function subtypesRedirect()
         {
-            //$subtypePicked = 1; //$this->input->post('Id_Button');
-            // if ($this->session->has_userdata('customer_id')){
+        //   check if user logged in.
+            if ($this->session->has_userdata('customer_id'))
+            {
                 $subtypePicked =array('ID' => $this->input->post('Id_Button')); 
                 $this->load->view('subtypes/buytest',$subtypePicked);
-            //}
-            // else
-            // {
-            // $this->load->view('users/login');
-            // }
+            }
+            else
+            {
+             redirect('users/login');
+            }
         }
 }
 ?>
