@@ -73,7 +73,6 @@
                 </div>
 
                 <!-- cards tab -->
-            
 
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 
