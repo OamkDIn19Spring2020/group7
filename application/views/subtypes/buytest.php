@@ -5,7 +5,7 @@
 
 echo 'Here Be the money making page';
 
-$var_value = $_POST['Id_button'];
+$var_value = $subtypePicked;
 echo $var_value;
 
 ?>
