@@ -73,6 +73,10 @@
                 </div>
 
                 <!-- cards tab -->
+<<<<<<< HEAD
+=======
+            
+>>>>>>> d45e745765c55ea47354d5c82af7c0b6c4e7ad1a
 
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 

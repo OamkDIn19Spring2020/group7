@@ -179,6 +179,7 @@ class Users extends CI_Controller {
         // Start Cards Function
         public function update_cards()
         {
+<<<<<<< HEAD
      
             // Calling the rules from form_validation.php
             // if ($this->form_validation->run() === false)
@@ -188,6 +189,10 @@ class Users extends CI_Controller {
             // }
             // else
            // {
+=======
+            //dropdown list doesn't need validation neccessarily
+
+>>>>>>> d45e745765c55ea47354d5c82af7c0b6c4e7ad1a
                 // Update user infromation in database
                 $this->User->update_cards();
     
@@ -201,8 +206,14 @@ class Users extends CI_Controller {
                 $this->session->set_userdata($user);
                 
                 // Send a success update feedback
+<<<<<<< HEAD
                 $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
     
+=======
+
+                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
+
+>>>>>>> d45e745765c55ea47354d5c82af7c0b6c4e7ad1a
                 // Load profile view
                 redirect('users/profile');
            // }
