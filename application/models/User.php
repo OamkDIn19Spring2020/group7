@@ -126,45 +126,25 @@
             $this->db->update('customer', $data);
         }
 
-        //start update cards function
-        public function update_cards()
-        {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-            // Retrieve data from AJAX POST
-            $data = [
-                        'credit' => $this->input->post('Amount') + $this->input->post('credit'),
-            ];
-
-            
-            
-            // Retrieve id from AJAX POST
-            $id = $this->input->post('id');
-            
-=======
-=======
-        
->>>>>>> Added dropdown menu to credit buy
-            // Retrieve data from AJAX POST
-            $data = [
-                        'credit' => $this->input->post('Amount') + $this->input->post('credit'),
-            ];
-
-            
-            
-            // Retrieve id from AJAX POST
-            $id = $this->input->post('id');
-<<<<<<< HEAD
-
->>>>>>> Working on credits + card readout
-=======
-            
->>>>>>> Added dropdown menu to credit buy
-            // Update customer where id = $id
-            $this->db->where('customer_id', $id);
-            $this->db->update('card', $data);
-        }
+         //start update cards function
+         public function update_cards()
+         {
+         
+             // Retrieve data from AJAX POST
+             $data = [
+                         'credit' => $this->input->post('Amount') + $this->input->post('credit'),
+             ];
+ 
+             
+             
+             // Retrieve id from AJAX POST
+             $id = $this->input->post('id');
+             
+             // Update customer where id = $id
+             $this->db->where('customer_id', $id);
+             $this->db->update('card', $data);
+         }
+ 
 
        // Start Password Update Function 
         public function update_password()

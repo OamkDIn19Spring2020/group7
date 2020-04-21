@@ -194,16 +194,9 @@ class Users extends CI_Controller {
                 $this->session->set_userdata($user);
                 
                 // Send a success update feedback
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                 $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
-=======
-                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Email updated successfully.</div>');
->>>>>>> Working on credits + card readout
-=======
-                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
->>>>>>> Added dropdown menu to credit buy
-    
+
                 // Load profile view
                 redirect('users/profile');
            // }
