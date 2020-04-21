@@ -13,5 +13,3 @@ class Cards extends CI_Controller {
     //no need to use card controller for now.
 
 }
-
-?>

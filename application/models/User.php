@@ -126,26 +126,6 @@
             $this->db->update('customer', $data);
         }
 
-<<<<<<< HEAD
-        //start update cards function
-        public function update_cards()
-        {
-        
-            // Retrieve data from AJAX POST
-            $data = [
-                        'credit' => $this->input->post('Amount') + $this->input->post('credit'),
-            ];
-
-            
-            
-            // Retrieve id from AJAX POST
-            $id = $this->input->post('id');
-            
-            // Update customer where id = $id
-            $this->db->where('customer_id', $id);
-            $this->db->update('card', $data);
-        }
-=======
          //start update cards function
          public function update_cards()
          {
@@ -165,7 +145,6 @@
              $this->db->update('card', $data);
          }
  
->>>>>>> d45e745765c55ea47354d5c82af7c0b6c4e7ad1a
 
        // Start Password Update Function 
         public function update_password()
