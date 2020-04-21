@@ -26,6 +26,11 @@ class SubTypes extends CI_Controller
             }
             else
             {
+            //get the current Url to return to
+            $returnUrl = current_url().'/subtypesRedirect';
+            // save the url in session data
+            $this->session->set_userdata('ReturnUrl', $returnUrl);
+            //need to unset after order?
              redirect('users/login');
             }
         }

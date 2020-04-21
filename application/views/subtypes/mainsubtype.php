@@ -1,7 +1,7 @@
 <?php include(APPPATH . '/views/include/header.php'); ?>
 <?php include(APPPATH . '/views/include/nav.php'); ?>
 <!-- Should save post action in array in session what can be called -->
-<?php $_SESSION['post-data'] = $_POST;?>
+<?php $_SESSION['postdata'] = $_POST;?>
 
 <div class="container">
 
