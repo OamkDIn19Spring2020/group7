@@ -30,7 +30,8 @@
         //form starts. submits the picked id for the contoller what then is used in buy view.
         echo'<form action="../SubTypes/subtypesRedirect" method="post">';
         // the value doesnt work with the id
-        echo'<input type="hidden" name="Id_Button" value="<?php echo $row[\'subtype_id\'];?>">';
+        echo'<input type="hidden" name="Id_Button" value="'.$row['subtype_id'];
+        echo '">';
         echo'<input type="submit">';     
         echo '</form>';
         
