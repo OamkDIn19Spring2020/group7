@@ -105,6 +105,10 @@ class Users extends CI_Controller {
     {  
         // Make a card if card doesnt exist, or read cards. 
         $this->Card->makeCard($this->session->userdata('customer_id'));
+        
+        $data['card_info'] = $this->Card->cards_info($this->session->userdata('customer_id'));
+        $this->session->set_userdata($data);
+
         // Restrict non logged users from accessing profile page
         if (!$this->session->has_userdata('customer_id'))
         {
@@ -175,15 +179,8 @@ class Users extends CI_Controller {
         // Start Cards Function
         public function update_cards()
         {
-     
-            // Calling the rules from form_validation.php
-            // if ($this->form_validation->run() === false)
-            // {
-            //     // Reload profile view
-            //     $this->load->view('users/profile');
-            // }
-            // else
-           // {
+            //dropdown list doesn't need validation neccessarily
+
                 // Update user infromation in database
                 $this->User->update_cards();
     
@@ -256,5 +253,14 @@ class Users extends CI_Controller {
         // Redirect to home page
         redirect('pages/index');
     }
+
+    public function card_info()
+    {
+        // $data['card_info'] = $this->Card->cards_info();
+        // $this->session->set_userdata($data);
+      
+    }
+
+
 
 }
