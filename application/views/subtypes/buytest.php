@@ -3,10 +3,10 @@
 
 <?php
 
-echo 'Here Be the money making page';
+echo 'Here Be the money making page<br>';
 
 
-echo $ID;
+echo 'your id is :'.$ID;
 
 ?>
 
