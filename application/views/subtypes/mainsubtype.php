@@ -31,7 +31,7 @@
         // 
         // does the value work? leaks ">
         echo'<form action="../SubTypes/subtypesRedirect" method="post">';
-        echo'<input type="hidden" name="Id_Button" value="<?php echo .$row[\'subtype_id\'];?>">';
+        echo'<input type="hidden" name="Id_Button" value="<?php echo $row[\'subtype_id\'];?>">';
         echo'<input type="submit">';     
         echo '</form>';
         
