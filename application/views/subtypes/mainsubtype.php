@@ -26,11 +26,10 @@
         echo '<br> info'.$row['address'];
         echo '<br>';
         echo '</div>';
-        // here we can put to link to buy page
         echo '<br>';
-        // 
-        // does the value work? leaks ">
+        //form starts. submits the picked id for the contoller what then is used in buy view.
         echo'<form action="../SubTypes/subtypesRedirect" method="post">';
+        // the value doesnt work with the id
         echo'<input type="hidden" name="Id_Button" value="<?php echo $row[\'subtype_id\'];?>">';
         echo'<input type="submit">';     
         echo '</form>';
