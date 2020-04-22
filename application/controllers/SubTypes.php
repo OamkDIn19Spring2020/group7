@@ -13,7 +13,7 @@ class SubTypes extends CI_Controller
         { 
             $this->load->model('Sub_type');
             $data['subtype']=$this->Sub_type->getSubtypeData();
-            $this->load->view('subtypes/mainsubtype',$data);
+            $this->load->view('subtypes/subtype',$data);
         }
 }
 ?>
