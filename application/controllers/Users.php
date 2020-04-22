@@ -12,7 +12,7 @@ class Users extends CI_Controller {
         $this->load->model('User');
 
         // Load card model
-        $this->load->model('Cards');
+        $this->load->model('Card');
     }
 
     // Start Register Function
@@ -104,7 +104,11 @@ class Users extends CI_Controller {
     public function profile()
     {  
         // Make a card if card doesnt exist, or read cards. 
-        $this->Cards->makeCard($this->session->userdata('customer_id'));
+        $this->Card->makeCard($this->session->userdata('customer_id'));
+        //Get the card info and set it as userdata
+        $data['card_info'] = $this->Card->cards_info($this->session->userdata('customer_id'),$this->session->userdata('card_id'));
+        $this->session->set_userdata($data);
+
         // Restrict non logged users from accessing profile page
         if (!$this->session->has_userdata('customer_id'))
         {
@@ -172,6 +176,31 @@ class Users extends CI_Controller {
         }
     }
 
+        // Start Cards Function
+        public function update_cards()
+        {
+            //dropdown list doesn't need validation neccessarily
+
+                // Update user infromation in database
+                $this->User->update_cards();
+    
+                // Get user data by id
+                $user = $this->User->get($this->session->userdata('customer_id'))->row_array();
+    
+                // Clean last registered session
+                $this->session->unset_userdata($this->session->userdata());
+    
+                // Create new session with new user information
+                $this->session->set_userdata($user);
+                
+                // Send a success update feedback
+                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
+    
+                // Load profile view
+                redirect('users/profile');
+           // }
+        }
+
     // Start Update Password Function
     public function update_password()
     {
@@ -216,5 +245,6 @@ class Users extends CI_Controller {
         // Redirect to home page
         redirect('pages/index');
     }
+
 
 }

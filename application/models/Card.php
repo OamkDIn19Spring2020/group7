@@ -1,6 +1,6 @@
 <?php
 
-    class Cards extends CI_Model
+    class Card extends CI_Model
     {
 
         public function __construct()
@@ -28,24 +28,29 @@
         { 
         
             
-
+        
         //check wether user has cards
 
             $userid = $userID;
             $userquery = $this->db->get_where('card',array('customer_id' => $userid));
 
-        
+        if ($userid == NULL)
+        {
+            return false;
+        }
+        else
+        {
         //if user doesnt have any cards.
         if ($userquery->num_rows() == 0)
-           
+        { 
             
         //create new card for this user
 
-         {
+       
 
             //random card number
 
-            $newcardNumber = $this->Cards->randomNum();
+            $newcardNumber = $this->Card ->randomNum();
 
             //check wether the number is taken
 
@@ -62,6 +67,7 @@
             
             //the data for the row
                   $data = [
+                'card_id' => '',
                 'cardnumber' => $newcardNumber,
                 'credit' => 100,
                 'customer_id'=> $userid
@@ -73,14 +79,24 @@
           }
         
         // if card already exists just read the row from table
-          else
-          {
+          
             $query =  $this->db->get_where('card', array('customer_id' => $userid));
             $data =  $query->row_array();
             $this->session->set_userdata($data);
-          }
+          
 
-     } 
+     }
+    
+    }
+     public function cards_info($userid,$card_id)
+     {
+        //query for inner join of sub and subtype with card_id 
+
+         $query = $this->db->query("SELECT sub.sub_id,sub.startdate,sub.expirydate,subtype.name,subtype.description,subtype.subtype_id FROM sub INNER JOIN subtype ON subtype.subtype_id = sub.subtype_id WHERE sub.card_id=$card_id");
+
+         return $query->result_array();
+       
+     }
 
  }
 

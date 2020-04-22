@@ -73,10 +73,11 @@
                 </div>
 
                 <!-- cards tab -->
+
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 
                     <!-- Form Start -->
-                    <?php echo form_open('Users/cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
+                    <?php echo form_open('Users/update_cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
 
                         <!-- Card number-->
                         <div class="form-group row col-lg-12">
@@ -84,25 +85,106 @@
                             <input class="form-control col-lg-9 <?php echo (form_error('cardnumber')) ? "is-invalid" : ""; ?>" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
                             <!-- CI Form Validation -->
                             <?php echo form_error('cardnumber', '<span class="invalid-feedback">', '</span>'); ?>
-                        </div><!-- Form Group -->
+                        </div>
 
+                        <!-- Form Group -->
+
+                        <!-- Button trigger modal -->
+                        <div class="row justify-content-end col-lg-12">
+                                 <?php echo form_open('Users/card_info', 'class="form-row" id="cardinfo_form"'); ?>
+                        </div>
+                        <!-- button for cardinfo -->
+                        <div class="form-group justify-content-end col-lg-8">
+
+                        <button class="btn btn-primary text-center" type="button" data-toggle="modal" data-target="#card_infos">Card information</button>
+                        
+                        </div>
+                        <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="card_infos" >
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="row col-lg-12 justify-content-center">
+                                        <!-- Modal header -->
+                                            <h5 class="modal-title" id="cnf_del_label">Card info</h5>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Modal body -->
+
+                                    <div class="modal-body">
+                                        <p class="modal-title">Card info of card: <?php print_r($this->session->userdata('cardnumber'));  ?></p>
+                                         <!-- Start Table for printout  -->
+
+                                        <table class = table>
+                                        <tr>
+                                        <th>ID</th>
+                                        <th>START DATE</th>
+                                        <th>EXPIRATION DATE</th>
+                                        <th>SUBSCRIPTION NAME</th>
+                                        <th>DESCRIPTION</th>
+                                        <th>Subscription id</th>
+                                        </tr>
+
+                                        <?php
+                                        
+                                       // Prints out the data from the join query array
+
+                                        foreach ($this->session->userdata('card_info') as $info) { ?>
+                                        <tr>
+                                        <td><?php echo $info['sub_id']; ?></td>
+                                        <td><?php echo $info['startdate'] ?></td>
+                                        <td><?php echo $info['expirydate']?></td>
+                                        <td><?php echo $info['name'] ?></td>
+                                        <td><?php echo $info['description'] ?></td>
+                                        <td><?php echo $info['subtype_id']?></td>
+                                        <?php } ?>
+                                        </tr>
+                                        </table>
+                                        <!-- End Table for printout  -->
+                                    </div>
+                                    <!-- Modal footer/buttons -->
+                                    <div class="modal-footer">
+                                        <div class="row col-lg-12 justify-content-around">
+                                            <div class="">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+                                            </div><!-- Close Modal-->
+
+                                            
+                                        </div>
+                                    </div><!-- Modal Footer-->
+                                </div><!-- Modal Content -->
+                            </div><!-- Modal Dialog -->
+                        </div><!-- Modal -->
+                                        
                           <!-- Credits -->
                           <div class="form-group row col-lg-12">
-                            <label class="form-control-label col-lg-3" for="credits">Credits:</label>
-                            <input class="form-control col-lg-9 <?php echo (form_error('cardnumber')) ? "is-invalid" : ""; ?>" readonly type="text" id="credits" name="credits" value="<?php echo $this->session->userdata('credit'); ?>">
+                            <label class="form-control-label col-lg-3" for="credit">Credits:</label>
+                            <input class="form-control col-lg-9 <?php echo (form_error('credit')) ? "is-invalid" : ""; ?>" readonly type="text" id="credit" name="credit" value="<?php echo $this->session->userdata('credit'); ?>">
                             <!-- CI Form Validation -->
-                            <?php echo form_error('credits', '<span class="invalid-feedback">', '</span>'); ?>
+                            <?php echo form_error('credit', '<span class="invalid-feedback">', '</span>'); ?>
                         </div><!-- Form Group -->
+                        <div class="form-control-label col-lg-9">
+                        <p> Select an amount of credits to buy: </p>
+                        </div>
+                        <div class="form-group row col-lg-12">
+                        <label class="form-control-label col-lg-3" for="CreditsAmount">Amount:</label>
 
-                         <!-- There are no functions yet used by this tab -->
+                        <select Class="form-control col-lg-3  <?php echo (form_error('Amount')) ? "is-invalid" : ""; ?>" id="Amount" name="Amount">
+                            <option value="50">50</option>
+                            <option value="100">100 Credits</option>
+                        </select>
+
+                        </div>
+
                          <!-- Submit -->
-                        <div class="d-flex justify-content-end col-lg-12">
-                            <input class="btn btn-primary text-center" type="submit" value="Update cards">
+                         <div class="form-group justify-content-end col-lg-8">
+                            <input class="btn btn-primary text-center" type="submit" value="Buy credit">
                         </div>
                         <!-- Submit -->
-                   </form>
+                     </form><!-- 1st Form End -->
+                   </form><!-- 2nd Form End -->
                 </div>
-
+                                        
                 <!-- Account tab -->
                 <div class="col-lg-9 tab-pane fade p-3 mt-3" id="account" role="tabpanel" aria-labelledby="account-tab">
 
@@ -362,5 +444,53 @@
             }
         }, 0.1);
     }
+    //update cards function.
+
+    function update_cards(form) {
+
+         // Create XMLHttpRequest new object
+    var xhttp = new XMLHttpRequest();
+
+         // Check if response received successfully
+     xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+        var html = document.querySelector('html');
+
+        // Assign response to HTML element
+        html.innerHTML  = this.responseText;
+
+        var profile_tab = document.querySelector('#profile-tab');
+        profile_tab.classList.remove("active");
+
+        var account_tab = document.querySelector('#cards-tab');
+        account_tab.classList.add("active");
+
+        var profile = document.querySelector('#profile');
+        profile.classList.remove("show");
+        profile.classList.remove("active");
+        
+        var account = document.querySelector('#cards');
+        account.classList.add("show");
+        account.classList.add("active");
+
+        // set flashdata to expire after 1 sec
+        var flashdata = document.querySelector('#flash-msg');
+        setTimeout(function() {
+            <?php $this->session->set_flashdata('success', ''); ?>
+            flashdata.parentNode.removeChild(flashdata);
+        }, 2000);
+
+    }
+};
+
+// Open AJAX request
+xhttp.open(form.method , form.action, true);
+// Set AJAX request header encryption type
+xhttp.setRequestHeader('Content-Type', form.enctype);
+// Send data within header
+xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id'); ?>' + '&' + get_name_value(form));
+}
+
 </script>
 <?php include(APPPATH . '/views/include/footer.php'); ?>
