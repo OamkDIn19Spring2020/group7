@@ -6,7 +6,7 @@
 echo 'Here Be the money making page<br>';
 
 
-echo 'your id is '.$this->load->userdata('SubTypePicked');;
+echo 'your id is '.$this->session->userdata('SubTypePicked');;
 
 ?>
 
