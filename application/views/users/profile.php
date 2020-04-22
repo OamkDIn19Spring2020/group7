@@ -73,10 +73,6 @@
                 </div>
 
                 <!-- cards tab -->
-<<<<<<< HEAD
-=======
-            
->>>>>>> d45e745765c55ea47354d5c82af7c0b6c4e7ad1a
 
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 
@@ -95,9 +91,13 @@
 
                         <!-- Button trigger modal -->
                         <div class="row justify-content-end col-lg-12">
-                        <?php echo form_open('Users/card_info', 'class="form-row" id="cardinfo_form"'); ?>
+                                 <?php echo form_open('Users/card_info', 'class="form-row" id="cardinfo_form"'); ?>
+                        </div>
+                        <!-- button for cardinfo -->
+                        <div class="form-group justify-content-end col-lg-8">
 
-                            <button class="btn btn-primary text-center" type="button" data-toggle="modal" data-target="#card_infos">Card information</button>
+                        <button class="btn btn-primary text-center" type="button" data-toggle="modal" data-target="#card_infos">Card information</button>
+                        
                         </div>
                         <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="card_infos" >
                             <div class="modal-dialog modal-lg">
@@ -112,7 +112,8 @@
                                     <!-- Modal body -->
 
                                     <div class="modal-body">
-                                        <p class="modal-title">Card info of card: <?php echo print_r($this->session->userdata('cardnumber'));  ?></p>
+                                        <p class="modal-title">Card info of card: <?php print_r($this->session->userdata('cardnumber'));  ?></p>
+                                         <!-- Start Table for printout  -->
 
                                         <table class = table>
                                         <tr>
@@ -126,7 +127,7 @@
 
                                         <?php
                                         
-                                       // $cardinfos = $this->session->userdata('card_info');
+                                       // Prints out the data from the join query array
 
                                         foreach ($this->session->userdata('card_info') as $info) { ?>
                                         <tr>
@@ -139,7 +140,7 @@
                                         <?php } ?>
                                         </tr>
                                         </table>
-                                        
+                                        <!-- End Table for printout  -->
                                     </div>
                                     <!-- Modal footer/buttons -->
                                     <div class="modal-footer">
@@ -162,8 +163,10 @@
                             <!-- CI Form Validation -->
                             <?php echo form_error('credit', '<span class="invalid-feedback">', '</span>'); ?>
                         </div><!-- Form Group -->
-                        <div class="form-group row col-lg-12">
+                        <div class="form-control-label col-lg-9">
                         <p> Select an amount of credits to buy: </p>
+                        </div>
+                        <div class="form-group row col-lg-12">
                         <label class="form-control-label col-lg-3" for="CreditsAmount">Amount:</label>
 
                         <select Class="form-control col-lg-3  <?php echo (form_error('Amount')) ? "is-invalid" : ""; ?>" id="Amount" name="Amount">
@@ -172,13 +175,13 @@
                         </select>
 
                         </div>
-                         <!-- There are no functions yet used by this tab -->
+
                          <!-- Submit -->
-                        <div class="d-flex justify-content-end col-lg-12">
-                            <input class="btn btn-primary text-center" type="submit" value="Update cards">
+                         <div class="form-group justify-content-end col-lg-8">
+                            <input class="btn btn-primary text-center" type="submit" value="Buy credit">
                         </div>
                         <!-- Submit -->
-                   </form><!-- 1st Form End -->
+                     </form><!-- 1st Form End -->
                    </form><!-- 2nd Form End -->
                 </div>
                                         

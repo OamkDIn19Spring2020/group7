@@ -105,8 +105,8 @@ class Users extends CI_Controller {
     {  
         // Make a card if card doesnt exist, or read cards. 
         $this->Card->makeCard($this->session->userdata('customer_id'));
-        
-        $data['card_info'] = $this->Card->cards_info($this->session->userdata('customer_id'));
+        //Get the card info and set it as userdata
+        $data['card_info'] = $this->Card->cards_info($this->session->userdata('customer_id'),$this->session->userdata('card_id'));
         $this->session->set_userdata($data);
 
         // Restrict non logged users from accessing profile page
@@ -194,9 +194,8 @@ class Users extends CI_Controller {
                 $this->session->set_userdata($user);
                 
                 // Send a success update feedback
-
                 $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
-
+    
                 // Load profile view
                 redirect('users/profile');
            // }
@@ -246,14 +245,6 @@ class Users extends CI_Controller {
         // Redirect to home page
         redirect('pages/index');
     }
-
-    public function card_info()
-    {
-        // $data['card_info'] = $this->Card->cards_info();
-        // $this->session->set_userdata($data);
-      
-    }
-
 
 
 }

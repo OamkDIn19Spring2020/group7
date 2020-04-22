@@ -28,13 +28,18 @@
         { 
         
             
-
+        
         //check wether user has cards
 
             $userid = $userID;
             $userquery = $this->db->get_where('card',array('customer_id' => $userid));
 
-        
+        if ($userid == NULL)
+        {
+            return false;
+        }
+        else
+        {
         //if user doesnt have any cards.
         if ($userquery->num_rows() == 0)
         { 
@@ -45,7 +50,7 @@
 
             //random card number
 
-            $newcardNumber = $this->Cards->randomNum();
+            $newcardNumber = $this->Card ->randomNum();
 
             //check wether the number is taken
 
@@ -62,6 +67,7 @@
             
             //the data for the row
                   $data = [
+                'card_id' => '',
                 'cardnumber' => $newcardNumber,
                 'credit' => 100,
                 'customer_id'=> $userid
@@ -81,15 +87,14 @@
 
      }
     
-     public function cards_info($userid)
+    }
+     public function cards_info($userid,$card_id)
      {
-         // Retrieve id from AJAX POST
-             $cardid = $this->db->query("SELECT card.card_id FROM card WHERE card.customer_id = $userid");
-         
-    
-         $query = $this->db->query("SELECT sub.sub_id,sub.startdate,sub.expirydate,subtype.name,subtype.description,subtype.subtype_id FROM sub INNER JOIN subtype ON subtype.subtype_id = sub.subtype_id WHERE sub.card_id=33");
+        //query for inner join of sub and subtype with card_id 
 
-        return $query->result_array();
+         $query = $this->db->query("SELECT sub.sub_id,sub.startdate,sub.expirydate,subtype.name,subtype.description,subtype.subtype_id FROM sub INNER JOIN subtype ON subtype.subtype_id = sub.subtype_id WHERE sub.card_id=$card_id");
+
+         return $query->result_array();
        
      }
 
