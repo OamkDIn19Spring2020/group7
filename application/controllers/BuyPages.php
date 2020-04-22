@@ -16,7 +16,7 @@ class BuyPages extends CI_Controller {
                 //Check the variable is there
             if($subtypePicked != $this->session->userdata('SubTypePicked'))
             {      
-                $subtypePicked == $this->session->userdata('SubTypePicked');
+                $subtypePicked = $this->session->userdata('SubTypePicked');
             }
             $this->load->view('subtypes/buytest',$subtypePicked);
          }
