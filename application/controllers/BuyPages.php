@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class SubTypes extends CI_Controller {
+class BuyPages extends CI_Controller {
 
     public function index()
     {
