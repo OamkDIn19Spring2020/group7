@@ -72,12 +72,22 @@ class Users extends CI_Controller {
         // If user authenticated continue to set session
         if ($user = $this->User->authenticate())
         {
-            
             // Set user session
             $this->session->set_userdata($user);
-           
-         
-            redirect('users/profile');
+
+            // Session values set on BuyPages.php
+            $redirect = $this->session->userdata('ReturnUrl');
+
+            // Redirect the user to buy page after logging in, if he has been on Sub page
+            if(isset($redirect))
+            {
+
+                redirect('subtypes/buytest');
+            }
+            else
+            {
+                redirect('users/profile');
+            }
         }
         else
         {
