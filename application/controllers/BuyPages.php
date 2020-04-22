@@ -12,14 +12,10 @@ class BuyPages extends CI_Controller {
 
          //   check if user logged in.
         if ($this->session->has_userdata('customer_id'))
-            {
-                //Check the variable is there
-            if($subtypePicked != $this->session->userdata('SubTypePicked'))
-            {      
-                $subtypePicked = $this->session->userdata('SubTypePicked');
-            }
-            $this->load->view('subtypes/buytest',$subtypePicked);
-         }
+        {            
+            $this->load->view('subtypes/buytest');
+        }
+         
         else
         {
         //get the current Url to return to
