@@ -82,7 +82,7 @@ class Users extends CI_Controller {
             if(isset($redirect))
             {
 
-                redirect('subtypes/buytest');
+                redirect($redirect);
             }
             else
             {
