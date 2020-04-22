@@ -5,10 +5,13 @@
 
 echo 'Here Be the money making page<br>';
 
+print_r($this->session->userdata('SubTypePicked'));
 
-echo 'your id is '.$this->session->userdata('SubTypePicked');;
+echo '<pre>';
+var_dump($_SESSION);
+echo '</pre>';
+
 
 ?>
-
 
 <?php include(APPPATH . '/views/include/footer.php'); ?>

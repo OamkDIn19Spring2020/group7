@@ -28,7 +28,7 @@
         echo '</div>';
         echo '<br>';
         //form starts. submits the picked id for the contoller what then is used in buy view.
-        echo'<form action="../BuyPages/" method="post">';
+        echo'<form action="BuyPages" method="post">';
         // the value doesnt work with the id
         echo'<input type="hidden" name="Id_Button" value="'.$row['subtype_id'];
         echo '">';
