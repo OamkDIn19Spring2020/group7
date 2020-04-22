@@ -13,6 +13,20 @@
     <?php
     foreach ($subtype as $row)
     {
+        ?>
+        <div class="card border-dark mb-3"style="width:18rem" >
+            <div class="card-body">
+            <h5 class="card-title"><?php echo $row['name']; ?></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><?php echo 'Id is'.$row['subtype_id'].'price is'.$row['cost']; ?></h6>
+            <p class="card-text-center"> <?php echo $row['description'] ?></p>
+            <p class="card-text"><?php echo 'Info '.$row['address']; ?></p>
+            <form action="BuyPages" method="post">
+            <input type="hidden" name="Id_Button" value="<?php echo $row['subtype_id'] ?>">
+            <input class="btn btn-primary" type="submit">
+            </form>
+            </div>
+        </div>
+        <?php
         echo '<div>';
         echo '<br>Id is '.$row['subtype_id'];
         echo '<br> Name :'.$row['name'];
