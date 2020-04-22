@@ -1,6 +1,7 @@
 <?php include(APPPATH . '/views/include/header.php'); ?>
 <?php include(APPPATH . '/views/include/nav.php'); ?>
-
+<!-- Should save post action in array in session what can be called -->
+<?php $_SESSION['postdata'] = $_POST;?>
 
 <div class="container">
 
@@ -17,21 +18,24 @@
         echo '<br> Name :'.$row['name'];
         echo '</div>';
         // Using the bootstrap for collapsing
+        // Some animation timings?
         echo '<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#info">More info</button>';
         echo '<div id="info" class="collapse in">';
         echo '<br>about the company:<br>'.$row['description'];
-        echo '<br> Price in credits'.$row['cost'];
+        echo '<br> Price in credits '.$row['cost'];
         echo '<br> info'.$row['address'];
         echo '<br>';
         echo '</div>';
-        // here we can put to link to buy page
         echo '<br>';
-
-        // would echo the ID so each button has the Id wont work? 
-
-        echo '<br> <button id="echo$row[\'subtype_id\'];"type="button" onclick="test(this.id)" class="btn btn-info">Buy</button>';
-        echo '<br>';
-        }
+        //form starts. submits the picked id for the contoller what then is used in buy view.
+        echo'<form action="../BuyPages/" method="post">';
+        // the value doesnt work with the id
+        echo'<input type="hidden" name="Id_Button" value="'.$row['subtype_id'];
+        echo '">';
+        echo'<input type="submit">';     
+        echo '</form>';
+        
+    } 
 
     
     ?>
@@ -40,12 +44,5 @@
 
 
 </div>
-<!-- Script what could be used to get the button Id put in session variable or flastdata -->
-<script>
-
-function test(clicked_id){
-    alert(clicked_id);
-}
-</script>
 
 <?php include(APPPATH . '/views/include/footer.php'); ?>

@@ -9,11 +9,11 @@ class SubTypes extends CI_Controller
             { 
             echo "This is hello function."; 
             }
-        public function index() { 
-       
+        public function index() 
+        { 
             $this->load->model('Sub_type');
             $data['subtype']=$this->Sub_type->getSubtypeData();
-            $this->load->view('subtypes/main',$data);
+            $this->load->view('subtypes/mainsubtype',$data);
         }
 }
 ?>
