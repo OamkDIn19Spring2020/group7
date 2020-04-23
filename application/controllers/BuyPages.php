@@ -7,8 +7,11 @@ class BuyPages extends CI_Controller {
     public function index()
     {
         // Save the Id what was picked from sub types.
-        $subtypePicked =array('ID' => $this->input->post('Id_Button')); 
+        if ($this->input->post('Id_Button') != null)
+        {
+        $subtypePicked =$this->input->post('Id_Button'); 
         $this->session->set_userdata('SubTypePicked' , $subtypePicked);
+        }
 
          //   check if user logged in.
         if ($this->session->has_userdata('customer_id'))
