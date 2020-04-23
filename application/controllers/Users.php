@@ -37,7 +37,7 @@ class Users extends CI_Controller {
             {    
                 // Setting flash message that will be displayed in login view
                 $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Registered successfully</div>');
-
+                
                 redirect('users/login');
             }
             else
@@ -72,9 +72,13 @@ class Users extends CI_Controller {
         // If user authenticated continue to set session
         if ($user = $this->User->authenticate())
         {
+
             // Set user session
             $this->session->set_userdata($user);
-                                                
+            // Make a card if card doesnt exist, or read cards. 
+            $this->Card->makeCard($this->session->userdata('customer_id'));
+    
+            redirect('users/profile');
 
             // Session values set on BuyPages.php
             $redirect = $this->session->userdata('ReturnUrl');
@@ -87,6 +91,7 @@ class Users extends CI_Controller {
             
             // Redirect to profil if $redirect doesn't carry a value
             redirect('users/profile');
+
         }
         else
         {
@@ -112,12 +117,6 @@ class Users extends CI_Controller {
     // Start Profile Function
     public function profile()
     {  
-        // Make a card if card doesnt exist, or read cards. 
-        $this->Card->makeCard($this->session->userdata('customer_id'));
-        //Get the card info and set it as userdata
-        $data['card_info'] = $this->Card->cards_info($this->session->userdata('customer_id'),$this->session->userdata('card_id'));
-        $this->session->set_userdata($data);
-
         // Restrict non logged users from accessing profile page
         if (!$this->session->has_userdata('customer_id'))
         {
@@ -134,11 +133,10 @@ class Users extends CI_Controller {
         {
             // Update user infromation in database
             $this->User->update_profile();
-
             // Get user data by id
             $user = $this->User->get($this->session->userdata('customer_id'))->row_array();
 
-            // Clean last registered session values
+            // Clean last registered session
             $this->session->unset_userdata($user);
 
             // Reset session values with new user information
@@ -185,30 +183,6 @@ class Users extends CI_Controller {
         }
     }
 
-        // Start Cards Function
-        public function update_cards()
-        {
-            //dropdown list doesn't need validation neccessarily
-
-                // Update user infromation in database
-                $this->User->update_cards();
-    
-                // Get user data by id
-                $user = $this->User->get($this->session->userdata('customer_id'))->row_array();
-    
-                // Clean last registered session
-                $this->session->unset_userdata($this->session->userdata());
-    
-                // Create new session with new user information
-                $this->session->set_userdata($user);
-                
-                // Send a success update feedback
-                $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
-    
-                // Load profile view
-                redirect('users/profile');
-        }
-
     // Start Update Password Function
     public function update_password()
     {
@@ -237,6 +211,8 @@ class Users extends CI_Controller {
             
 
     }
+
+    
 
     // Start Delete Account Function
     public function delete_account()
