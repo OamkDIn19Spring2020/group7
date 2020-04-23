@@ -2,8 +2,6 @@
 <?php include(APPPATH . '/views/include/nav.php'); ?>
 
 
-Here Be the money making page
-
-
+Something went wrong
 
 <?php include(APPPATH . '/views/include/footer.php'); ?>
