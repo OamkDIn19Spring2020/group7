@@ -74,20 +74,19 @@ class Users extends CI_Controller {
         {
             // Set user session
             $this->session->set_userdata($user);
+                                                
 
             // Session values set on BuyPages.php
             $redirect = $this->session->userdata('ReturnUrl');
 
-            // Redirect the user to buy page after logging in, if he has been on Sub page
+            // If the user is coming from Subtype page redirect him to Buy page after logging in
             if(isset($redirect))
             {
-
                 redirect($redirect);
             }
-            else
-            {
-                redirect('users/profile');
-            }
+            
+            // Redirect to profil if $redirect doesn't carry a value
+            redirect('users/profile');
         }
         else
         {
@@ -139,10 +138,10 @@ class Users extends CI_Controller {
             // Get user data by id
             $user = $this->User->get($this->session->userdata('customer_id'))->row_array();
 
-            // Clean last registered session
-            $this->session->unset_userdata($this->session->userdata());
+            // Clean last registered session values
+            $this->session->unset_userdata($user);
 
-            // Create new session with new user information
+            // Reset session values with new user information
             $this->session->set_userdata($user);
             
             // Send a feedback
@@ -172,11 +171,11 @@ class Users extends CI_Controller {
             // Get user data by id
             $user = $this->User->get($this->session->userdata('customer_id'))->row_array();
 
-            // Clean last registered session
-            $this->session->unset_userdata($this->session->userdata());
+            // Clean last registered session value for email
+            $this->session->unset_userdata('email');
 
-            // Create new session with new user information
-            $this->session->set_userdata($user);
+            // Create new session with new user email
+            $this->session->set_userdata('email', $user['email']);
             
             // Send a success update feedback
             $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Email updated successfully.</div>');
@@ -208,7 +207,6 @@ class Users extends CI_Controller {
     
                 // Load profile view
                 redirect('users/profile');
-           // }
         }
 
     // Start Update Password Function
