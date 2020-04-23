@@ -76,53 +76,58 @@
 
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 
-               
-
-                        <!-- Card number-->
-                        <div class="form-group row col-lg-12">
-                            <label class="form-control-label col-lg-3" for="cardnumber">Cardnumber:</label>
-                            <input class="form-control col-lg-9" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
+                    <!-- Card number-->
+                    <div class="form-group row col-lg-12">
+                    <div class="input-group col-lg-9">
+                        <label class="form-control-label col-lg-3" for="cardnumber">Cardnumber:</label>
+                        <input class="form-control col-lg-6" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
+                        <div class="input-group-append">
+                        <input class="btn btn-danger text-center" type="button" data-toggle="modal" data-target="#rep_card"  value="Replace Card">
                         </div>
-                        <?php  print_r($this->session->userdata() ) ?>
-                        <!-- Form Group -->
-
-                       
-                        <div class="row justify-content-end col-lg-12">
-                           <?php //echo form_open('Users/card_info', 'class="form-row" id="cardinfo_form"'); ?>
                         </div>
-                        <!-- button for cardinfo -->
-                        <div class="form-group justify-content-end col-lg-8">
+                    </div>
+                    <?php
+                    // this is used for debugging the userdata. 
+                    // print_r($this->session->userdata() ) 
+                    ?>
+                     <!-- Form Group -->
+                     <hr class="mb-4">
+
+                    <!-- button for cardinfo -->
+                        <div class="form-group row justify-content-around col-lg-5">
+                        <label class="form-control-label col-lg-5" for="card_info">View subscriptions:</label>
+                        <!-- Form start -->
                         <?php echo form_open('Cards/card_info', 'class="form-row" id="cards-form" onsubmit="card_info(this); return false;"'); ?>
+                        <!-- Submit -->
+                        <div class ="form-control-label col-lg-12">
                         <button class="btn btn-primary text-center" type="submit">Card information</button>
-                        </form>
                         </div>
-                        <div class="form-group justify-content-end col-lg-8">
-                        <!-- Button replace card modal -->
-                        <div class="row justify-content-end col-lg-12">
-                        <button class="btn btn-danger text-center" type="button" data-toggle="modal" data-target="#rep_card">Replace Card</button>
+                        <!-- Form end -->
+                        </form> 
                         </div>
-                        </div>
-                                        
+                     <!-- Form Group -->
+                     <hr class="mb-4">
+                    <!-- Form Start -->
+                    <?php echo form_open('Cards/update_cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
 
-                         <!-- Form Start -->
-                        <?php echo form_open('Users/update_cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
-
-                          <!-- Credits -->
-                          <div class="form-group row col-lg-12">
+                        <!-- Credits -->
+                        <div class="form-group row justify-content-around  col-lg-5">
                             <label class="form-control-label col-lg-3" for="credit">Credits:</label>
-                            <input class="form-control col-lg-9 <?php echo (form_error('credit')) ? "is-invalid" : ""; ?>" readonly type="text" id="credit" name="credit" value="<?php echo $this->session->userdata('credit'); ?>">
+                            <input class="form-control col-lg-3 <?php echo (form_error('credit')) ? "is-invalid" : ""; ?>" readonly type="text" id="credit" name="credit" value="<?php echo $this->session->userdata('credit'); ?>">
                             <!-- CI Form Validation -->
                             <?php echo form_error('credit', '<span class="invalid-feedback">', '</span>'); ?>
-
-                        </div><!-- Form Group -->
-                        
-                        <div class="form-control-label col-lg-9">
-                        <p> Select an amount of credits to buy: </p>
                         </div>
-                        <div class="form-group row col-lg-12">
+                     
+                        
+                        <!-- Form Group -->
+                        
+                        <div class="form-group-row col-lg-8">
+                        <p> Select an amount of credits: </p>
+                        </div>
+                        <div class="form-group row justify-content-around  col-lg-6">
                         <label class="form-control-label col-lg-3" for="CreditsAmount">Amount:</label>
 
-                        <select Class="form-control col-lg-3  <?php echo (form_error('Amount')) ? "is-invalid" : ""; ?>" id="Amount" name="Amount">
+                        <select Class="form-control col-lg-5  <?php echo (form_error('Amount')) ? "is-invalid" : ""; ?>" id="Amount" name="Amount">
                             <option value="50">50</option>
                             <option value="100">100 Credits</option>
                         </select>
@@ -130,12 +135,10 @@
                         </div>
 
                          <!-- Submit -->
-                         <div class="form-group justify-content-end col-lg-8">
+                         <div class="form-group justify-content-end col-lg-7">
                             <input class="btn btn-primary text-center" type="submit" value="Buy credit">
                         </div>
-                        <!-- Submit -->
-                   <!--  </form>  1st Form End -->
-                   </form><!-- 2nd Form End -->
+                   </form><!-- Form End -->
                 </div>
 
 
@@ -143,23 +146,24 @@
                 <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="rep_card" >
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
+                                    <!-- Modal Header -->
                                     <div class="modal-header">
                                         <div class="row col-lg-12 justify-content-center">
                                             <h5 class="modal-title text-danger" id="cnf_rep_card">Replace Card</h5>
                                         </div>
-                                    </div><!-- Modal Header -->
+                                    </div>
+                                    <!-- Modal Body -->
                                     <div class="modal-body">
                                         <p class="modal-title">Are you sure you want to replace the card?</p>
                                         <p class="modal-body">The subscriptions will be kept, but credits will be lost.</p>
-                                    </div><!-- Modal Body -->
+                                    </div>
                                     <div class="modal-footer">
                                         <div class="row col-lg-12 justify-content-around">
-                                            <div class="">
+                                            
                                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                            </div><!-- Close Modal-->
+                                            <!-- Close Modal-->
                                             <!-- Form Start -->
-                                            <?php echo form_open('Users/replace_cards', "replace_cards(this)" ,'class="form-row" id="replace-form"'); ?>
-                                                <?php echo form_hidden('id', $this->session->userdata('customer_id')); ?>
+                                            <?php echo form_open('Cards/replace_cards', 'class="form-row" id="replace-form" onsubmit="replace_cards(this); return false;" '); ?>
                                                 <input class="btn btn-danger text-center" type="submit" value="Yes, i am sure"><!-- Submit -->
                                            </form>  <!--Form End -->
                                         </div>
@@ -173,17 +177,17 @@
                         <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="card_infos" >
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
+                                    <!-- Modal header -->
                                     <div class="modal-header">
                                         <div class="row col-lg-12 justify-content-center">
-                                        <!-- Modal header -->
                                             <h5 class="modal-title" id="card_info_label">Card info</h5>
                                         </div>
                                     </div>
-                                    
                                     <!-- Modal body -->
                                     <div class="modal-body">
                                         <p class="modal-title">Card info of card: <?php print_r($this->session->userdata('cardnumber'));  ?></p>
-                                         <!-- Start Table for printout  -->
+                                         
+                                        <!-- Start Table for printout  -->
 
                                         <table class = table>
                                         <tr>
@@ -212,7 +216,7 @@
                                         </table>
                                         <!-- End Table for printout  -->
                                     </div>
-                                    <!-- Modal footer/buttons -->
+                                    <!-- Modal footer/ /back button -->
                                     <div class="modal-footer">
                                         <div class="row col-lg-12 justify-content-around">
                                             <div class="">
@@ -484,149 +488,162 @@
             }
         }, 0.1);
     }
-    //update cards function.
 
-    function update_cards(form) {
+    //update cards function.
+    function update_cards(form) 
+    {
 
          // Create XMLHttpRequest new object
-    var xhttp = new XMLHttpRequest();
+         var xhttp = new XMLHttpRequest();
 
          // Check if response received successfully
-     xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+        xhttp.onreadystatechange = function() 
+        {
 
-        var html = document.querySelector('html');
+        if (this.readyState == 4 && this.status == 200) 
+        {
 
-        // Assign response to HTML element
-        html.innerHTML  = this.responseText;
+            var html = document.querySelector('html');
 
-        var profile_tab = document.querySelector('#profile-tab');
-        profile_tab.classList.remove("active");
+            // Assign response to HTML element
+             html.innerHTML  = this.responseText;
 
-        var account_tab = document.querySelector('#cards-tab');
-        account_tab.classList.add("active");
+            var profile_tab = document.querySelector('#profile-tab');
+            profile_tab.classList.remove("active");
 
-        var profile = document.querySelector('#profile');
-        profile.classList.remove("show");
-        profile.classList.remove("active");
+            var account_tab = document.querySelector('#cards-tab');
+            account_tab.classList.add("active");
+
+            var profile = document.querySelector('#profile');
+            profile.classList.remove("show");
+            profile.classList.remove("active");
         
-        var account = document.querySelector('#cards');
-        account.classList.add("show");
-        account.classList.add("active");
+            var account = document.querySelector('#cards');
+            account.classList.add("show");
+            account.classList.add("active");
 
-        // set flashdata to expire after 1 sec
-        var flashdata = document.querySelector('#flash-msg');
-        setTimeout(function() {
-            <?php $this->session->set_flashdata('success', ''); ?>
-            flashdata.parentNode.removeChild(flashdata);
-        }, 2000);
+            // set flashdata to expire after 2 sec
+            var flashdata = document.querySelector('#flash-msg');
+            setTimeout(function() 
+            {
+                <?php $this->session->set_flashdata('success', ''); ?>
+                flashdata.parentNode.removeChild(flashdata);
+            }, 2000);
 
+        }
+        };
+
+    // Open AJAX request
+    xhttp.open(form.method , form.action, true);
+    // Set AJAX request header encryption type
+    xhttp.setRequestHeader('Content-Type', form.enctype);
+    // Send data within header
+    xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id'); ?>' + '&' + get_name_value(form));
+
+    //end update_cards function
     }
-};
-
-// Open AJAX request
-xhttp.open(form.method , form.action, true);
-// Set AJAX request header encryption type
-xhttp.setRequestHeader('Content-Type', form.enctype);
-// Send data within header
-xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id'); ?>' + '&' + get_name_value(form));
-}
 
 
-//start card info
-function card_info(form) {
+    //start card info
+    function card_info(form) 
+        {
 
-// Create XMLHttpRequest new object
-var xhttp = new XMLHttpRequest();
+        // Create XMLHttpRequest new object
+        var xhttp = new XMLHttpRequest();
 
-// Check if response received successfully
-xhttp.onreadystatechange = function() {
-if (this.readyState == 4 && this.status == 200) {
+        // Check if response received successfully
+        xhttp.onreadystatechange = function() 
+        {
+            if (this.readyState == 4 && this.status == 200) 
+            {
 
-    var html = document.querySelector('html');
+            var html = document.querySelector('html');
 
-// Assign response to HTML element
-html.innerHTML  = this.responseText;
+            // Assign response to HTML element
+            html.innerHTML  = this.responseText;
 
-var profile_tab = document.querySelector('#profile-tab');
-profile_tab.classList.remove("active");
+            var profile_tab = document.querySelector('#profile-tab');
+            profile_tab.classList.remove("active");
 
-var account_tab = document.querySelector('#cards-tab');
-account_tab.classList.add("active");
+            var account_tab = document.querySelector('#cards-tab');
+            account_tab.classList.add("active");
 
-var profile = document.querySelector('#profile');
-profile.classList.remove("show");
-profile.classList.remove("active");
+            var profile = document.querySelector('#profile');
+            profile.classList.remove("show");
+            profile.classList.remove("active");
 
-var account = document.querySelector('#cards');
-account.classList.add("show");
-account.classList.add("active");
+            var account = document.querySelector('#cards');
+            account.classList.add("show");
+            account.classList.add("active");
+            
+            //show the modal with the active subs. 
+            $('#card_infos').modal('show');
+            
+            }
+        };
 
-$('#card_infos').modal('show');
+    // Open AJAX request
+    xhttp.open(form.method , form.action, true);
+    // Set AJAX request header encryption type
+    xhttp.setRequestHeader('Content-Type', form.enctype);
+    // Send data within header
+    xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id') . "&" .  "card_id=" . $this->session->userdata('card_id'); ?>');
 
-
-
-
-}
-};
-
-// Open AJAX request
-xhttp.open(form.method , form.action, true);
-// Set AJAX request header encryption type
-xhttp.setRequestHeader('Content-Type', form.enctype);
-// Send data within header
-xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id') . "&" .  "card_id=" . $this->session->userdata('card_id'); ?>');
-}
+    //end card_info function
+    }
 
 
 
-//start replace cards function
+    //start replace cards function
+    function replace_cards(form) 
+    {
 
-function replace_cards(form) {
+        // Create XMLHttpRequest new object
+        var xhttp = new XMLHttpRequest();
 
-// Create XMLHttpRequest new object
-var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) 
+        {
 
-// Check if response received successfully
-xhttp.onreadystatechange = function() {
-if (this.readyState == 4 && this.status == 200) {
+            var html = document.querySelector('html');
 
-var html = document.querySelector('html');
+            // Assign response to HTML element
+             html.innerHTML  = this.responseText;
 
-// Assign response to HTML element
-html.innerHTML  = this.responseText;
+            var profile_tab = document.querySelector('#profile-tab');
+            profile_tab.classList.remove("active");
 
-var profile_tab = document.querySelector('#profile-tab');
-profile_tab.classList.remove("active");
+            var account_tab = document.querySelector('#cards-tab');
+            account_tab.classList.add("active");
 
-var account_tab = document.querySelector('#cards-tab');
-account_tab.classList.add("active");
+            var profile = document.querySelector('#profile');
+            profile.classList.remove("show");
+            profile.classList.remove("active");
+        
+            var account = document.querySelector('#cards');
+            account.classList.add("show");
+            account.classList.add("active");
 
-var profile = document.querySelector('#profile');
-profile.classList.remove("show");
-profile.classList.remove("active");
+            // set flashdata to expire after 2 sec
+            var flashdata = document.querySelector('#flash-msg');
+            setTimeout(function() 
+            {
+                <?php $this->session->set_flashdata('success', ''); ?>
+                flashdata.parentNode.removeChild(flashdata);
+            }, 2000);
 
-var account = document.querySelector('#cards');
-account.classList.add("show");
-account.classList.add("active");
+            }
+        };
 
-// set flashdata to expire after 1 sec
-var flashdata = document.querySelector('#flash-msg');
-setTimeout(function() {
-   <?php $this->session->set_flashdata('success', ''); ?>
-   flashdata.parentNode.removeChild(flashdata);
-}, 2000);
+    // Open AJAX request
+    xhttp.open(form.method , form.action, true);
+    // Set AJAX request header encryption type
+    xhttp.setRequestHeader('Content-Type', form.enctype);
+    // Send data within header
+    xhttp.send('<?php echo "card_id=" . $this->session->userdata('card_id'); ?>');
 
-}
-};
-
-// Open AJAX request
-xhttp.open(form.method , form.action, true);
-// Set AJAX request header encryption type
-xhttp.setRequestHeader('Content-Type', form.enctype);
-// Send data within header
-xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id'); ?>' + '&' + get_name_value(form));
-}
+    //end replace_card function
+    }
 
 
 </script>

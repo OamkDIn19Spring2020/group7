@@ -180,7 +180,7 @@ class Users extends CI_Controller {
              $this->Card->update_cards();
              
              // Get user data by id
-             $card_data = $this->User->get($this->session->userdata('card_id'))->row_array();
+             $card_data = $this->Card->get($this->session->userdata('card_id'))->row_array();
  
              // Clean last registered session
              $this->session->unset_userdata($card_data);

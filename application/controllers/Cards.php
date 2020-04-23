@@ -10,14 +10,68 @@ class Cards extends CI_Controller {
         $this->load->model('Card');
     }
 
-    
+    // Start card_info function
     public function card_info()
     {
-        $data['card_info'] = $this->Card->cards_info($this->input->post('id'),$this->input->post('card_id'));
+        //This function retrieves all the sub info on the card with the model.
+        $data['card_info'] = $this->Card->cards_info($this->input->post('card_id'));
         $this->session->set_userdata($data);
         $this->load->view('users/profile');
     }
 
+
+    
+     // Start update_cards Function
+    public function update_cards()
+     {
+        // Dropdown list doesn't need validation neccessarily
+             
+        // Update user infromation in database
+        $this->Card->update_cards();
+             
+        // Get data with the card_id
+        $card_data = $this->Card->get($this->session->userdata('card_id'))->row_array();
+ 
+        // Clean last registered session
+        $this->session->unset_userdata($card_data);
+ 
+        // Create new session with new user information
+        $this->session->set_userdata($card_data);
+             
+        // Send a success update feedback
+        $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards updated successfully.</div>');
+ 
+        // Load profile view
+        redirect('users/profile');
+    
+     }
+
+     // Start Cards Function
+     public function replace_cards()
+     {
+         //dropdown list doesn't need validation neccessarily
+
+             // Update user infromation in database
+             $this->Card->replace_cards();
+ 
+             // Get user data by id
+             $card_data = $this->Card->get($this->session->userdata('card_id'))->row_array();
+ 
+             // Clean last registered session
+             $this->session->unset_userdata($card_data);
+ 
+             // Create new session with new user information
+             $this->session->set_userdata($card_data);
+             
+             // Send a success update feedback
+             $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards replaced successfully.</div>');
+ 
+             // Load profile view
+             redirect('users/profile');
+
+     }
+
+//End of cards controller
 }
 
 ?>
