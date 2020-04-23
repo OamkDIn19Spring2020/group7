@@ -72,9 +72,13 @@ class Users extends CI_Controller {
         // If user authenticated continue to set session
         if ($user = $this->User->authenticate())
         {
+
             // Set user session
             $this->session->set_userdata($user);
-                                                
+            // Make a card if card doesnt exist, or read cards. 
+            $this->Card->makeCard($this->session->userdata('customer_id'));
+    
+            redirect('users/profile');
 
             // Session values set on BuyPages.php
             $redirect = $this->session->userdata('ReturnUrl');
@@ -112,11 +116,6 @@ class Users extends CI_Controller {
     // Start Profile Function
     public function profile()
     {  
-        // Make a card if card doesnt exist, or read cards. 
-         $this->Card->makeCard($this->session->userdata('customer_id'));
-
-         
-        
         // Restrict non logged users from accessing profile page
         if (!$this->session->has_userdata('customer_id'))
         {

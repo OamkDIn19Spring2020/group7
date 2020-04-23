@@ -7,10 +7,16 @@ class Cards extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-
+        $this->load->model('Card');
     }
 
-    //no need to use card controller for now.
+    
+    public function card_info()
+    {
+        $data['card_info'] = $this->Card->cards_info($this->input->post('id'),$this->input->post('card_id'));
+        $this->session->set_userdata($data);
+        $this->load->view('users/profile');
+    }
 
 }
 
