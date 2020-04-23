@@ -91,6 +91,7 @@ class Users extends CI_Controller {
             
             // Redirect to profil if $redirect doesn't carry a value
             redirect('users/profile');
+
         }
         else
         {
