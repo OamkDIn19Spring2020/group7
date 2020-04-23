@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?php echo base_url(); ?>"><img class="logo" src="“"> </a>
+        <a class="navbar-brand" href="<?php echo base_url(); ?>"><img class="logo" src="<?php echo base_url('assets\img\Logoo.png'); ?>"> </a>
         <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
