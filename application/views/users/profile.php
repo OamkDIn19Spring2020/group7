@@ -76,35 +76,37 @@
 
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 
-                    <!-- Form Start -->
-                    <?php echo form_open('Users/update_cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
+               
 
                         <!-- Card number-->
                         <div class="form-group row col-lg-12">
                             <label class="form-control-label col-lg-3" for="cardnumber">Cardnumber:</label>
-                            <input class="form-control col-lg-9 <?php echo (form_error('cardnumber')) ? "is-invalid" : ""; ?>" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
-                            <!-- CI Form Validation -->
-                            <?php echo form_error('cardnumber', '<span class="invalid-feedback">', '</span>'); ?>
+                            <input class="form-control col-lg-9" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
                         </div>
-                        <?php //print_r($this->session->userdata('card_info') ) ?>
+                        <?php  print_r($this->session->userdata() ) ?>
                         <!-- Form Group -->
 
-                        <!-- Button trigger modal -->
+                       
                         <div class="row justify-content-end col-lg-12">
                            <?php //echo form_open('Users/card_info', 'class="form-row" id="cardinfo_form"'); ?>
                         </div>
                         <!-- button for cardinfo -->
                         <div class="form-group justify-content-end col-lg-8">
-
-                        <button class="btn btn-primary text-center" type="button" data-toggle="modal" data-target="#card_infos">Card information</button>
+                        <?php echo form_open('Cards/card_info', 'class="form-row" id="cards-form" onsubmit="card_info(this); return false;"'); ?>
+                        <button class="btn btn-primary text-center" type="submit">Card information</button>
+                        </form>
                         </div>
                         <div class="form-group justify-content-end col-lg-8">
-                        <!-- Button trigger modal -->
+                        <!-- Button replace card modal -->
                         <div class="row justify-content-end col-lg-12">
                         <button class="btn btn-danger text-center" type="button" data-toggle="modal" data-target="#rep_card">Replace Card</button>
                         </div>
                         </div>
                                         
+
+                         <!-- Form Start -->
+                        <?php echo form_open('Users/update_cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
+
                           <!-- Credits -->
                           <div class="form-group row col-lg-12">
                             <label class="form-control-label col-lg-3" for="credit">Credits:</label>
@@ -156,7 +158,7 @@
                                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                             </div><!-- Close Modal-->
                                             <!-- Form Start -->
-                                            <?php echo form_open('Users/replace_cards', 'class="form-row" id="replace-form"'); ?>
+                                            <?php echo form_open('Users/replace_cards', "replace_cards(this)" ,'class="form-row" id="replace-form"'); ?>
                                                 <?php echo form_hidden('id', $this->session->userdata('customer_id')); ?>
                                                 <input class="btn btn-danger text-center" type="submit" value="Yes, i am sure"><!-- Submit -->
                                            </form>  <!--Form End -->
@@ -529,6 +531,103 @@ xhttp.setRequestHeader('Content-Type', form.enctype);
 // Send data within header
 xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id'); ?>' + '&' + get_name_value(form));
 }
+
+
+//start card info
+function card_info(form) {
+
+// Create XMLHttpRequest new object
+var xhttp = new XMLHttpRequest();
+
+// Check if response received successfully
+xhttp.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+
+    var html = document.querySelector('html');
+
+// Assign response to HTML element
+html.innerHTML  = this.responseText;
+
+var profile_tab = document.querySelector('#profile-tab');
+profile_tab.classList.remove("active");
+
+var account_tab = document.querySelector('#cards-tab');
+account_tab.classList.add("active");
+
+var profile = document.querySelector('#profile');
+profile.classList.remove("show");
+profile.classList.remove("active");
+
+var account = document.querySelector('#cards');
+account.classList.add("show");
+account.classList.add("active");
+
+$('#card_infos').modal('show');
+
+
+
+
+}
+};
+
+// Open AJAX request
+xhttp.open(form.method , form.action, true);
+// Set AJAX request header encryption type
+xhttp.setRequestHeader('Content-Type', form.enctype);
+// Send data within header
+xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id') . "&" .  "card_id=" . $this->session->userdata('card_id'); ?>');
+}
+
+
+
+//start replace cards function
+
+function replace_cards(form) {
+
+// Create XMLHttpRequest new object
+var xhttp = new XMLHttpRequest();
+
+// Check if response received successfully
+xhttp.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+
+var html = document.querySelector('html');
+
+// Assign response to HTML element
+html.innerHTML  = this.responseText;
+
+var profile_tab = document.querySelector('#profile-tab');
+profile_tab.classList.remove("active");
+
+var account_tab = document.querySelector('#cards-tab');
+account_tab.classList.add("active");
+
+var profile = document.querySelector('#profile');
+profile.classList.remove("show");
+profile.classList.remove("active");
+
+var account = document.querySelector('#cards');
+account.classList.add("show");
+account.classList.add("active");
+
+// set flashdata to expire after 1 sec
+var flashdata = document.querySelector('#flash-msg');
+setTimeout(function() {
+   <?php $this->session->set_flashdata('success', ''); ?>
+   flashdata.parentNode.removeChild(flashdata);
+}, 2000);
+
+}
+};
+
+// Open AJAX request
+xhttp.open(form.method , form.action, true);
+// Set AJAX request header encryption type
+xhttp.setRequestHeader('Content-Type', form.enctype);
+// Send data within header
+xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id'); ?>' + '&' + get_name_value(form));
+}
+
 
 </script>
 <?php include(APPPATH . '/views/include/footer.php'); ?>

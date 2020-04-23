@@ -31,7 +31,7 @@
         
         //check wether user has cards
 
-            $userquery = $this->db->get_where('card',array('customer_id' => $userid));
+         $userquery = $this->db->get_where('card',array('customer_id' => $userid));
 
         //if user doesn't exist, no card will be made
         if ($userid == NULL)
@@ -115,9 +115,11 @@
         // if card already exists just read the row from table, get the latest card.
           
             // $query =  $this->db->get_where('card', array('customer_id' => $userid));
+            $userid = $this->session->userdata('customer_id');
             $query = $this->db->query("SELECT * FROM card WHERE customer_id=$userid ORDER BY card_id DESC LIMIT 1");
             $data =  $query->row_array();
             $this->session->set_userdata($data);
+            
 
     
     }
@@ -142,11 +144,10 @@
      }
 
 
-     public function cards_info()
+     public function cards_info($id,$cardid)
      {
         //query for inner join of sub and subtype with card_id 
-        $card_id = $this->session->userdata('card_id');
-         $query = $this->db->query("SELECT sub.sub_id,sub.startdate,sub.expirydate,subtype.name,subtype.description,subtype.subtype_id FROM sub INNER JOIN subtype ON subtype.subtype_id = sub.subtype_id WHERE sub.card_id=$card_id");
+        $query = $this->db->query("SELECT sub.sub_id,sub.startdate,sub.expirydate,subtype.name,subtype.description,subtype.subtype_id FROM sub INNER JOIN subtype ON subtype.subtype_id = sub.subtype_id WHERE sub.card_id=$cardid");
 
          return $query->result_array();
        
@@ -176,13 +177,13 @@
        
      }
 
-     public function card_info_get()
-     {
-        //Get the card info and set it as userdata
-        $data['card_info'] = $this->Card->cards_info();
-        $this->session->set_userdata($data);
+    //  public function card_info_get()
+    //  {
+    //     //Get the card info and set it as userdata
+    //     $data['card_info'] = $this->Card->cards_info();
+    //     $this->session->set_userdata($data);
        
-     }
+    //  }
 
 
  }
