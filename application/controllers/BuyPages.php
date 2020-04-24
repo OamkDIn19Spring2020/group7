@@ -64,6 +64,12 @@ class BuyPages extends CI_Controller {
             $data['test'] = 'Database insert error';
             $this->load->view('pages/buy',$data);
         }
+        else if ($result == 4)
+        {
+            // error in credit update
+            $data['test'] = 'credit update error';
+            $this->load->view('pages/buy',$data);
+        }
         else{
             //Something went really wrong.
             $data['test'] = 'Something went really wrong';
