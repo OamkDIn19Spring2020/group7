@@ -15,7 +15,7 @@
             $subPicked =$this->session->userdata('SubTypePicked');
             $subtyperow = $this->db->get_where('subtype',['subtype_id'=>$subPicked])->row_array();
             $subCost = $subtyperow['cost'];
-            if ($credits - $subCost < 0)
+            if (($credits - $subCost )< 0)
             {
                 //Has money
                 $countedCredits = $credits - $subCost;
@@ -34,12 +34,13 @@
                 {
                     return 1;
                 }
-                else {
+                else 
+                {
                     return 3;
-                    }
-                }   
+                }
+            }   
                 else {
-                //too poor add credits peasant.
+                //too poor add credits you peasant. They are free. Eat some cake too.
                 return 2;
             }
         }

@@ -44,20 +44,30 @@ class BuyPages extends CI_Controller {
         $subEndDate   = $this->input->post('enddate');
         //put those as vars
         $result =$this->Order->Order($subStartDate,$subEndDate);
-        if ($result = 1){
-            //Succsess
-            $this->load->view('users/profile');
+        if ($result == 1)
+        {
+            //All ok
+            $data['test'] = 'Successful';
+            $this->load->view('pages/buy',$data);
+            $this->output->set_header('refresh:5;url="../users/profile');
             
         }
-        if ($result = 2){
+       else if ($result == 2)
+        {
             // too poor
+            $data['test'] = 'Not enough credits';
+            $this->load->view('pages/buy',$data);
         }
-        if ($result = 3){
+        else if ($result == 3)
+        {
             // error in database insert
+            $data['test'] = 'Database insert error';
+            $this->load->view('pages/buy',$data);
         }
         else{
             //Something went really wrong.
-            $this->load->view('pages/buy');
+            $data['test'] = 'Something went really wrong';
+            $this->load->view('pages/buy',$data);
         }
     }
 }
