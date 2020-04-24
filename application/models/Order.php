@@ -23,13 +23,16 @@
                 //Has money
                 $countedCredits = $credits - $subCost;
                 $newCredits =['credit'=> $countedCredits];
-
+                //this could be skipped or changed if extends a sub?
+                //the sub_id from userdata 'subIdtoExtend'
+                // only need to update end date + 30 days or 60 days
                 $data = [
                     'startdate' =>$subStartDate,
                     'expirydate'=>$subEndDate,
                     'subtype_id' =>$subPicked,
                     'card_id'=>$cardid
-                ];
+                    ];
+
                 $Test =  $this->db->insert('sub', $data);
                 //Insert was OK if true
                 if ($Test == TRUE)

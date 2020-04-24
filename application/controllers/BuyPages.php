@@ -24,8 +24,10 @@ class BuyPages extends CI_Controller {
 
          //   check if user logged in.
         if ($this->session->has_userdata('customer_id'))
-        {            
-            $this->load->view('subtypes/buytest');
+        {       
+            //Checks if card id has active sub for this Subtype. Return
+            $hasActiveSub =$this->Sub->HasActiveSub();
+            $this->load->view('subtypes/buytest',$hasActiveSub);
         }
          
         else
