@@ -10,21 +10,21 @@
                     <?php echo $this->session->flashdata('fail'); ?>
             </div>
             <div class="card-body row tab-content p-2" id="personal-info-content">
+                
                 <ul class="nav nav-pills col-lg-3 flex-column p-3" id="personal-info" role="tablist" aria-orientation="vertical">
                     <li class="nav-item">
-                        <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" onclick="delete_account_style()" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
+                        <a class="nav-link active" id="profile-tab" data-toggle="pill" href="#profile" onclick="delete_account_style()" role="tab" aria-controls="profile" aria-selected="true"><b>Profile</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="account-tab" data-toggle="pill" href="#account" onclick="delete_account_style()" role="tab" aria-controls="account" aria-selected="false">Account</a>
+                        <a class="nav-link" id="account-tab" data-toggle="pill" href="#account" onclick="delete_account_style()" role="tab" aria-controls="account" aria-selected="false"><b>Account</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="cards-tab" data-toggle="pill" href="#cards" onclick="delete_account_style()" role="tab" aria-controls="cards" aria-selected="false">Cards</a>
+                        <a class="nav-link" id="cards-tab" data-toggle="pill" href="#cards" onclick="delete_account_style()" role="tab" aria-controls="cards" aria-selected="false"><b>Cards</b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger" id="delete-account-tab" data-toggle="pill" href="#delete-account" onclick="delete_account_style()" role="tab" aria-controls="delete account" aria-selected="false">Delete account</a>
+                        <a class="nav-link text-danger" id="delete-account-tab" data-toggle="pill" href="#delete-account" onclick="delete_account_style()" role="tab" aria-controls="delete account" aria-selected="false"><b>Delete account</b></a>
                     </li>
                 </ul>
-
                 <!-- Profile tab -->
                 <div class="col-lg-9 p-3 mt-3 tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
@@ -71,74 +71,84 @@
                         </div><!-- Submit -->
                    </form>
                 </div>
+                
+                <?php
+                    // this is used for debugging the userdata. 
+                    // print_r($this->session->userdata() ) 
+                ?>
 
                 <!-- cards tab -->
-
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
 
                     <!-- Card number-->
                     <div class="form-group row col-lg-12">
                     <div class="input-group col-lg-9">
-                        <label class="form-control-label col-lg-3" for="cardnumber">Cardnumber:</label>
+                        <label class="form-control-label col-lg-5" for="cardnumber">Card number:</label>
                         <input class="form-control col-lg-6" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
                         <div class="input-group-append">
                         <input class="btn btn-danger text-center" type="button" data-toggle="modal" data-target="#rep_card"  value="Replace Card">
                         </div>
                         </div>
                     </div>
-                    <?php
-                    // this is used for debugging the userdata. 
-                    // print_r($this->session->userdata() ) 
-                    ?>
-                     <!-- Form Group -->
+                    <!-- Form Group -->
+
                      <hr class="mb-4">
 
                     <!-- button for cardinfo -->
-                        <div class="form-group row justify-content-around col-lg-5">
-                        <label class="form-control-label col-lg-5" for="card_info">View subscriptions:</label>
-                        <!-- Form start -->
-                        <?php echo form_open('Cards/card_info', 'class="form-row" id="cards-form" onsubmit="card_info(this); return false;"'); ?>
-                        <!-- Submit -->
-                        <div class ="form-control-label col-lg-12">
-                        <button class="btn btn-primary text-center" type="submit">Card information</button>
+                    <!-- Form start -->
+                    <?php echo form_open('Cards/card_info', 'class="form-row" id="cards-info-form" onsubmit="card_info(this); return false;"'); ?>
+                        <div class="form-group row col-lg-12">
+                            <div class="input-group col-lg-9">
+                                <label class="form-control-label col-lg-5" for="card_info">View subscriptions:</label>
+                                <!-- Submit -->  
+                                <input class="btn btn-primary text-center col-lg-5" type="submit" value="Card information">
+                            </div>
                         </div>
-                        <!-- Form end -->
-                        </form> 
-                        </div>
+                    <!-- Form end -->
+                    </form> 
+
                      <!-- Form Group -->
                      <hr class="mb-4">
-                    <!-- Form Start -->
-                    <?php echo form_open('Cards/update_cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
-
+                    
                         <!-- Credits -->
-                        <div class="form-group row justify-content-around  col-lg-5">
-                            <label class="form-control-label col-lg-3" for="credit">Credits:</label>
-                            <input class="form-control col-lg-3 <?php echo (form_error('credit')) ? "is-invalid" : ""; ?>" readonly type="text" id="credit" name="credit" value="<?php echo $this->session->userdata('credit'); ?>">
+                    <div class="form-group row col-lg-12">
+                        <div class="input-group col-lg-9">
+                            <label class="form-control-label col-lg-5" for="credit">Credits:</label>
+                            <input class="form-control col-lg-5 <?php echo (form_error('credit')) ? "is-invalid" : ""; ?>" readonly type="text" id="credit" name="credit" value="<?php echo $this->session->userdata('credit'); ?>">
                             <!-- CI Form Validation -->
                             <?php echo form_error('credit', '<span class="invalid-feedback">', '</span>'); ?>
                         </div>
-                     
-                        
+                    </div>
+
+                    <hr class="mb-4">
+                    <!-- Form Start -->
+                    <?php echo form_open('Cards/update_cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
+
+                        <label class="form-control-label justify-content-end row col-lg-7" for="CreditsAmount">Select an amount of credits:</label>
+                        <div class="form-group row col-lg-12">
+                            <div class="input-group col-lg-9">
+                                <label class="form-control-label col-lg-5" for="CreditsAmount">Credits to add:</label>
+                                <select Class="form-control col-lg-7  <?php echo (form_error('Amount')) ? "is-invalid" : ""; ?>" id="Amount" name="Amount">
+                                    <option value="50">50 credits</option>
+                                    <option value="100">100 Credits</option>
+                                    <option value="1000">1000 Credits</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <input class="btn btn-primary text-center"  type="submit" value="Buy credit">
+                                </div>
+                            </div>
+                        </div>
                         <!-- Form Group -->
-                        
-                        <div class="form-group-row col-lg-8">
-                        <p> Select an amount of credits: </p>
-                        </div>
-                        <div class="form-group row justify-content-around  col-lg-6">
-                        <label class="form-control-label col-lg-3" for="CreditsAmount">Amount:</label>
-
-                        <select Class="form-control col-lg-5  <?php echo (form_error('Amount')) ? "is-invalid" : ""; ?>" id="Amount" name="Amount">
-                            <option value="50">50</option>
-                            <option value="100">100 Credits</option>
-                        </select>
-
-                        </div>
-
                          <!-- Submit -->
+                         <!--
                          <div class="form-group justify-content-end col-lg-7">
                             <input class="btn btn-primary text-center" type="submit" value="Buy credit">
                         </div>
-                   </form><!-- Form End -->
+                         </form>
+                         -->
+                  <!-- Form End -->
+                  </form>
+                  <!-- Tab end -->
                 </div>
 
 
@@ -164,7 +174,7 @@
                                             <!-- Close Modal-->
                                             <!-- Form Start -->
                                             <?php echo form_open('Cards/replace_cards', 'class="form-row" id="replace-form" onsubmit="replace_cards(this); return false;" '); ?>
-                                                <input class="btn btn-danger text-center" type="submit" value="Yes, i am sure"><!-- Submit -->
+                                                <input class="btn btn-danger text-center" type="submit" value="Yes, I am sure"><!-- Submit -->
                                            </form>  <!--Form End -->
                                         </div>
                                     </div><!-- Modal Footer-->
@@ -191,12 +201,12 @@
 
                                         <table class = table>
                                         <tr>
-                                        <th>ID</th>
+                                        <th>SUB TYPE ID</th>
                                         <th>START DATE</th>
                                         <th>EXPIRATION DATE</th>
                                         <th>SUBSCRIPTION NAME</th>
                                         <th>DESCRIPTION</th>
-                                        <th>Subscription id</th>
+                                        <th>SUBSCRIPTION ID</th>
                                         </tr>
 
                                         <?php
@@ -253,7 +263,6 @@
 
                     <!-- Form Start -->
                     <?php echo form_open('Users/update_password', 'class="form-row" id="password-form" onsubmit="update_password(this); return false;"'); ?>
-
                         <!-- Old Password -->
                         <div class="form-group row col-lg-12">
                             <label class="form-control-label col-lg-3" for="pwd">Old password</label>
@@ -310,7 +319,7 @@
                                             <!-- Form Start -->
                                             <?php echo form_open('Users/delete_account', 'class="form-row" id="delete-form"'); ?>
                                                 <?php echo form_hidden('id', $this->session->userdata('customer_id')); ?>
-                                                <input class="btn btn-danger text-center" type="submit" value="Yes, i am sure"><!-- Submit -->
+                                                <input class="btn btn-danger text-center" type="submit" value="Yes, I am sure"><!-- Submit -->
                                             </form><!-- Form End -->
                                         </div>
                                     </div><!-- Modal Footer-->
@@ -488,6 +497,9 @@
             }
         }, 0.1);
     }
+
+
+
 
     //update cards function.
     function update_cards(form) 
