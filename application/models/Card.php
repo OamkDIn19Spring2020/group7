@@ -125,7 +125,7 @@
      
          // Retrieve data from AJAX POST
          $data = [
-                     'credit' => $this->input->post('Amount') + $this->input->post('credit'),
+                     'credit' => $this->input->post('Amount') + $this->session->userdata('credit'),
          ];
 
          
