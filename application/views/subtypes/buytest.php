@@ -6,7 +6,7 @@
 <div>
  <!-- Has active sub for picked subtype id? -->
 <?php
-if ($$hasActiveSub === FALSE)
+if ($hasActiveSub == FALSE)
 {
     //Doesnt have active sub So will create new one
     ?>
@@ -27,14 +27,15 @@ else
     echo 'Would you like to Extend the sub by 30 days or 60 days?';
     ?>
     <div>
-    <form action=buypages/orderSub method="post">
-    <input type="radio" id="30days" name="30 days">
-    <input type="radio" id="60days" name="60 days">
+    <form action=buypages/updateSub method="post">
+    <input type="radio" id="30days" name="Extension"value="1">
+    <label for="30days">30 days</label><br>
+    <input type="radio" id="60days" name="Extension"value="2">
+    <label for="60days">60days</label><br>
     <input type="submit" value="Submit">
     </form>
     </div>
 
-    <!-- maybe should have cost somewhere? And you have credits it will cost this much? -->
     <?php
 }
 

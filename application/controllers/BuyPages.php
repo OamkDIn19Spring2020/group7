@@ -9,6 +9,7 @@ class BuyPages extends CI_Controller {
         parent::__construct();
         // Load Order model
         $this->load->model('Order');
+        $this->load->model('Sub');
 
     }
 
@@ -77,6 +78,13 @@ class BuyPages extends CI_Controller {
             $data['test'] = 'Something went really wrong';
             $this->load->view('pages/buy',$data);
         }
+    }
+    public function updateSub()
+    {
+        //gets from buytest view radio buttons 1 or 2 value.So easy to use as multiplier. 2=60 days
+        $daysToextend =$this->input->post('Extension');
+        
+        $result = $this->Order->OrderExtend($daysToextend);
     }
 }
 

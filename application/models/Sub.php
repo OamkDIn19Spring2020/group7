@@ -26,6 +26,7 @@ class Sub extends CI_Model
             $data=$subRow['sub_id'];
             //need to add to order model? Know the ID of the sub to extend
             $this->session->set_userdata('subIdtoExtend',$data);
+            $this->session->set_userdata('expiryDateToExtend');
             //Return end date to Controller
             return $EndDate;
         }

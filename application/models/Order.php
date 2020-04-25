@@ -23,10 +23,8 @@
                 //Has money
                 $countedCredits = $credits - $subCost;
                 $newCredits =['credit'=> $countedCredits];
-                //this could be skipped or changed if extends a sub?
-                //the sub_id from userdata 'subIdtoExtend'
-                // only need to update end date + 30 days or 60 days
-                $data = [
+
+                    [
                     'startdate' =>$subStartDate,
                     'expirydate'=>$subEndDate,
                     'subtype_id' =>$subPicked,
@@ -34,6 +32,8 @@
                     ];
 
                 $Test =  $this->db->insert('sub', $data);
+                
+                
                 //Insert was OK if true
                 if ($Test == TRUE)
                     {
@@ -62,4 +62,37 @@
                 return 2;
             }
         }
+        public function OrderExtend($daysToextend)
+        {
+            //this was set in sub model when we checked if had active sub of this type
+            $subIdToExtend = $this->session_>userdata('subIdtoExtend');
+            $subExDateToExtend = $this->session_>userdata('expiryDateToExtend');
+            //So we have the Id of sub to extend, End date and the amount of days to extend
+            //need to check credits and subcost
+            $credits =$this->session->userdata('credits');
+            $credits =settype($credits,"integer");
+            $subPicked =$this->session->userdata('SubTypePicked');
+            $subtyperow = $this->db->get_where('subtype',['subtype_id'=>$subPicked])->row_array();
+            $subCost = $subtyperow['cost'];
+            $subCost= settype($subCost,"integer");
+            //has lot of same code with Order function? merge or split credit check??
+
+           if (($credits-$subCost )>= 0)
+           {
+            $countedCredits = $credits - $subCost;
+            $newCredits =['credit'=> $countedCredits];
+
+            // hmm?
+            $builder->where('sub_id',$subIdToExtend);
+            $builder->update('SELECT DATE_ADD("$subExDateToExtend", INTERVAL 30*$daysToextend DAY )');
+
+           }
+           else{
+               //too poor no credits
+               return 2;
+           }
+
+        }
+        
+    
     }
