@@ -86,7 +86,7 @@
                         <label class="form-control-label col-lg-5" for="cardnumber">Card number:</label>
                         <input class="form-control col-lg-6" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
                         <div class="input-group-append">
-                        <input class="btn btn-danger text-center" type="button" data-toggle="modal" data-target="#rep_card"  value="Replace Card">
+                        <input class="btn btn-danger text-center" type="button" data-toggle="modal" data-target="#rep_card"  value="Replace card">
                         </div>
                         </div>
                     </div>
