@@ -78,7 +78,7 @@ class Users extends CI_Controller {
             // Make a card if card doesnt exist, or read cards. 
             $this->Card->makeCard($this->session->userdata('customer_id'));
     
-            redirect('users/profile');
+            redirect('');
 
             // Session values set on BuyPages.php
             $redirect = $this->session->userdata('ReturnUrl');
@@ -90,7 +90,7 @@ class Users extends CI_Controller {
             }
             
             // Redirect to profil if $redirect doesn't carry a value
-            redirect('users/profile');
+            redirect('');
 
         }
         else
