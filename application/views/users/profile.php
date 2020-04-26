@@ -5,7 +5,7 @@
     <div class="row mt-3 justify-content-center">
         <div class="card text-center col-md-12 bg-light shadow-lg mt-5">
             <div class="card-header bg-light">
-                <h4 class="card-title">Personal Settings</h4>
+                <h4 class="card-title">User Profile</h4>
                     <?php echo $this->session->flashdata('success'); ?>
                     <?php echo $this->session->flashdata('fail'); ?>
             </div>
@@ -18,16 +18,22 @@
                     <li class="nav-item">
                         <a class="nav-link" id="account-tab" data-toggle="pill" href="#account" onclick="delete_account_style()" role="tab" aria-controls="account" aria-selected="false"><b>Account</b></a>
                     </li>
+
                     <li class="nav-item">
+                    <hr class="mb-3">
                         <a class="nav-link" id="cards-tab" data-toggle="pill" href="#cards" onclick="delete_account_style()" role="tab" aria-controls="cards" aria-selected="false"><b>Cards</b></a>
                     </li>
+
                     <li class="nav-item">
+                    <hr class="mb-3">
                         <a class="nav-link text-danger" id="delete-account-tab" data-toggle="pill" href="#delete-account" onclick="delete_account_style()" role="tab" aria-controls="delete account" aria-selected="false"><b>Delete account</b></a>
                     </li>
                 </ul>
                 <!-- Profile tab -->
                 <div class="col-lg-9 p-3 mt-3 tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
+                    <!--Tab title-->
+                    <h5>Personal Settings</h5>
+                    <hr class="mb-3">
                     <!-- Form Start -->
                     <?php echo form_open('Users/profile', 'class="form-row" id="profile-form" onsubmit="update_profile(this); return false;"'); ?>
 
@@ -79,6 +85,11 @@
 
                 <!-- cards tab -->
                 <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
+                <!-- tab title -->
+                   
+                        <h5>Card information</h5>
+                   
+                <hr class="mb-3">
 
                     <!-- Card number-->
                     <div class="form-group row col-lg-12">
@@ -139,13 +150,7 @@
                             </div>
                         </div>
                         <!-- Form Group -->
-                         <!-- Submit -->
-                         <!--
-                         <div class="form-group justify-content-end col-lg-7">
-                            <input class="btn btn-primary text-center" type="submit" value="Buy credit">
-                        </div>
-                         </form>
-                         -->
+
                   <!-- Form End -->
                   </form>
                   <!-- Tab end -->
@@ -166,6 +171,8 @@
                                     <div class="modal-body">
                                         <p class="modal-title">Are you sure you want to replace the card?</p>
                                         <p class="modal-body">The subscriptions will be kept, but credits will be lost.</p>
+                                        <p>You can pickup your new card at your closest kioski.</p>
+                                        
                                     </div>
                                     <div class="modal-footer">
                                         <div class="row col-lg-12 justify-content-around">
@@ -241,6 +248,9 @@
                                         
                 <!-- Account tab -->
                 <div class="col-lg-9 tab-pane fade p-3 mt-3" id="account" role="tabpanel" aria-labelledby="account-tab">
+                <!-- Card title -->
+                <h5>Account settings</h5>
+                <hr class="mb-3">
 
                     <!-- Form Start -->
                     <?php echo form_open('Users/update_email', 'class="form-row" id="email-form" onsubmit="update_email(this); return false;"'); ?>

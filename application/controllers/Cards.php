@@ -71,6 +71,7 @@ class Cards extends CI_Controller {
 
      }
 
+
 //End of cards controller
 }
 
