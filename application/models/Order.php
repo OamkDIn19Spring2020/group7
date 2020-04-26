@@ -31,10 +31,8 @@
             }
         }
 
-        public function update_sub()
+        public function update_sub($expiryDate, $extensionPeriod)
         {
-            $extensionPeriod = $this->input->post('extension_period');
-            $expiryDate = $this->session->userdata('expirydate');
 
             $newExpiryDate = "DATE_ADD( '{$expiryDate}' , INTERVAL {$extensionPeriod} DAY)";
 
@@ -47,14 +45,11 @@
             $this->db->update('sub');
         }
 
-        public function insert_sub($startDate)
+        public function insert_sub($startDate, $expiryDate, $extensionPeriod)
         {
-            $extensionPeriod = $this->input->post('extension_period');
-            $expiryDate = "DATE_ADD('{$startDate}', INTERVAL {$extensionPeriod} DAY)";
 
             $subtypePicked = $this->session->userdata('subtypePicked');
             $cardId = $this->session->userdata('card_id');
-
 
             $this->db->set('startdate', $startDate);
             $this->db->set('expirydate', $expiryDate, false);
