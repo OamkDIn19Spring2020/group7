@@ -2,46 +2,67 @@
 
     class Order extends CI_Model
     {
+
         public function __construct()
         {
-            // Load CI database library
-            $this->load->database();
+
+
         }
-        // Get all the variables.
-        public function Order($subStartDate,$subEndDate)
+
+
+        public function get_sub()
         {
-            $credits =$this->session->userdata('credits');
-            $cardid =$this->session->userdata('card_id');
-            $subPicked =$this->session->userdata('SubTypePicked');
-            $subtyperow = $this->db->get_where('subtype',['subtype_id'=>$subPicked])->row_array();
-            $subCost = $subtyperow['cost'];
-            if (($credits - $subCost )< 0)
+            $subtypePicked = $this->session->userdata('subtypePicked');
+            $cardId = $this->session->userdata('card_id');
+
+            $this->db->where('subtype_id', $subtypePicked);
+            $this->db->where('card_id', $cardId);
+            $userSub = $this->db->get('sub');
+
+            
+            if ($userSub->num_rows() == 1)
             {
-                //Has money
-                $countedCredits = $credits - $subCost;
-                $newCredits =['credit'=> $countedCredits];
+                return $userSub->row_array();
 
-                $data = [
-                    'startdate' =>$subStartDate,
-                    'expirydate'=>$subEndDate,
-                    'subtype_id' =>$subPicked,
-                    'card_id'=>$cardid
-                ];
-
-                $Test =  $this->db->insert('sub', $data);
-                $Test += $this->db->update('card', $newCredits);
-                if ($Test == TRUE)
-                {
-                    return 1;
-                }
-                else 
-                {
-                    return 3;
-                }
-            }   
-                else {
-                //too poor add credits you peasant. They are free. Eat some cake too.
-                return 2;
+            }
+            else 
+            {
+                return FALSE;
             }
         }
+
+        public function update_sub()
+        {
+            $extensionPeriod = $this->input->post('extension_period');
+            $expiryDate = $this->session->userdata('expirydate');
+
+            $newExpiryDate = "DATE_ADD( '{$expiryDate}' , INTERVAL {$extensionPeriod} DAY)";
+
+            $subtypePicked = $this->session->userdata('subtypePicked');
+            $cardId = $this->session->userdata('card_id');
+
+            $this->db->set('expirydate', $newExpiryDate, false);
+            $this->db->where('subtype_id', $subtypePicked);
+            $this->db->where('card_id', $cardId);
+            $this->db->update('sub');
+        }
+
+        public function insert_sub($startDate)
+        {
+            $extensionPeriod = $this->input->post('extension_period');
+            $expiryDate = "DATE_ADD('{$startDate}', INTERVAL {$extensionPeriod} DAY)";
+
+            $subtypePicked = $this->session->userdata('subtypePicked');
+            $cardId = $this->session->userdata('card_id');
+
+
+            $this->db->set('startdate', $startDate);
+            $this->db->set('expirydate', $expiryDate, false);
+            $this->db->set('card_id', $cardId);
+            $this->db->set('subtype_id', $subtypePicked);
+            $this->db->where('subtype_id', $subtypePicked);
+            $this->db->where('card_id', $cardId);
+            $this->db->insert('sub');
+        }
+    
     }
