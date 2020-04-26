@@ -84,7 +84,7 @@
                 ?>
 
                 <!-- cards tab -->
-                <div class="col-lg-9 mt-4 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
+                <div class="col-lg-9 mt-3 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
                 <!-- tab title -->
                    
                         <h5>Card information</h5>
@@ -115,10 +115,11 @@
                                 <input class="btn btn-primary text-center col-lg-5" type="submit" value="Card information">
                             </div>
                         </div>
+                        <!-- Form Group -->
                     <!-- Form end -->
                     </form> 
+                    
 
-                     <!-- Form Group -->
                      <hr class="mb-4">
                     
                         <!-- Credits -->
@@ -131,7 +132,8 @@
                         </div>
                     </div>
 
-                    <hr class="mb-4">
+                    <hr class="mb-3">
+
                     <!-- Form Start -->
                     <?php echo form_open('Cards/update_cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
 

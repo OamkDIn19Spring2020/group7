@@ -10,11 +10,7 @@ class Abouts extends CI_Controller {
     }
 
     // Start card_info function
-    public function aboutus()
-    {
-        $this->load->view('etc/aboutus');
-        
-    }
+
 }
 
 ?>
