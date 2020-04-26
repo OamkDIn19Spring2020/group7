@@ -230,5 +230,11 @@ class Users extends CI_Controller {
         redirect('pages/index');
     }
 
+    public function aboutus()
+    {
+        $this->load->view('etc/aboutus');
+        
+    }
+
 
 }

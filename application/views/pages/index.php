@@ -38,7 +38,7 @@
       <div class="col-md-4">
         <h2>About us</h2>
         <p>Got any questions about us? We're no slim shady. Check out the about us page.</p>
-        <p><a class="btn btn-secondary" href="<?php echo site_url('abouts/aboutus'); ?>" role="button">About us &raquo;</a></p>
+        <p><a class="btn btn-secondary" href="<?php echo site_url('users/aboutus'); ?>" role="button">About us &raquo;</a></p>
       </div>
     </div>
 

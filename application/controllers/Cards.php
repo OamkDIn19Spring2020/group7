@@ -25,9 +25,14 @@ class Cards extends CI_Controller {
     public function update_cards()
      {
         // Dropdown list doesn't need validation neccessarily
+
+         // Retrieve data from AJAX POST
+         $data = [
+                     'credit' => $this->input->post('Amount') + $this->session->userdata('credit'),
+         ];
              
         // Update user infromation in database
-        $this->Card->update_cards();
+        $this->Card->update_credit($data);
              
         // Get data with the card_id
         $card_data = $this->Card->get($this->session->userdata('card_id'))->row_array();

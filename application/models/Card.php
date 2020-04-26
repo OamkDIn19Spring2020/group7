@@ -120,18 +120,11 @@
     }
 
      //start update cards function
-    public function update_cards()
+    public function update_credit($data)
      {
      
-         // Retrieve data from AJAX POST
-         $data = [
-                     'credit' => $this->input->post('Amount') + $this->session->userdata('credit'),
-         ];
-
-         
-         
          // Retrieve id from AJAX POST
-         $id = $this->input->post('id');
+         $id = $this->session->userdata('customer_id');
          
          // Update card table where customer_id = $id
          $this->db->where('customer_id', $id);
