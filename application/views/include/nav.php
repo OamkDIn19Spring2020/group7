@@ -19,7 +19,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo site_url('users/logout'); ?>">Logout</a>
             </li>
-
             <?php else : ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo site_url('users/register'); ?>">Register</a>

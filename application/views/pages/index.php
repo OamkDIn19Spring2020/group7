@@ -26,9 +26,10 @@
 
       <?php if($this->session->has_userdata('customer_id')) : ?>
         <h2>Card information</h2>
-        <?php echo $this->session->userdata('cardnumber'); ?>
-        <p>Check your card balance and review your purchases.</p> 
-      <p><a class="btn btn-secondary" href="<?php echo site_url('users/profile#'); ?>" role="button" >Go to My card &raquo;</a></p>
+        <p>Card number: <?php echo $this->session->userdata('cardnumber'); ?> </p>
+        <p>Credit: <?php echo $this->session->userdata('credit'); ?> </p>
+        <p>Check your card balance and review your purchases in your user profile.</p> 
+      <p><a class="btn btn-secondary" href="<?php echo site_url('users/profile/'.'cards'); ?>" role="button" >Go to profile &raquo;</a></p>
       <?php else : ?>
         <h2>Card information</h2>
         <p><a class="btn btn-secondary" href="<?php echo site_url('users/login'); ?>"  role="button">Sign in&raquo;</a></p>
@@ -41,8 +42,9 @@
       </div>
     </div>
 
+      
     <hr>
-
+    <div class="col-md-4">
   </div> <!-- /container -->
 
 </main>
