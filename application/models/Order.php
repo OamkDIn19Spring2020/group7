@@ -23,7 +23,7 @@
                 //Has money
                 $countedCredits = $credits - $subCost;
                 $newCredits =['credit'=> $countedCredits];
-
+                $data=
                     [
                     'startdate' =>$subStartDate,
                     'expirydate'=>$subEndDate,
@@ -65,8 +65,8 @@
         public function OrderExtend($daysToextend)
         {
             //this was set in sub model when we checked if had active sub of this type
-            $subIdToExtend = $this->session_>userdata('subIdtoExtend');
-            $subExDateToExtend = $this->session_>userdata('expiryDateToExtend');
+            $subIdToExtend = $this->session->userdata('subIdtoExtend');
+            $subExDateToExtend = $this->session->userdata('expiryDateToExtend');
             //So we have the Id of sub to extend, End date and the amount of days to extend
             //need to check credits and subcost
             $credits =$this->session->userdata('credits');
@@ -82,9 +82,18 @@
             $countedCredits = $credits - $subCost;
             $newCredits =['credit'=> $countedCredits];
 
-            // hmm?
-            $builder->where('sub_id',$subIdToExtend);
-            $builder->update('SELECT DATE_ADD("$subExDateToExtend", INTERVAL 30*$daysToextend DAY )');
+            // how to init $builder?
+
+            
+
+
+            // $builder = $this->db->table('sub');
+            // $builder ->where('sub_id',$subIdToExtend);
+            // $data =[ 'SELECT DATE_ADD("$subExDateToExtend", INTERVAL 30*$daysToextend DAY )' ];
+
+
+            $sql = "SELECT DATE_ADD('$subExDateToExtend', INTERVAL 30*$daysToextend DAY ) WHERE sub_id = $subIdToExtend";
+            $quary = $this->db->update($sql,'sub');
 
            }
            else{

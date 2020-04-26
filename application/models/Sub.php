@@ -10,23 +10,25 @@ class Sub extends CI_Model
     }
     public function HasActiveSub()
     {
-        $subType = $this->session->userdata('SubTypePicked');
+        $subTypePicked = $this->session->userdata('SubTypePicked');
         $cardId = $this->session->userdata('card_id');
 
         // Does this work? 2 requirements for get where
-        $subRow = $this->db->get_where('sub',array('card_id'=>$cardId,'subtype_id'=>$subType) )->row_array();
+        $subRow = $this->db->get_where('sub',array('card_id'=>$cardId,'subtype_id'=>$subTypePicked) );
 
         // Should work as live version of database one card only can have one active sub of each type.
         // So if we found one we will ask if they want to extend the sub
-        $subTypeId = $subRow['subtype_id'];
         
-        if ($subTypeId == $subTypeId)
+        
+        if ($subRow->num_rows() == 1)
         {
-            $EndDate = $subRow['expirydate'];
-            $data=$subRow['sub_id'];
+            $data = $subRow->row_array();
+            $subTypeId = $data['subtype_id'];
+            $EndDate = $data['expirydate'];
+            $data2=$data['sub_id'];
             //need to add to order model? Know the ID of the sub to extend
-            $this->session->set_userdata('subIdtoExtend',$data);
-            $this->session->set_userdata('expiryDateToExtend');
+            $this->session->set_userdata('subIdtoExtend',$data2);
+            $this->session->set_userdata('expiryDateToExtend' ,$EndDate );
             //Return end date to Controller
             return $EndDate;
         }
