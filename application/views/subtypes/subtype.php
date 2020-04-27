@@ -5,7 +5,7 @@
   <h1 class="display-4">Our offered services.</h1>
     <p class="lead">Here you can find our offered products for our card. All are servises 30 days if not otherways informed.</p>
   </div>
-
+</div>
 
 
 
@@ -45,6 +45,6 @@
         </div>
     </div>
 </div>
-</div>
+
 
 <?php include(APPPATH . '/views/include/footer.php'); ?>
