@@ -13,6 +13,7 @@
                 <h5 class="card-title">1 week</h5>
                 <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost') / 4; ?> Credits</p>
                 <?php echo form_open('Orders/order'); ?>
+                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') / 4;?>"> 
                     <input type="hidden" name="extension_period" value="7">
                     <input class="btn btn-success" type="submit" value="Extend">
                 </form>
@@ -24,6 +25,7 @@
                 <h5 class="card-title">30 Days</h5>
                 <p class="card-text"><?php echo $this->session->userdata('subtypeCost'); ?> Credits</p>
                 <?php echo form_open('Orders/order'); ?>
+                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost');?>"> 
                     <input type="hidden" name="extension_period" value="30">
                     <input class="btn btn-success" type="submit" value="Extend">
                 </form>
@@ -35,6 +37,7 @@
                 <h5 class="card-title">60 Days</h5>
                 <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost') * 2;?> Credits</p>
                 <?php echo form_open('Orders/order'); ?>
+                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') * 2;?>"> 
                     <input type="hidden" name="extension_period" value="60">
                     <input class="btn btn-success" type="submit" value="Extend">
                 </form>
@@ -53,6 +56,7 @@
                 <h5 class="card-title">30 Days</h5>
                 <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost');?></p>
                 <?php echo form_open('Orders/order_new'); ?>
+                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost');?>"> 
                     <input type="hidden" name="extension_period" value="30">
                     <input class="btn btn-success" type="submit" value="Buy">
                 </form>
@@ -64,6 +68,7 @@
                 <h5 class="card-title">60 Days</h5>
                 <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost') * 2;?></p>
                 <?php echo form_open('Orders/order_new'); ?>
+                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') * 2;?>"> 
                     <input type="hidden" name="extension_period" value="60">
                     <input class="btn btn-success" type="submit" value="Buy">
                 </form>
