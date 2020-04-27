@@ -79,8 +79,9 @@ class Orders extends CI_Controller {
             $this->session->unset_userdata('credit');
             $this->session->set_userdata($newCredit);
 
-            // TODO
-            redirect('users/profile');
+            $this->session->set_flashdata('success', '$(\'#success\').modal(\'show\');');
+
+            $this->check_sub_status();
         }
         
         // The user has already subscribed before but has no enough credit
@@ -114,7 +115,9 @@ class Orders extends CI_Controller {
 
             $this->session->set_userdata($sub);
 
-            redirect('users/profile');
+            $this->session->set_flashdata('success', '$(\'#success\').modal(\'show\');');
+
+            $this->check_sub_status();
         }
 
         // The User does not have subscription and has no enough credit
