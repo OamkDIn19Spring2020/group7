@@ -14,7 +14,7 @@ class Cards extends CI_Controller {
     public function card_info()
     {
         //This function retrieves all the sub info on the card with the model.
-        $data['card_info'] = $this->Card->cards_info($this->input->post('card_id'));
+        $data['card_info'] = $this->Card->cards_info($this->session->userdata('card_id'));
         $this->session->set_userdata($data);
         $this->load->view('users/profile');
     }
@@ -67,7 +67,8 @@ class Cards extends CI_Controller {
  
              // Create new session with new user information
              $this->session->set_userdata($card_data);
-             
+
+             $this->card_info();
              // Send a success update feedback
              $this->session->set_flashdata('success', '<div class="alert alert-success text-center" id="flash-msg">Cards replaced successfully.</div>');
  
