@@ -46,8 +46,11 @@ class Orders extends CI_Controller {
     public function order()
     
     {
+            $currentCredit = (integer) $this->session->userdata('credit');
+            $subCost = (integer) $this->session->userdata('subtypeCost');
+
         // The user has already subscribed before and has enough credit
-        if (trim($currentCredit) >= trim($subCost))
+        if ($currentCredit >= $subCost)
         {
             $extensionPeriod = $this->input->post('extension_period');
             $expiryDate = $this->session->userdata('expirydate');
@@ -64,12 +67,10 @@ class Orders extends CI_Controller {
                 $this->Order->update_sub($today, $extensionPeriod);
             }
 
-            $currentCredit = $this->session->userdata('credit');
-            $subCost = $this->session->userdata('subtypeCost');
 
             // Deduct subscription cost from user credit
             $newCredit = [ 
-                            'credit' => trim($currentCredit) - trim($subCost)
+                            'credit' => $currentCredit - $subCost
                         ];
 
             $this->Card->update_credit($newCredit);
@@ -83,17 +84,20 @@ class Orders extends CI_Controller {
         }
         
         // The user has already subscribed before but has no enough credit
-        else if (trim($currentCredit) < trim($subCost))
+        else if ($currentCredit < $subCost)
         {
-            echo 'No enough Credit';
+            $hasCredit = false;
+            $this->check_sub_status($hasCredit);
         }
     }
 
     public function order_new()
     {
+            $currentCredit = (integer) $this->session->userdata('credit');
+            $subCost = (integer) $this->session->userdata('subtypeCost');
 
         // The user does not have subscription but has enough credit
-        if (trim($currentCredit) >= trim($subCost))
+        if ($currentCredit >= $subCost)
         {
             $startDate = $this->get_today_date();
             $extensionPeriod = $this->input->post('extension_period');
@@ -101,10 +105,7 @@ class Orders extends CI_Controller {
 
             $this->Order->insert_sub($startDate, $expiryDate, $extensionPeriod);
 
-            $currentCredit = $this->session->userdata('credit');
-            $subCost = $this->session->userdata('subtypeCost');
-
-            $newCredit = trim($currentCredit) - trim($subCost);
+            $newCredit = $currentCredit - $subCost;
 
             $this->session->unset_userdata('credit');
             $this->session->set_userdata('credit', $newCredit);
@@ -115,14 +116,16 @@ class Orders extends CI_Controller {
 
             redirect('users/profile');
         }
+
         // The User does not have subscription and has no enough credit
-        else if (trim($currentCredit) < trim($subCost))
+        else if ($currentCredit < $subCost)
         {
-            echo 'No enough Credit';
+            $hasCredit = false;
+            $this->check_sub_status($hasCredit);
         }
     }
 
-    public function check_sub_status()
+    public function check_sub_status($hasCredit = true)
     {
 
             // Check if the user has pervious subscription
@@ -140,6 +143,7 @@ class Orders extends CI_Controller {
                 {
                     $interval = $expiryDate->diff($today);
                     $data['timeLeft'] = 'Your subscription will expire in ' . $interval->days . ' Days';
+                    $data['hasCredit'] = $hasCredit;
                     $this->load->view('subtypes/order', $data);
                  }
 
@@ -147,10 +151,12 @@ class Orders extends CI_Controller {
                 else
                 {
                     $data['timeLeft'] = 'You subscription has expired.';
+                    $data['hasCredit'] = $hasCredit;
                     $this->load->view('subtypes/order',$data);
                 }
 
             }
+
             // User Didn't subscribe before
             else
             {
@@ -158,7 +164,9 @@ class Orders extends CI_Controller {
                 $this->session->unset_userdata('startdate');
                 $this->session->unset_userdata('expirydate');
                 $this->session->unset_userdata('subtype_id');
-                $this->load->view('subtypes/order');
+
+                $data['hasCredit'] = $hasCredit;
+                $this->load->view('subtypes/order', $data);
             }
     }
 
