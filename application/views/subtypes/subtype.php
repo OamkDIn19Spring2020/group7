@@ -10,13 +10,13 @@
 
 
 <div class="container mt-4">
-        <div class=" row row-cols-1 row-cols-md-3">
+        <div class="card-deck row row-cols-1 row-cols-md-3">
             <?php foreach ($subtype as $row)
             {?>
-              <div class="col mb-4">
-                    <div class="card bg-light border-primary ">
+              <div class=" col mb-3 mh-100" >
+                    <div class="card bg-light border-primary h-100 ">
                         <!-- Body Start -->
-                          <div class="card-body text-dark h-70" >
+                          <div class="card-body text-dark h-90 " >
                                 <!-- Tile -->
                                 <h5 class="card-title"><?php echo $row['name']; ?></h5>
                                 <!-- Here we have bit fader text -->
@@ -25,7 +25,7 @@
                                 <p class="card-text-center"> <?php echo '<b>Description</b>: ' . $row['description'] ?></p>
                             </div>
                         <!-- footer start -->
-                        <div class="card-footer row h-30">
+                        <div class="card-footer row h-10 mx-0 ">
                           <div class="col-sm-8">
                               <?php echo '<b></b> ' . $row['address']; ?>
                             </div>
@@ -41,7 +41,7 @@
                     </div>    
                     </div>
               </div>
-      <?php } ?>
+            <?php } ?>
         </div>
     </div>
 </div>
