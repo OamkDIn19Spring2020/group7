@@ -13,4 +13,4 @@
 
     <title><?php if (!empty($title)) echo $title; ?></title>
   </head>
-  <body>
+  <body class="h-100">
