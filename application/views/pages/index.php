@@ -1,4 +1,4 @@
-<main role="main">
+<main role="main" style="height:auto;min-height:100%;">
 
   <!-- Main jumbotron container with image background and welcome -->
   <div class="jumbotron" style="background-image: url('assets/helsinki.jpg'); background-attachment: inherit;  background-position:center; background-size: cover;">
