@@ -2,7 +2,7 @@
 <?php include(APPPATH . '/views/include/nav.php'); ?>
 
 <div class="container mt-4">
-    <h1><?php echo $this->session->userdata('subtypeName'); ?></h1>
+    <h1 class="display-4"><?php echo $this->session->userdata('subtypeName'); ?></h1>
     <?php if ($this->session->userdata('sub_id')) {?>
         <p><?php echo $timeLeft; ?></p> 
         <h3 class="mb-3">Extend Your subscription</h3>
@@ -153,4 +153,3 @@
         window.location.replace("<?php echo base_url('/users/profile');?>");
    }
 </script>
-<?php var_dump($_SESSION); ?>
