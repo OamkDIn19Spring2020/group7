@@ -32,7 +32,6 @@ class Orders extends CI_Controller {
         }
         else
         {
-
             //get the current Url to return to
             $returnUrl = current_url();
         
@@ -47,19 +46,31 @@ class Orders extends CI_Controller {
     public function order()
     
     {
-        $currentCredit = $this->session->userdata('credit');
-        $subCost = $this->session->userdata('subtypeCost');
-
+            $currentCredit = (integer) $this->session->userdata('credit');
+            $subCost = (integer) $this->session->userdata('subtypeCost');
 
         // The user has already subscribed before and has enough credit
-        if (trim($currentCredit) >= trim($subCost))
+        if ($currentCredit >= $subCost)
         {
-            // Update existing subcription
-            $this->Order->update_sub();
+            $extensionPeriod = $this->input->post('extension_period');
+            $expiryDate = $this->session->userdata('expirydate');
+            $today = $this->get_today_date();
+
+            if ($expiryDate > $today)
+            {
+                // Update active subcription
+                $this->Order->update_sub($expiryDate, $extensionPeriod);
+            }
+            else
+            {
+                // Update expired subscription
+                $this->Order->update_sub($today, $extensionPeriod);
+            }
+
 
             // Deduct subscription cost from user credit
             $newCredit = [ 
-                            'credit' => trim($currentCredit) - trim($subCost)
+                            'credit' => $currentCredit - $subCost
                         ];
 
             $this->Card->update_credit($newCredit);
@@ -68,30 +79,38 @@ class Orders extends CI_Controller {
             $this->session->unset_userdata('credit');
             $this->session->set_userdata($newCredit);
 
-            // TODO
-            redirect('users/profile');
+            $this->session->set_flashdata('success', '$(\'#success\').modal(\'show\');');
 
+            $this->check_sub_status();
         }
+        
         // The user has already subscribed before but has no enough credit
-        else if (trim($currentCredit) < trim($subCost))
+        else if ($currentCredit < $subCost)
         {
-            echo 'No enough Credit';
+            $hasCredit = false;
+            
+            // Card_tab will be used to redirect user to card tab view
+            $this->session->set_userdata('card_tab', true);
+
+            $this->check_sub_status($hasCredit);
         }
     }
 
     public function order_new()
     {
-        $currentCredit = $this->session->userdata('credit');
-        $subCost = $this->session->userdata('subtypeCost');
+            $currentCredit = (integer) $this->session->userdata('credit');
+            $subCost = (integer) $this->session->userdata('subtypeCost');
 
         // The user does not have subscription but has enough credit
-        if (trim($currentCredit) >= trim($subCost))
+        if ($currentCredit >= $subCost)
         {
             $startDate = $this->get_today_date();
+            $extensionPeriod = $this->input->post('extension_period');
+            $expiryDate = "DATE_ADD('{$startDate}', INTERVAL {$extensionPeriod} DAY)";
 
-            $this->Order->insert_sub($startDate);
+            $this->Order->insert_sub($startDate, $expiryDate, $extensionPeriod);
 
-            $newCredit = trim($currentCredit) - trim($subCost);
+            $newCredit = $currentCredit - $subCost;
 
             $this->session->unset_userdata('credit');
             $this->session->set_userdata('credit', $newCredit);
@@ -100,54 +119,66 @@ class Orders extends CI_Controller {
 
             $this->session->set_userdata($sub);
 
-            redirect('users/profile');
+            $this->session->set_flashdata('success', '$(\'#success\').modal(\'show\');');
+
+            $this->check_sub_status();
         }
 
-        else if (trim($currentCredit) < trim($subCost))
+        // The User does not have subscription and has no enough credit
+        else if ($currentCredit < $subCost)
         {
-            echo 'No enough Credit';
+            $hasCredit = false;
+
+            // Card_tab will be used to redirect user to card tab view
+            $this->session->set_userdata('card_tab', true);
+
+            $this->check_sub_status($hasCredit);
         }
     }
 
-
-    public function check_sub_status()
+    public function check_sub_status($hasCredit = true)
     {
 
-                // Check if the user has pervious subscription
-                if ($sub = $this->Order->get_sub())
+            // Check if the user has pervious subscription
+            if ($sub = $this->Order->get_sub())
+            {
+                $this->session->unset_userdata($sub);
+                $this->session->set_userdata($sub);
+
+                // Get how many days till sub expire
+                $expiryDate= new Datetime($this->session->userdata('expirydate'));
+                $today = new DateTime("now");
+
+                // Subscription still active
+                if ($expiryDate > $today)
                 {
-                    $this->session->unset_userdata($sub);
-                    $this->session->set_userdata($sub);
+                    $interval = $expiryDate->diff($today);
+                    $data['timeLeft'] = 'Your subscription will expire in ' . $interval->days . ' Days';
+                    $data['hasCredit'] = $hasCredit;
+                    $this->load->view('subtypes/order', $data);
+                 }
 
-                    // Get how many days till sub expire
-                    $expiryDate= new Datetime($this->session->userdata('expirydate'));
-                    $today = new DateTime("now");
-
-                    // Subscription still active
-                    if ($expiryDate > $today)
-                    {
-                        $interval = $expiryDate->diff($today);
-                        $data['timeLeft'] = 'Your subscription will expire in ' . $interval->days . ' Days';
-                        $this->load->view('subtypes/order', $data);
-                    }
-
-                    // Subscription expired
-                    else
-                    {
-                        $data['timeLeft'] = 'You subscription has expired.';
-                        $this->load->view('subtypes/order',$data);
-                    }
-
-                }
-                // User Didn't subscribe before
+                // Subscription expired
                 else
                 {
-                    $this->session->unset_userdata('sub_id');
-                    $this->session->unset_userdata('startdate');
-                    $this->session->unset_userdata('expirydate');
-                    $this->session->unset_userdata('subtype_id');
-                    $this->load->view('subtypes/order');
+                    $data['timeLeft'] = 'You subscription has expired.';
+                    $data['hasCredit'] = $hasCredit;
+                    $this->load->view('subtypes/order',$data);
                 }
+
+            }
+
+            // User Didn't subscribe before
+            else
+            {
+                $this->session->unset_userdata('sub_id');
+                $this->session->unset_userdata('startdate');
+                $this->session->unset_userdata('expirydate');
+                $this->session->unset_userdata('subtype_id');
+
+                $data['hasCredit'] = $hasCredit;
+                $this->load->view('subtypes/order', $data);
+            }
     }
 
 
