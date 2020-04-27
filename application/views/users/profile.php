@@ -136,7 +136,7 @@
                     <!-- Form Start -->
                     <?php echo form_open('Cards/update_cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
 
-                        <label class="form-control-label justify-content-end row col-lg-7" for="CreditsAmount">Select an amount of credits:</label>
+                        <label class="form-control-label justify-content-center row col-lg-12" for="CreditsAmount">Select an amount of credits:</label>
                         <div class="form-group row col-lg-12">
                             <div class="input-group col-lg-9">
                                 <label class="form-control-label col-lg-5" for="CreditsAmount">Credits to add:</label>
@@ -337,5 +337,6 @@
         </div>
     </div>
 </div>
+
 <?php include(APPPATH . '/views/include/footer.php'); ?>
 <?php include(APPPATH . '../assets/js/profile.php'); ?>
