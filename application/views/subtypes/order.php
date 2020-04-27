@@ -110,8 +110,15 @@
                         <h5 class="row col-12 modal-title text-success justify-content-center" id="success_label">Success</h5>
                     </div><!-- Modal Header -->
                     <div class="modal-body">
-                        <p class="row col-12 justify-content-center">Your subscription will expire in <?php echo $this->session->userdata('expirydate');?></p>
+                        <p class="row col-12 justify-content-center">Thanks for your purchase.</p>
+                        <p class="row col-12 justify-content-center">Your subscription will expire after <?php echo $timeLeft;?></p>
                     </div><!-- Modal Body -->
+                    <div class="modal-footer">
+                        <div class="row col-12 justify-content-between">
+                            <p>You will be redirect back to browser more products, wait a moment ...</p>
+                            <div class="spinner-border spinner-border-sm ml-auto" role="status" aria-hidden="true"></div>
+                        </div>
+                    </div><!-- Modal Footer-->
                 </div><!-- Modal Content -->
             </div><!-- Modal Dialog -->
         </div><!-- Modal -->
