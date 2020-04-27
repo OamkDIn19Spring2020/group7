@@ -1,4 +1,30 @@
 <script>
+    var body = document.querySelector('body');
+    body.addEventListener('load', card_tab());
+    // Show no_credit modal if the user doesn't have enough credit
+   function card_tab()
+   {
+        // Check for 'card_tab' session if exist open card_tab
+        <?php if ($this->session->userdata('card_tab')) {
+                    $this->session->unset_userdata('card_tab');?>
+            
+            var profile_tab = document.querySelector('#profile-tab');
+            profile_tab.classList.remove("active");
+
+            var account_tab = document.querySelector('#cards-tab');
+            account_tab.classList.add("active");
+
+            var profile = document.querySelector('#profile');
+            profile.classList.remove("show");
+            profile.classList.remove("active");
+        
+            var account = document.querySelector('#cards');
+            account.classList.add("show");
+            account.classList.add("active");
+                    
+        <?php };?>
+   }
+
     // Get 'name=value' string from all input fields in a form
     function get_name_value(form)
     {
@@ -162,8 +188,6 @@
             }
         }, 0.1);
     }
-
-
 
 
     //update cards function.

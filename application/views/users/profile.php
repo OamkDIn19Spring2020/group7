@@ -344,5 +344,5 @@
         </div>
     </div>
 </div>
-<?php include(APPPATH . '../assets/js/profile.php'); ?>
 <?php include(APPPATH . '/views/include/footer.php'); ?>
+<?php include(APPPATH . '../assets/js/profile.php'); ?>
