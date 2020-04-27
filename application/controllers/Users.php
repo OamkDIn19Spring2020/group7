@@ -117,6 +117,11 @@ class Users extends CI_Controller {
     // Start Profile Function
     public function profile()
     {  
+
+        if($this->uri->segment(3) == true)
+        {
+            $this->session->set_userdata('card_tab',true);
+        }
         // Restrict non logged users from accessing profile page
         if (!$this->session->has_userdata('customer_id'))
         {
