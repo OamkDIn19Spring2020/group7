@@ -13,6 +13,7 @@
                 <h5 class="card-title">1 week</h5>
                 <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost') / 4; ?> Credits</p>
                 <?php echo form_open('Orders/order'); ?>
+                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') / 4;?>"> 
                     <input type="hidden" name="extension_period" value="7">
                     <input class="btn btn-success" type="submit" value="Extend">
                 </form>
@@ -24,6 +25,7 @@
                 <h5 class="card-title">30 Days</h5>
                 <p class="card-text"><?php echo $this->session->userdata('subtypeCost'); ?> Credits</p>
                 <?php echo form_open('Orders/order'); ?>
+                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost');?>"> 
                     <input type="hidden" name="extension_period" value="30">
                     <input class="btn btn-success" type="submit" value="Extend">
                 </form>
@@ -35,6 +37,7 @@
                 <h5 class="card-title">60 Days</h5>
                 <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost') * 2;?> Credits</p>
                 <?php echo form_open('Orders/order'); ?>
+                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') * 2;?>"> 
                     <input type="hidden" name="extension_period" value="60">
                     <input class="btn btn-success" type="submit" value="Extend">
                 </form>
@@ -53,6 +56,7 @@
                 <h5 class="card-title">30 Days</h5>
                 <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost');?></p>
                 <?php echo form_open('Orders/order_new'); ?>
+                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost');?>"> 
                     <input type="hidden" name="extension_period" value="30">
                     <input class="btn btn-success" type="submit" value="Buy">
                 </form>
@@ -64,6 +68,7 @@
                 <h5 class="card-title">60 Days</h5>
                 <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost') * 2;?></p>
                 <?php echo form_open('Orders/order_new'); ?>
+                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') * 2;?>"> 
                     <input type="hidden" name="extension_period" value="60">
                     <input class="btn btn-success" type="submit" value="Buy">
                 </form>
@@ -105,8 +110,15 @@
                         <h5 class="row col-12 modal-title text-success justify-content-center" id="success_label">Success</h5>
                     </div><!-- Modal Header -->
                     <div class="modal-body">
-                        <p class="row col-12 justify-content-center">Your subscription will expire in <?php echo $this->session->userdata('expirydate');?></p>
+                        <p class="row col-12 justify-content-center">Thanks for your purchase.</p>
+                        <p class="row col-12 justify-content-center">Your subscription will expire after <?php echo $timeLeft;?></p>
                     </div><!-- Modal Body -->
+                    <div class="modal-footer">
+                        <div class="row col-12 justify-content-between">
+                            <p>You will be redirect back to browser more products, wait a moment ...</p>
+                            <div class="spinner-border spinner-border-sm ml-auto" role="status" aria-hidden="true"></div>
+                        </div>
+                    </div><!-- Modal Footer-->
                 </div><!-- Modal Content -->
             </div><!-- Modal Dialog -->
         </div><!-- Modal -->

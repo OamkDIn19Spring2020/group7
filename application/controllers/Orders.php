@@ -46,93 +46,110 @@ class Orders extends CI_Controller {
     public function order()
     
     {
+        // If the user tried to type in the url and he didn't pass extension period
+        if ($this->input->post('extension_period') != null)
+        {
             $currentCredit = (integer) $this->session->userdata('credit');
-            $subCost = (integer) $this->session->userdata('subtypeCost');
+            $subCost = $this->input->post('cost');
 
-        // The user has already subscribed before and has enough credit
-        if ($currentCredit >= $subCost)
-        {
-            $extensionPeriod = $this->input->post('extension_period');
-            $expiryDate = $this->session->userdata('expirydate');
-            $today = $this->get_today_date();
-
-            if ($expiryDate > $today)
+            // The user has already subscribed before and has enough credit
+            if ($currentCredit >= $subCost)
             {
-                // Update active subcription
-                $this->Order->update_sub($expiryDate, $extensionPeriod);
+                $extensionPeriod = $this->input->post('extension_period');
+                $expiryDate = $this->session->userdata('expirydate');
+                $today = $this->get_today_date();
+
+                if ($expiryDate > $today)
+                {
+                    // Update active subcription
+                    $this->Order->update_sub($expiryDate, $extensionPeriod);
+                }
+                else
+                {
+                    // Update expired subscription
+                    $this->Order->update_sub($today, $extensionPeriod);
+                }
+
+
+                // Deduct subscription cost from user credit
+                $newCredit = [ 
+                                'credit' => $currentCredit - $subCost
+                            ];
+
+                $this->Card->update_credit($newCredit);
+
+                // Reset credit session
+                $this->session->unset_userdata('credit');
+                $this->session->set_userdata($newCredit);
+
+                $this->session->set_flashdata('success', '$(\'#success\').modal(\'show\');');
+
+                $this->check_sub_status();
             }
-            else
-            {
-                // Update expired subscription
-                $this->Order->update_sub($today, $extensionPeriod);
-            }
-
-
-            // Deduct subscription cost from user credit
-            $newCredit = [ 
-                            'credit' => $currentCredit - $subCost
-                        ];
-
-            $this->Card->update_credit($newCredit);
-
-            // Reset credit session
-            $this->session->unset_userdata('credit');
-            $this->session->set_userdata($newCredit);
-
-            $this->session->set_flashdata('success', '$(\'#success\').modal(\'show\');');
-
-            $this->check_sub_status();
-        }
-        
-        // The user has already subscribed before but has no enough credit
-        else if ($currentCredit < $subCost)
-        {
-            $hasCredit = false;
             
-            // Card_tab will be used to redirect user to card tab view
-            $this->session->set_userdata('card_tab', true);
+            // The user has already subscribed before but has no enough credit
+            else if ($currentCredit < $subCost)
+            {
+                $hasCredit = false;
+                
+                // Card_tab will be used to redirect user to card tab view
+                $this->session->set_userdata('card_tab', true);
 
-            $this->check_sub_status($hasCredit);
+                $this->check_sub_status($hasCredit);
+            }
+        }
+        else
+        {
+            redirect('SubTypes');
         }
     }
 
     public function order_new()
     {
-            $currentCredit = (integer) $this->session->userdata('credit');
-            $subCost = (integer) $this->session->userdata('subtypeCost');
-
-        // The user does not have subscription but has enough credit
-        if ($currentCredit >= $subCost)
+        // If the user tried to type in the url and he didn't pass extension period
+        if ($this->input->post('extension_period') != null)
         {
-            $startDate = $this->get_today_date();
-            $extensionPeriod = $this->input->post('extension_period');
-            $expiryDate = "DATE_ADD('{$startDate}', INTERVAL {$extensionPeriod} DAY)";
+            $currentCredit = (integer) $this->session->userdata('credit');
+            $subCost = $this->input->post('cost');
 
-            $this->Order->insert_sub($startDate, $expiryDate, $extensionPeriod);
+            // The user does not have subscription but has enough credit
+            if ($currentCredit >= $subCost)
+            {
+                $startDate = $this->get_today_date();
+                $extensionPeriod = $this->input->post('extension_period');
+                $expiryDate = "DATE_ADD('{$startDate}', INTERVAL {$extensionPeriod} DAY)";
 
-            $newCredit = $currentCredit - $subCost;
+                $this->Order->insert_sub($startDate, $expiryDate, $extensionPeriod);
 
-            $this->session->unset_userdata('credit');
-            $this->session->set_userdata('credit', $newCredit);
+                $newCredit = $currentCredit - $subCost;
 
-            $sub = $this->Order->get_sub();
+                $this->session->unset_userdata('credit');
+                $this->session->set_userdata('credit', $newCredit);
 
-            $this->session->set_userdata($sub);
+                $sub = $this->Order->get_sub();
 
-            $this->session->set_flashdata('success', '$(\'#success\').modal(\'show\');');
+                $this->session->set_userdata($sub);
 
-            $this->check_sub_status();
+                $this->session->set_flashdata('success', '$(\'#success\').modal(\'show\');');
+
+                $this->check_sub_status();
+            }
+
+            // The User does not have subscription and has no enough credit
+            else if ($currentCredit < $subCost)
+            {
+                $hasCredit = false;
+
+                // Card_tab will be used to redirect user to card tab view
+                $this->session->set_userdata('card_tab', true);
+
+                $this->check_sub_status($hasCredit);
+            }
         }
 
-        // The User does not have subscription and has no enough credit
-        else if ($currentCredit < $subCost)
+        else
         {
-            $hasCredit = false;
-
-            // Card_tab will be used to redirect user to card tab view
-            $this->session->set_userdata('card_tab', true);
-
-            $this->check_sub_status($hasCredit);
+            redirect('SubTypes');
         }
     }
 

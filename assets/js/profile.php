@@ -288,7 +288,7 @@
     // Set AJAX request header encryption type
     xhttp.setRequestHeader('Content-Type', form.enctype);
     // Send data within header
-    xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id') . "&" .  "card_id=" . $this->session->userdata('card_id'); ?>');
+    xhttp.send('<?php echo "id=" . $this->session->userdata('customer_id') ?>');
 
     //end card_info function
     }
