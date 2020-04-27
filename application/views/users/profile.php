@@ -85,20 +85,20 @@
 
                 <!-- cards tab -->
                 <div class="col-lg-9 mt-3 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
-                <!-- tab title -->
+                
+                    <!-- tab title -->   
+                    <h5>Card information</h5>
                    
-                        <h5>Card information</h5>
-                   
-                <hr class="mb-3">
+                    <hr class="mb-3">
 
                     <!-- Card number-->
                     <div class="form-group row col-lg-12">
-                    <div class="input-group col-lg-9">
-                        <label class="form-control-label col-lg-5" for="cardnumber">Card number:</label>
-                        <input class="form-control col-lg-6" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
-                        <div class="input-group-append">
-                        <input class="btn btn-danger text-center" type="button" data-toggle="modal" data-target="#rep_card"  value="Replace card">
-                        </div>
+                        <div class="input-group col-lg-9">
+                            <label class="form-control-label col-lg-5" for="cardnumber">Card number:</label>
+                            <input class="form-control col-lg-6" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
+                                <div class="input-group-append">
+                                    <input class="btn btn-danger text-center" type="button" data-toggle="modal" data-target="#rep_card"  value="Replace card">
+                                </div>
                         </div>
                     </div>
                     <!-- Form Group -->
@@ -115,14 +115,13 @@
                                 <input class="btn btn-primary text-center col-lg-5" type="submit" value="Card information">
                             </div>
                         </div>
+                        </form> 
                         <!-- Form Group -->
-                    <!-- Form end -->
-                    </form> 
+                        <!-- Form end -->
                     
-
                      <hr class="mb-4">
                     
-                        <!-- Credits -->
+                    <!-- Credits -->
                     <div class="form-group row col-lg-12">
                         <div class="input-group col-lg-9">
                             <label class="form-control-label col-lg-5" for="credit">Credits:</label>
@@ -137,7 +136,7 @@
                     <!-- Form Start -->
                     <?php echo form_open('Cards/update_cards', 'class="form-row" id="cards-form" onsubmit="update_cards(this); return false;"'); ?>
 
-                        <label class="form-control-label justify-content-end row col-lg-7" for="CreditsAmount">Select an amount of credits:</label>
+                        <label class="form-control-label justify-content-center row col-lg-12" for="CreditsAmount">Select an amount of credits:</label>
                         <div class="form-group row col-lg-12">
                             <div class="input-group col-lg-9">
                                 <label class="form-control-label col-lg-5" for="CreditsAmount">Credits to add:</label>
@@ -152,12 +151,10 @@
                             </div>
                         </div>
                         <!-- Form Group -->
-
-                  <!-- Form End -->
-                  </form>
-                  <!-- Tab end -->
-                </div>
-
+                        </form>
+                        <!-- Form End -->
+                    </div>
+                    <!-- Tab end -->
 
                 <!-- modal of replace_cards -->
                 <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="rep_card" >
@@ -210,12 +207,10 @@
 
                                         <table class = table>
                                         <tr>
-                                        <th>SUB TYPE ID</th>
+                                        <th>SUBSCRIPTION NAME</th>
                                         <th>START DATE</th>
                                         <th>EXPIRATION DATE</th>
-                                        <th>SUBSCRIPTION NAME</th>
                                         <th>DESCRIPTION</th>
-                                        <th>SUBSCRIPTION ID</th>
                                         </tr>
 
                                         <?php
@@ -224,12 +219,10 @@
 
                                         foreach ($this->session->userdata('card_info') as $info) { ?>
                                         <tr>
-                                        <td><?php echo $info['sub_id']; ?></td>
+                                        <td><?php echo $info['name']; ?></td>
                                         <td><?php echo $info['startdate'] ?></td>
                                         <td><?php echo $info['expirydate']?></td>
-                                        <td><?php echo $info['name'] ?></td>
                                         <td><?php echo $info['description'] ?></td>
-                                        <td><?php echo $info['subtype_id']?></td>
                                         <?php } ?>
                                         </tr>
                                         </table>
@@ -250,9 +243,9 @@
                                         
                 <!-- Account tab -->
                 <div class="col-lg-9 tab-pane fade p-3 mt-3" id="account" role="tabpanel" aria-labelledby="account-tab">
-                <!-- Card title -->
-                <h5>Account settings</h5>
-                <hr class="mb-3">
+                    <!-- Card title -->
+                    <h5>Account settings</h5>
+                    <hr class="mb-3">
 
                     <!-- Form Start -->
                     <?php echo form_open('Users/update_email', 'class="form-row" id="email-form" onsubmit="update_email(this); return false;"'); ?>
@@ -344,5 +337,6 @@
         </div>
     </div>
 </div>
+
 <?php include(APPPATH . '/views/include/footer.php'); ?>
 <?php include(APPPATH . '../assets/js/profile.php'); ?>
