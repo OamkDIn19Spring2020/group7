@@ -88,6 +88,10 @@ class Orders extends CI_Controller {
         else if ($currentCredit < $subCost)
         {
             $hasCredit = false;
+            
+            // Card_tab will be used to redirect user to card tab view
+            $this->session->set_userdata('card_tab', true);
+
             $this->check_sub_status($hasCredit);
         }
     }
@@ -124,6 +128,10 @@ class Orders extends CI_Controller {
         else if ($currentCredit < $subCost)
         {
             $hasCredit = false;
+
+            // Card_tab will be used to redirect user to card tab view
+            $this->session->set_userdata('card_tab', true);
+
             $this->check_sub_status($hasCredit);
         }
     }

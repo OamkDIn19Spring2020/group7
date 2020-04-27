@@ -90,7 +90,7 @@
                             <div>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             </div><!-- Close Modal-->
-                            <button class="btn btn-primary text-center" onclick="card_redirect()">Yes, I want to buy credit</button>
+                            <button class="btn btn-primary text-center" type="submit" onclick="card_redirect()">Yes, I want to buy credit</button>
                         </div>
                     </div><!-- Modal Footer-->
                 </div><!-- Modal Content --> 
@@ -138,7 +138,7 @@
 
    function card_redirect()
    {
-        <?php $this->session->set_userdata('card_tab', true); ?>
         window.location.replace("<?php echo base_url('/users/profile');?>");
    }
 </script>
+<?php var_dump($_SESSION); ?>
