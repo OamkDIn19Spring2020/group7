@@ -47,7 +47,7 @@ class Orders extends CI_Controller {
     
     {
             $currentCredit = (integer) $this->session->userdata('credit');
-            $subCost = (integer) $this->session->userdata('subtypeCost');
+            $subCost = $this->input->post('cost');
 
         // The user has already subscribed before and has enough credit
         if ($currentCredit >= $subCost)
@@ -99,7 +99,7 @@ class Orders extends CI_Controller {
     public function order_new()
     {
             $currentCredit = (integer) $this->session->userdata('credit');
-            $subCost = (integer) $this->session->userdata('subtypeCost');
+            $subCost = $this->input->post('cost');
 
         // The user does not have subscription but has enough credit
         if ($currentCredit >= $subCost)
