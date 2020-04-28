@@ -78,20 +78,18 @@ class Users extends CI_Controller {
             // Make a card if card doesnt exist, or read cards. 
             $this->Card->makeCard($this->session->userdata('customer_id'));
     
-            redirect('');
-
             // Session values set on BuyPages.php
             $redirect = $this->session->userdata('ReturnUrl');
 
             // If the user is coming from Subtype page redirect him to Buy page after logging in
             if(isset($redirect))
             {
-                redirect($redirect);
+                $this->session->unset_userdata('ReturnUrl');
+                redirect($redirect . "/?subtype_id=" . $this->session->userdata('subtypePicked') . "&name=" . $this->session->userdata('subtypeName') . "&cost=" . $this->session->userdata('subtypeCost'));
             }
             
             // Redirect to profil if $redirect doesn't carry a value
-            redirect('');
-
+            redirect('Pages');
         }
         else
         {
