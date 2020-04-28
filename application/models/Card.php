@@ -67,7 +67,7 @@
             $data = [
                 'card_id' => '',
                 'cardnumber' => $newcardNumber,
-                'credit' => 100,
+                'credit' => 0,
                 'customer_id'=> $userid
                 ];
 

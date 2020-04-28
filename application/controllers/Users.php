@@ -109,7 +109,7 @@ class Users extends CI_Controller {
         // Destroy user session
         $this->session->sess_destroy();
 
-        redirect('users/login');
+        redirect('Pages');
     }
 
     // Start Profile Function
