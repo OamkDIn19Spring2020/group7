@@ -1,15 +1,19 @@
 <?php include(APPPATH . '/views/include/header.php'); ?>
 <?php include(APPPATH . '/views/include/nav.php'); ?>
-<div class="jumbotron jumbotron-fluid py-5 h-100" >
-  <div class="container">
-  <h1 class="display-4">Our offered services.</h1>
-    <p class="lead">Here you can find our offered products for our card. All are servises 30 days if not otherways informed.</p>
+<div class="jumbotron jumbotron-fluid pt-5" >
+  <div class="container pt-5 pb-4">
+  <h1 class="display-4 font-weight-bold">Our offered services</h1>
+    <h4>Here you can find our offered products for our card. All are services 30 days if not otherways informed.</h4>
   </div>
 </div>
 
 
 
+<<<<<<< HEAD
 <div class="container ">
+=======
+<div class="container my-5 overflow-auto pb-5">
+>>>>>>> master
         <div class="card-deck row row-cols-1 row-cols-md-2">
             <?php foreach ($subtype as $row)
             {?>
