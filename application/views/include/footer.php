@@ -5,13 +5,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   
   
-<footer class="footer mt-auto  mt-n5 mb-n1 fixed-bottom p-3 mb-2 bg-light text-dark">
+    <footer class="page-footer mt-3 bg-light text-dark fixed-bottom" style="padding-bottom:10px;">
   <div class="container">
-    <div>
-  <h1 class="display-4"></h1>
-    <p class="lead" style="text-align:center"> Some product missing? Need some help? Want to have your product on our card family? </p>
-    <p class="lead" style="text-align:center">Contact Us at: CityCard(att)System.com for all problems. We are happy to help anyway we can.</p>
-   </div>
+   
     <div class="mx-auto" style="text-align:center"> &#169; <?php echo date("Y"); ?> Group 7</div>
   </div>
 </footer>
