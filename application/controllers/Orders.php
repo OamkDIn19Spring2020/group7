@@ -13,33 +13,37 @@ class Orders extends CI_Controller {
 
     public function index()
     {
-        // Save the Id what was picked from sub types.
-        if ($this->input->get('subtype_id') != null)
-        {
+
+            // On order page load set passed values into session
             $subtypePicked = $this->input->get('subtype_id'); 
             $subtypeName = $this->input->get('name');
             $subtypeCost = $this->input->get('cost');
-            
+                
             $this->session->set_userdata('subtypePicked' , $subtypePicked);
             $this->session->set_userdata('subtypeName' , $subtypeName);
             $this->session->set_userdata('subtypeCost', $subtypeCost);
-        }
 
-         //   check if user logged in.
+        // If user is logged in
         if ($this->session->has_userdata('customer_id'))
-        {       
+        {
+            // Don't allow user to pass infromation through url
+            if ($this->input->get('subtype_id') == null || $this->input->get('name') == null || $this->input->get('cost') == null)
+            {
+                redirect('SubTypes');
+            }
+
             $this->check_sub_status();
         }
-        else
+        else 
         {
-            //get the current Url to return to
-            $returnUrl = current_url();
-        
-            // save the url in session data
-            $this->session->set_userdata('ReturnUrl', $returnUrl);
+                //get the current Url to return to
+                $returnUrl = current_url();
+            
+                // save the url in session data
+                $this->session->set_userdata('ReturnUrl', $returnUrl);
 
-            //need to unset after order?
-            redirect('users/login');
+                //need to unset after order?
+                $this->load->view('users/login');
         }
     }
 
@@ -171,6 +175,7 @@ class Orders extends CI_Controller {
                 {
                     $interval = $expiryDate->diff($today);
                     $data['timeLeft'] = 'Your subscription will expire in ' . $interval->days . ' Days';
+                    $data['status'] = 'Extend your subscription';
                     $data['hasCredit'] = $hasCredit;
                     $this->load->view('subtypes/order', $data);
                  }
@@ -178,9 +183,11 @@ class Orders extends CI_Controller {
                 // Subscription expired
                 else
                 {
-                    $data['timeLeft'] = 'You subscription has expired.';
+                    $data['timeLeft'] = 'You subscription has expired';
+                    $data['status'] = 'Renew your subscription';
                     $data['hasCredit'] = $hasCredit;
                     $this->load->view('subtypes/order',$data);
+
                 }
 
             }
@@ -193,6 +200,8 @@ class Orders extends CI_Controller {
                 $this->session->unset_userdata('expirydate');
                 $this->session->unset_userdata('subtype_id');
 
+                $data['timeLeft'] = 'You have not subscribed Yet!';
+                $data['status'] = 'Subscribe';
                 $data['hasCredit'] = $hasCredit;
                 $this->load->view('subtypes/order', $data);
             }

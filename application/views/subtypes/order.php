@@ -1,81 +1,50 @@
 <?php include(APPPATH . '/views/include/header.php'); ?>
 <?php include(APPPATH . '/views/include/nav.php'); ?>
 
-<div class="container mt-4">
-    <h1 class="display-4"><?php echo $this->session->userdata('subtypeName'); ?></h1>
-    <?php if ($this->session->userdata('sub_id')) {?>
-        <p><?php echo $timeLeft; ?></p> 
-        <h3 class="mb-3">Extend Your subscription</h3>
+<div class="jumbotron jubmotron-fluid pt-5">
+    <div class="container pt-5 pb-4">
+        <h1 class="display-4 justify-content-center font-weight-bold"><?php echo $this->session->userdata('subtypeName'); ?></h1>
+        <h4><?php echo $timeLeft; ?></h4>
+    </div>
+</div>
+    <div class="container pt-3 pb-3">
+        <h3 class="mb-5">Choose one of the following plans</h3>
         <div class="card-deck">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">1 week</h5>
-                <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost') / 4; ?> Credits</p>
-                <?php echo form_open('Orders/order'); ?>
-                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') / 4;?>"> 
-                    <input type="hidden" name="extension_period" value="7">
-                    <input class="btn btn-success" type="submit" value="Extend">
-                </form>
+            <div class="card bg-light shadow-lg" style="width: 18rem;">
+                <div class="card-body text-center text-primary">
+                    <h5 class="card-title h2">1 week</h5>
+                    <p class="card-text h5 mb-4"><?php echo (integer)$this->session->userdata('subtypeCost') / 4; ?> Credits</p>
+                    <?php echo ($this->session->userdata('sub_id')) ? form_open('Orders/order') : form_open('Orders/order_new');?>
+                        <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') / 4;?>"> 
+                        <input type="hidden" name="extension_period" value="7">
+                        <a class="btn btn-warning btn-lg text-body" onclick="this.closest('form').submit();return false;"><?php echo $status;?></a> 
+                    </form>
+                </div>
+            </div>
+            <div class="card bg-light shadow-lg" style="width: 18rem;">
+                <div class="card-body text-center text-primary">
+                    <h5 class="card-title h2">30 Days</h5>
+                    <p class="card-text h5 mb-4"><?php echo $this->session->userdata('subtypeCost'); ?> Credits</p>
+                    <?php echo ($this->session->userdata('sub_id')) ? form_open('Orders/order') : form_open('Orders/order_new');?>
+                        <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost');?>"> 
+                        <input type="hidden" name="extension_period" value="30">
+                        <a class="btn btn-warning btn-lg text-body" onclick="this.closest('form').submit();return false;"><?php echo $status;?></a>
+                    </form>
+                </div>
+            </div>
+            <div class="card bg-light shadow-lg" style="width: 18rem;">
+                <div class="card-body text-center text-primary">
+                    <h5 class="card-title h2">60 Days</h5>
+                    <p class="card-text h5 mb-4"><?php echo (integer)$this->session->userdata('subtypeCost') * 2;?> Credits</p>
+                    <?php echo ($this->session->userdata('sub_id')) ? form_open('Orders/order') : form_open('Orders/order_new');?> 
+                        <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') * 2;?>"> 
+                        <input type="hidden" name="extension_period" value="60">
+                        <a class="btn btn-warning btn-lg text-body" onclick="this.closest('form').submit();return false;"><?php echo $status;?></a> 
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="card" style="width: 18rem;">
-            <img src="<?php echo base_url('/assests/30days.png'); ?>" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">30 Days</h5>
-                <p class="card-text"><?php echo $this->session->userdata('subtypeCost'); ?> Credits</p>
-                <?php echo form_open('Orders/order'); ?>
-                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost');?>"> 
-                    <input type="hidden" name="extension_period" value="30">
-                    <input class="btn btn-success" type="submit" value="Extend">
-                </form>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="<?php echo base_url('/assests/60days.jpg'); ?>" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">60 Days</h5>
-                <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost') * 2;?> Credits</p>
-                <?php echo form_open('Orders/order'); ?>
-                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') * 2;?>"> 
-                    <input type="hidden" name="extension_period" value="60">
-                    <input class="btn btn-success" type="submit" value="Extend">
-                </form>
-            </div>
-        </div>
-        </div>
-
-    
-        <?php }else{?>
-        <p>You are not subscribed yet!</p>
-        <h3 class="mb-3">Buy a scubscription</h3>
-        <div class="card-deck">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">30 Days</h5>
-                <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost');?></p>
-                <?php echo form_open('Orders/order_new'); ?>
-                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost');?>"> 
-                    <input type="hidden" name="extension_period" value="30">
-                    <input class="btn btn-success" type="submit" value="Buy">
-                </form>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">60 Days</h5>
-                <p class="card-text"><?php echo (integer)$this->session->userdata('subtypeCost') * 2;?></p>
-                <?php echo form_open('Orders/order_new'); ?>
-                    <input type="hidden" name="cost" value="<?php echo (integer)$this->session->userdata('subtypeCost') * 2;?>"> 
-                    <input type="hidden" name="extension_period" value="60">
-                    <input class="btn btn-success" type="submit" value="Buy">
-                </form>
-            </div>
-        </div>
-        </div>
-        <?php }?>
+    </div>
 
         <!-- No Credit Modal -->
         <div class="modal fade" data-backdrop="static" id="no_credit" tabindex="-1" role="dialog" aria-labelledby="noEnoughCredit" aria-hidden="true">
@@ -107,22 +76,21 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="row col-12 modal-title text-success justify-content-center" id="success_label">Success</h5>
+                        <h5 class="row col-12 modal-title text-success justify-content-center h2" id="success_label">Success</h5>
                     </div><!-- Modal Header -->
                     <div class="modal-body">
-                        <p class="row col-12 justify-content-center">Thanks for your purchase.</p>
-                        <p class="row col-12 justify-content-center">Your subscription will expire after <?php echo $timeLeft;?></p>
+                        <p class="row col-12 justify-content-center">Thanks for your purchase!</p>
+                        <p class="row col-12 justify-content-center text-primary">Your subscription will expire after <?php echo $timeLeft;?></p>
                     </div><!-- Modal Body -->
                     <div class="modal-footer">
-                        <div class="row col-12 justify-content-between">
-                            <p>You will be redirect back to browser more products, wait a moment ...</p>
-                            <div class="spinner-border spinner-border-sm ml-auto" role="status" aria-hidden="true"></div>
+                        <div class="row col-12 justify-content-center">
+                            <div class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></div>
+                            <p class="ml-3">You will be redirect back to browser more products, wait a moment ...</p>
                         </div>
                     </div><!-- Modal Footer-->
                 </div><!-- Modal Content -->
             </div><!-- Modal Dialog -->
         </div><!-- Modal -->
-</div>
 
 <?php include(APPPATH . '/views/include/footer.php'); ?>
 
@@ -134,7 +102,7 @@
             if ($this->session->flashdata('success')) {;?> 
                 setTimeout(function() {
                 window.location.replace("<?php echo base_url('/SubTypes');?>");
-                }, 3000);
+                }, 5000);
             <?php };?>
         <?php };?>
 
