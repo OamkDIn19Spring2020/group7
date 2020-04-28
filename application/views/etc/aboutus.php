@@ -14,6 +14,15 @@
                 <p> City Card System is an easy way to pay and subscribe to many of our fine subscriptions.
                 Why pay with your bank card directly, if you can supply money to us an pay for stuff through us!</br>
                 City Card System, brings you the best, from the rest. </p>
+
+                <h4>Need help? </h4>
+                <p> Some product missing? Need some help? Want to have your product on our card family?</br>
+                 Contact Us at: CityCard@System.com for all problems. We are happy to help anyway we can.</p>
+
+                <h4>When do i get my card? </h4>
+                <p>After signing up on our website, you can pick your personal card up at your local kioski. </br>
+                The only thing you have to show is a valid ID.</p>
+
             </div>
             <hr class="mb-4">
             
