@@ -101,7 +101,7 @@
         echo $this->session->flashdata('success');
             if ($this->session->flashdata('success')) {;?> 
                 setTimeout(function() {
-                window.location.replace("<?php echo base_url('/SubTypes');?>");
+                window.location.replace("<?php echo site_url('/SubTypes');?>");
                 }, 5000);
             <?php };?>
         <?php };?>
@@ -118,6 +118,6 @@
 
    function card_redirect()
    {
-        window.location.replace("<?php echo base_url('/users/profile');?>");
+        window.location.replace("<?php echo site_url('/users/profile');?>");
    }
 </script>
