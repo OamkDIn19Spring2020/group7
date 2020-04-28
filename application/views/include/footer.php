@@ -8,7 +8,7 @@
     <footer class="page-footer mt-3 bg-light text-dark fixed-bottom" style="padding-bottom:10px;">
   <div class="container">
    
-    <div class="mx-auto" style="text-align:center"> &#169; <?php echo date("Y"); ?> Group 7</div>
+    <div class="mx-auto" style="text-align:center"> &#169; <?php echo date("Y"); ?> Karim Abdelrahman, Alexander Veliev and Jami Hannus </div>
   </div>
 </footer>
 
