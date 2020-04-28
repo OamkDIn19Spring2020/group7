@@ -9,11 +9,7 @@
 
 
 
-<<<<<<< HEAD
 <div class="container ">
-=======
-<div class="container my-5 overflow-auto pb-5">
->>>>>>> master
         <div class="card-deck row row-cols-1 row-cols-md-2">
             <?php foreach ($subtype as $row)
             {?>
