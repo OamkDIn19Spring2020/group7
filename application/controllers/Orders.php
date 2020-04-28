@@ -9,6 +9,7 @@ class Orders extends CI_Controller {
         parent::__construct();
         $this->load->model('Order');
         $this->load->model('Card');
+        $this->load->model('Sub_type');
     }
 
     public function index()
@@ -16,8 +17,9 @@ class Orders extends CI_Controller {
 
             // On order page load set passed values into session
             $subtypePicked = $this->input->get('subtype_id'); 
-            $subtypeName = $this->input->get('name');
-            $subtypeCost = $this->input->get('cost');
+            $subtype = $this->Sub_type->getSubtypeById($subtypePicked);
+            $subtypeName = $subtype['name'];
+            $subtypeCost = $subtype['cost'];
                 
             $this->session->set_userdata('subtypePicked' , $subtypePicked);
             $this->session->set_userdata('subtypeName' , $subtypeName);
@@ -27,7 +29,7 @@ class Orders extends CI_Controller {
         if ($this->session->has_userdata('customer_id'))
         {
             // Don't allow user to pass infromation through url
-            if ($this->input->get('subtype_id') == null || $this->input->get('name') == null || $this->input->get('cost') == null)
+            if ($this->input->get('subtype_id') == null)
             {
                 redirect('SubTypes');
             }

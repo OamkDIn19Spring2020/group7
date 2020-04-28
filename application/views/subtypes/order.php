@@ -121,3 +121,4 @@
         window.location.replace("<?php echo site_url('/users/profile');?>");
    }
 </script>
+<?php var_dump($_SESSION);?>
