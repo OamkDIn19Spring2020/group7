@@ -24,7 +24,7 @@
                                 <!-- Description -->
                                 <p class="card-text-center"> <?php echo '<b>Description</b>: ' . $row['description'] ?></p>
                             </div>
-                        <!-- footer start -->
+                        <!-- Card footer start -->
                         <div class="card-footer row h-10 mx-0 ">
                           <div class="col-sm-8 ">
                               <?php echo '<b></b> ' . $row['address']; ?>
