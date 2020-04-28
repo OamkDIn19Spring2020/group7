@@ -206,28 +206,32 @@
                                         <p class="modal-title">Subscriptions on card: <?php print_r($this->session->userdata('cardnumber'));  ?></p>
                                          
                                         <!-- Start Table for printout  -->
-
-                                        <table class = table>
-                                        <tr>
+                                        <div class = "table-responsive">
+                                        <table class = "table">
+                                        <tr class = "table-row">
                                         <th>SUBSCRIPTION NAME</th>
-                                        <th>START DATE</th>
+                                        <th>STARTING DATE</th>
                                         <th>EXPIRATION DATE</th>
-                                        <th>DESCRIPTION</th>
+                                        <th>ADDRESS</th>
                                         </tr>
 
+                                        
                                         <?php
                                         
                                        // Prints out the data from the join query array
 
                                         foreach ($this->session->userdata('card_info') as $info) { ?>
-                                        <tr>
-                                        <td><?php echo $info['name']; ?></td>
-                                        <td><?php echo $info['startdate'] ?></td>
-                                        <td><?php echo $info['expirydate']?></td>
-                                        <td><?php echo $info['description'] ?></td>
+                                        <tr class = "table-row">
+                                        <td><?php echo $info['name'] ?></td>
+                                        <td><?php $date = date_create($info['startdate']); echo date_format($date,"d/m/Y"); ?></td>
+                                        <td><?php $date = date_create($info['expirydate']); echo date_format($date,"d/m/Y"); ?></td>
+                                        <td> <?php echo $info['address'] ?></td>
                                         <?php } ?>
                                         </tr>
+
+
                                         </table>
+                                        </div>
                                         <!-- End Table for printout  -->
                                     </div>
                                     <!-- Modal footer/ /back button -->
