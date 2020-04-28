@@ -3,9 +3,9 @@
   <!-- Main jumbotron container with image background and welcome -->
   <div class="jumbotron" style="background-image: url('assets/helsinki.jpg'); background-attachment: inherit;  background-position:center; background-size: cover;">
     <div class="container">
-      <h1 class="display-3"><b>City Card System</h1>
+      <h1 class="display-3"><b>City Card System</b></h1>
         <?php if($this->session->has_userdata('customer_id')) : ?>
-      <h2 class="display-4"><i> Welcome <?php echo $this->session->userdata('firstname'); ?></i></b></h2></br>
+      <h2 class="display-4"><i> <b>Welcome <?php echo $this->session->userdata('firstname'); ?></i></b></h2></br>
         <p><a class="btn btn-primary btn-lg" href="<?php echo site_url('users/profile'); ?>"  role="button">View profile&raquo;</a></p>
       <?php else : ?>
         <h2 class="display-4">Please sign in</h2></br>
@@ -30,7 +30,7 @@
       <!-- if user is logged in, go to cards --> 
       <?php if($this->session->has_userdata('customer_id')) : ?>
         <h2>Card information</h2>
-        <p>Check your card balance and review your purchases in your user profile.</p> 
+        <p>Buy credit card and review your purchases in your user profile.</p> 
       <p><a class="btn btn-secondary" href="<?php echo site_url('users/profile/' .'cards');?>" role="button" >Go to My Card &raquo;</a></p>
       <?php else : ?>
         <h2>Card information</h2>
