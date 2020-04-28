@@ -85,7 +85,7 @@ class Users extends CI_Controller {
             if(isset($redirect))
             {
                 $this->session->unset_userdata('ReturnUrl');
-                redirect($redirect . "/?subtype_id=" . $this->session->userdata('subtypePicked') . "&name=" . $this->session->userdata('subtypeName') . "&cost=" . $this->session->userdata('subtypeCost'));
+                redirect($redirect . "/?subtype_id=" . $this->session->userdata('subtypePicked'));
             }
             
             // Redirect to profil if $redirect doesn't carry a value
