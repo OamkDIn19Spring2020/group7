@@ -21,7 +21,7 @@
 
                     <li class="nav-item">
                     <hr class="mb-3">
-                        <a class="nav-link" id="cards-tab" data-toggle="pill" href="#cards" onclick="delete_account_style()" role="tab" aria-controls="cards" aria-selected="false"><b>Cards</b></a>
+                        <a class="nav-link" id="cards-tab" data-toggle="pill" href="#cards" onclick="delete_account_style()" role="tab" aria-controls="cards" aria-selected="false"><b>My Card</b></a>
                     </li>
 
                     <li class="nav-item">
@@ -86,8 +86,10 @@
                 <!-- cards tab -->
                 <div class="col-lg-9 mt-3 p-3 tab-pane fade" id="cards" role="tabpanel" aria-labelledby="cards-tab">
                 
-                    <!-- tab title -->   
-                    <h5>Card information</h5>
+                    <!-- tab title -->
+                    <div class="input-group justify-content-center col-lg-9">   
+                        <h5>My Card</h5>
+                    </div>
                    
                     <hr class="mb-3">
 
@@ -95,7 +97,7 @@
                     <div class="form-group row col-lg-12">
                         <div class="input-group col-lg-9">
                             <label class="form-control-label col-lg-5" for="cardnumber">Card number:</label>
-                            <input class="form-control col-lg-6" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
+                            <input class="form-control col-lg-7" readonly type="text" id="cardnumber" name="cardnumber" value="<?php echo $this->session->userdata('cardnumber'); ?>">
                                 <div class="input-group-append">
                                     <input class="btn btn-danger text-center" type="button" data-toggle="modal" data-target="#rep_card"  value="Replace card">
                                 </div>
@@ -201,7 +203,7 @@
                                     </div>
                                     <!-- Modal body -->
                                     <div class="modal-body">
-                                        <p class="modal-title">Card info of card: <?php print_r($this->session->userdata('cardnumber'));  ?></p>
+                                        <p class="modal-title">Subscriptions on card: <?php print_r($this->session->userdata('cardnumber'));  ?></p>
                                          
                                         <!-- Start Table for printout  -->
 

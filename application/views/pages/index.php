@@ -5,10 +5,10 @@
     <div class="container">
       <h1 class="display-3"><b>City Card System</h1>
         <?php if($this->session->has_userdata('customer_id')) : ?>
-      <h2 class="display-4"><i> Welcome <?php echo $this->session->userdata('firstname'); ?></i></b></h2>
+      <h2 class="display-4"><i> Welcome <?php echo $this->session->userdata('firstname'); ?></i></b></h2></br>
         <p><a class="btn btn-primary btn-lg" href="<?php echo site_url('users/profile'); ?>"  role="button">View profile&raquo;</a></p>
       <?php else : ?>
-        <h2 class="display-4">Please sign in</h2>
+        <h2 class="display-4">Please sign in</h2></br>
         <p><a class="btn btn-primary btn-lg" href="<?php echo site_url('users/login'); ?>"  role="button">Sign in&raquo;</a></p>
       <?php endif; ?>
     </div>
@@ -31,7 +31,7 @@
       <?php if($this->session->has_userdata('customer_id')) : ?>
         <h2>Card information</h2>
         <p>Check your card balance and review your purchases in your user profile.</p> 
-      <p><a class="btn btn-secondary" href="<?php echo site_url('users/profile/' .'cards');?>" role="button" >Go to my Cards &raquo;</a></p>
+      <p><a class="btn btn-secondary" href="<?php echo site_url('users/profile/' .'cards');?>" role="button" >Go to My Card &raquo;</a></p>
       <?php else : ?>
         <h2>Card information</h2>
         <p><?php echo ('please sign in to view card informtion'); ?></p>
