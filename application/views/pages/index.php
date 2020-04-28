@@ -10,8 +10,8 @@
       <h2 class="display-4"><i> <b>Welcome <?php echo $this->session->userdata('firstname'); ?></i></b></h2></br>
         <p><a class="btn btn-primary btn-lg" href="<?php echo site_url('users/profile'); ?>"  role="button">View profile&raquo;</a></p>
       <?php else : ?>
-        <h2 class="display-4">Please sign in</h2></br>
-        <p><a class="btn btn-primary btn-lg" href="<?php echo site_url('users/login'); ?>"  role="button">Sign in&raquo;</a></p>
+        <h2 class="display-4"><b><i>Please sign in</i></b></h2></br>
+        <p><a class="btn btn-primary btn-lg" href="<?php echo site_url('users/login'); ?>"  role="button">Sign in &raquo;</a></p>
       <?php endif; ?>
     </div>
   </div>
