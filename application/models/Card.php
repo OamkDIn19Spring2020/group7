@@ -135,7 +135,7 @@
     public function cards_info($cardid)
      {
         //query for inner join of sub and subtype with card_id 
-        $query = $this->db->query("SELECT sub.sub_id,sub.startdate,sub.expirydate,subtype.name,subtype.description,subtype.subtype_id FROM sub INNER JOIN subtype ON subtype.subtype_id = sub.subtype_id WHERE sub.card_id=$cardid");
+        $query = $this->db->query("SELECT sub.sub_id,sub.startdate,sub.expirydate,subtype.name,subtype.description,subtype.address,subtype.subtype_id FROM sub INNER JOIN subtype ON subtype.subtype_id = sub.subtype_id WHERE sub.card_id=$cardid");
         //returns the active subs on the card with the $cardid
         return $query->result_array();
        
