@@ -1,10 +1,11 @@
 <?php include(APPPATH . '/views/include/header.php'); ?>
 <?php include(APPPATH . '/views/include/nav.php'); ?>
 
-<div class="jumbotron jubmotron-fluid pt-5">
+<div class="jumbotron jubmotron-fluid pt-5" style="background-image: url<?php if ($this->session->userdata('subtypeName') == 'Swimming Pass') {;?>(<?php echo base_url('assets/swimming.jpg');?>)<?php }elseif ($this->session->userdata('subtypeName') == 'Oulu City Gyms'){;?>(<?php echo base_url('assets/gym.jpg');?>)<?php }elseif ($this->session->userdata('subtypeName') == 'Bus Service(AB-zone)' || $this->session->userdata('subtypeName') == 'Bus Service(ABC-zone)'){;?>(<?php echo base_url('assets/bus.jpg');?>)<?php };?>;
+    background-position:center; background-size: cover;"> 
     <div class="container pt-5 pb-4">
         <h1 class="display-4 justify-content-center font-weight-bold"><?php echo $this->session->userdata('subtypeName'); ?></h1>
-        <h4><?php echo $timeLeft; ?></h4>
+        <h4 class="font-weight-bold"><?php echo $timeLeft; ?></h4>
     </div>
 </div>
     <div class="container pt-3 pb-3">
