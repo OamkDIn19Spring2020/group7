@@ -11,7 +11,7 @@
                     <a class="nav-link" href="<?php echo site_url(); ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo site_url('SubTypes');?>">Orders </a>
+                    <a class="nav-link" href="<?php echo site_url('SubTypes');?>">Products </a>
                 </li>
             </ul>
                 <?php if($this->session->has_userdata('customer_id')) : ?>
