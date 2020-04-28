@@ -143,12 +143,12 @@
                             <div class="input-group col-lg-9">
                                 <label class="form-control-label col-lg-5" for="CreditsAmount">Credits to add:</label>
                                 <select Class="form-control col-lg-7  <?php echo (form_error('Amount')) ? "is-invalid" : ""; ?>" id="Amount" name="Amount">
-                                    <option value="50">50 credits</option>
+                                    <option value="50">50 Credits</option>
                                     <option value="100">100 Credits</option>
                                     <option value="1000">1000 Credits</option>
                                 </select>
                                 <div class="input-group-append">
-                                    <input class="btn btn-primary text-center"  type="submit" value="Buy credit">
+                                    <input class="btn btn-primary text-center"  type="submit" value="Buy credits">
                                 </div>
                             </div>
                         </div>

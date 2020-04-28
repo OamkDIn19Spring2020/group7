@@ -17,7 +17,7 @@
                 <?php if($this->session->has_userdata('customer_id')) : ?>
             <ul class="navbar-nav mr-auto ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link active">Your credit <?php echo $this->session->userdata('credit'); ?></a>
+                    <a class="nav-link active">Your credits: <?php echo $this->session->userdata('credit'); ?></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active">Card number <?php echo $this->session->userdata('cardnumber'); ?></a>
