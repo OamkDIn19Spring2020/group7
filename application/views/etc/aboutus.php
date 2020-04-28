@@ -16,10 +16,10 @@
                 City Card System, brings you the best, from the rest. </p>
 
                 <h4>Need help? </h4>
-                <p> Some product missing? Need some help? Want to have your products on a family-account?</br>
-                 Contact Us at: CityCard@System.com for all problems. We are happy to help anyway we can.</p>
+                <p> Some products missing? Need some help? Want to have your products on a family-account?</br>
+                 Contact us at CityCard@System.com for all problems. We are happy to help anyway we can.</p>
 
-                <h4>When do i get my card? </h4>
+                <h4>When do I get my card? </h4>
                 <p>After signing up on our website, you can pick your personal card up at your local kioski. </br>
                 The only thing you have to show is a valid ID.</p>
 
