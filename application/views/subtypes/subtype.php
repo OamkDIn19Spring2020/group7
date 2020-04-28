@@ -33,8 +33,6 @@
                             <!-- Form start to catch users chosen sub's Id -->
                             <?php echo form_open('Orders/index', 'method="get"'); ?>
                               <input type="hidden" name="subtype_id" value="<?php echo $row['subtype_id'] ?> ">
-                              <input type="hidden" name="name" value="<?php echo $row['name'] ?> ">
-                              <input type="hidden" name="cost" value="<?php echo $row['cost'] ?> ">
                               <input class="btn  btn-primary justify-content-center " type="submit" Value="Order">
                             </form>
                         </div>
