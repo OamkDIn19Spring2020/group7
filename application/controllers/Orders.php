@@ -119,14 +119,17 @@ class Orders extends CI_Controller {
             // The user does not have subscription but has enough credit
             if ($currentCredit >= $subCost)
             {
+                //Get todays date and adds the extension period to date.
                 $startDate = $this->get_today_date();
                 $extensionPeriod = $this->input->post('extension_period');
                 $expiryDate = "DATE_ADD('{$startDate}', INTERVAL {$extensionPeriod} DAY)";
 
                 $this->Order->insert_sub($startDate, $expiryDate, $extensionPeriod);
 
+                // New credit amount
                 $newCredit = $currentCredit - $subCost;
 
+                //Update the new credit amount in session data.
                 $this->session->unset_userdata('credit');
                 $this->session->set_userdata('credit', $newCredit);
 
@@ -139,7 +142,7 @@ class Orders extends CI_Controller {
                 $this->check_sub_status();
             }
 
-            // The User does not have subscription and has no enough credit
+            // The User does not have subscription and has no enough credits
             else if ($currentCredit < $subCost)
             {
                 $hasCredit = false;

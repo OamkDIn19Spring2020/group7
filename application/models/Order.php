@@ -9,7 +9,7 @@
 
         }
 
-
+        //This function checks if the user card has active subscription for this type of subtype.
         public function get_sub()
         {
             $subtypePicked = $this->session->userdata('subtypePicked');
@@ -17,9 +17,10 @@
 
             $this->db->where('subtype_id', $subtypePicked);
             $this->db->where('card_id', $cardId);
+            //So we try to get the row where the Subtype_id and card_id match
             $userSub = $this->db->get('sub');
 
-            
+            // In here check the row if it has a value of 1.
             if ($userSub->num_rows() == 1)
             {
                 return $userSub->row_array();
@@ -30,10 +31,11 @@
                 return FALSE;
             }
         }
-
+        
+        //Function is used to update a function if one already exist.
         public function update_sub($expiryDate, $extensionPeriod)
         {
-
+            //
             $newExpiryDate = "DATE_ADD( '{$expiryDate}' , INTERVAL {$extensionPeriod} DAY)";
 
             $subtypePicked = $this->session->userdata('subtypePicked');
@@ -45,6 +47,7 @@
             $this->db->update('sub');
         }
 
+        //Function is used to insert a new sub into database
         public function insert_sub($startDate, $expiryDate, $extensionPeriod)
         {
 
