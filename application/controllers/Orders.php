@@ -175,6 +175,7 @@ class Orders extends CI_Controller {
                 {
                     $interval = $expiryDate->diff($today);
                     $data['timeLeft'] = 'Your subscription will expire in ' . $interval->days . ' Days';
+                    $data['status'] = 'Extend your subscription';
                     $data['hasCredit'] = $hasCredit;
                     $this->load->view('subtypes/order', $data);
                  }
@@ -182,7 +183,8 @@ class Orders extends CI_Controller {
                 // Subscription expired
                 else
                 {
-                    $data['timeLeft'] = 'You subscription has expired.';
+                    $data['timeLeft'] = 'You subscription has expired';
+                    $data['status'] = 'Renew your subscription';
                     $data['hasCredit'] = $hasCredit;
                     $this->load->view('subtypes/order',$data);
 
@@ -198,6 +200,8 @@ class Orders extends CI_Controller {
                 $this->session->unset_userdata('expirydate');
                 $this->session->unset_userdata('subtype_id');
 
+                $data['timeLeft'] = 'You have not subscribed Yet!';
+                $data['status'] = 'Subscribe';
                 $data['hasCredit'] = $hasCredit;
                 $this->load->view('subtypes/order', $data);
             }
