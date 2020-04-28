@@ -12,5 +12,13 @@
         {
             return $this->db->get('subtype')->result_array();
         }
+        
+        public function getSubtypeById($id)
+        {
+            $this->db->where('subtype_id', $id);
+            return $this->db->get('subtype')->row_array();
+        }
+
+
     }
  
